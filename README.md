@@ -49,15 +49,5 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [3 - Funções e Escopo](./2%20-%20JavaScript/3%20-%20Funções%20e%20Escopo.md)
 - [4 - Arrays e Objetos](./2%20-%20JavaScript/4%20-%20Arrays%20e%20Objetos.md)
 - [5 - Manipulação do DOM](./2%20-%20JavaScript/5%20-%20Manipulação%20do%20DOM.md)
-- [6 - JavaScript Assíncrono (Promises, async-await)](./2%20-%20JavaScript/6%20-%20JavaScript%20Assíncrono%20(Promises,%20async-await).md)
+- [6 - JavaScript Assíncrono (Promises, async-await)](<./2%20-%20JavaScript/6%20-%20JavaScript%20Assíncrono%20(Promises,%20async-await).md>)
 - [7 - Caminhos no JavaScript do Navegador](./2%20-%20JavaScript/7%20-%20Caminhos%20no%20JavaScript%20do%20Navegador.md)
-
-## Fontes Originais
-
-Recursos e documentações utilizadas como referência no projeto da Landing Page.
-
-- https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element
-- https://www.w3schools.com/html/html_form_input_types.asp
-- https://developer.mozilla.org/pt-BR/docs/Web/CSS/grid
-- https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-- https://validator.w3.org/nu/#textarea
