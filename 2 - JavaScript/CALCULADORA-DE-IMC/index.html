@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <section class="top-line">
+    <h1>Calculadora IMC</h1>
+    <p>Calcule seu indice de massa corporal.</p>
+  </section>
+  <section class="container">
+    <h1 class="top-line">Base de Dados</h1>
+    <div class="container-lista">
+      <div class="sub-lista">
+        <h3>Valores de referencia</h3>
+        <div class="grid-container">
+          <ol class="col-style">
+            <li>Menos do que 18,5</li>
+            <li>Entre 18,5 e 24,9</li>
+            <li>Entre 18,5 e 24,9</li>
+            <li>Entre 25 e 29,9</li>
+            <li>Entre 30 e 34,9</li>
+            <li>Mais do que 40</li>
+          </ol>
+        </div>
+      </div>
+      <div class="sub-lista">
+        <h3>Resultado</h3>
+        <div class="grid-container">
+          <ol class="col-style">
+            <li>Abaixo do peso</li>
+            <li>Peso normal</li>
+            <li>Sobrepeso</li>
+            <li>Obesidade grau 1</li>
+            <li>Obesidade grau 2</li>
+            <li>Obesidade grau 3</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <form action="/" id="formulario" method="POST">
+      <label for="peso">Peso</label>
+      <input type="text" id="peso" name="peso">
+      <label for="altura">Altura</label>
+      <input type="text" id="altura" name="altura">
+      <button type="submit">Enviar</button>
+    </form>
+
+    <section id="resultado">
+      <h6>Resultado:</h6>
+
+    </section>
+  </section>
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

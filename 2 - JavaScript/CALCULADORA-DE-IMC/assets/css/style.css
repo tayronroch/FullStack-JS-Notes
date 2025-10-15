@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+:root {
+  --primary-color: rgb(17, 86, 102);
+  --primary-color-darker: rgb(9, 48, 56);
+  --secondary-color: crimson;
+  --gap: 3rem;
+}
+
+* {
+  box-sizing: border-box;
+  outline: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--primary-color);
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+
+article {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 750px;
+  margin: 50 50%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.top-line {
+  text-align: center;
+  max-width: 750px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.container {
+  max-width: 750px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+form input,
+form label,
+form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form input {
+  font-size: 24px;
+  height: 50px;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+form input:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+form button {
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  height: 50px;
+  cursor: pointer;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+form button:hover {
+  background: var(--primary-color-darker);
+}
+
+.container-lista {
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100vh;
+  max-height: 100vh;
+  align-content: center;
+  padding: 1rem;
+}
+
+.col-style {
+  list-style: none;
+  grid-template-columns: 0 auto;
+
+
+}
+
+.container {
+  display: grid;
+
+
+}
+
+.container ol {
+  width: 100%;
+  max-width: 26rem;
+  max-height: 26rem;
+  overflow: hidden;
+  grid-template-columns: 0 auto;
+  align-items: center;
+  column-gap: 0 auto;
+  border-bottom: 100vh;
+}
+
+.container ol li {
+  text-align: left;
+}
+
+.container ol h3 {
+  text-align: center;
+}
+
+.container h1 {
+  gap: 38px 150px;
+
+}
+.sub-lista {
+  text-align: center;
+  margin: auto;
+}
+.bad {
+  background: rgb(192, 84, 84);
+  padding: auto;
+}
+.paragrafo-resultado {
+  background: rgb(87, 189, 87);
+  
+}
+
+@media (max-width: 667px) {
+  .top-line .container .form .container-lista  {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0;
+    overflow: hidden;
+    margin-left: 0;
+  };
+
+
+}
