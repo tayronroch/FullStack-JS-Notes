@@ -50,21 +50,36 @@ O operador `+` soma números, mas concatena (junta) strings. Se um dos operandos
 '5' + '5';  // '55' (String)
 ```
 
-### Igualdade: `==` vs. `===` (A Regra de Ouro)
+### Igualdade Abstrata (`==`) vs. Estrita (`===`)
 
-Esta é uma das fontes mais comuns de bugs em JavaScript.
+Esta é uma das fontes mais comuns de bugs em JavaScript, por isso é crucial entender a diferença.
 
-- `==` (Igualdade Abstrata): Compara dois valores **após fazer a coerção de tipo**. 
-- `===` (Igualdade Estrita): Compara os valores **e também os tipos**, sem fazer coerção.
+- `===` (Igualdade Estrita): Compara o valor **e** o tipo, sem fazer conversão automática de tipo (coerção). É a forma mais segura e previsível.
+- `==` (Igualdade Abstrata): Compara dois valores **após tentar convertê-los para um tipo comum**. Esse processo de coerção pode ter resultados inesperados.
 
-**Regra de ouro: Sempre prefira `===` para evitar surpresas.**
+**Regra de ouro: Sempre prefira `===` para evitar surpresas e bugs.**
+
+Veja como a coerção do `==` pode ser confusa:
 
 ```javascript
-10 == '10';   // true, porque o JavaScript converte a string '10' para o número 10 antes de comparar.
-10 === '10';  // false, porque os tipos são diferentes (Number vs. String).
+// Exemplo 1: String vs. Number
+10 === '10'; // false (tipos diferentes)
+10 == '10';  // true (a string '10' é coagida para o número 10)
 
-0 == false;   // true, porque `false` é coagido para 0.
-0 === false;  // false, porque os tipos são diferentes (Number vs. Boolean).
+// Exemplo 2: Boolean vs. Number
+1 === true; // false (tipos diferentes)
+1 == true;  // true (o boolean true é coagido para o número 1)
+
+0 === false; // false (tipos diferentes)
+0 == false;  // true (o boolean false é coagido para o número 0)
+
+// Exemplo 3: null vs. undefined
+null === undefined; // false (são tipos primitivos diferentes)
+null == undefined;  // true (esta é uma exceção específica da linguagem)
+
+// Exemplo 4: String vazia vs. Number
+'' === 0; // false (tipos diferentes)
+'' == 0;  // true (a string vazia é coagida para o número 0)
 ```
 
 ### Valores "Truthy" e "Falsy"
@@ -178,37 +193,289 @@ console.log(isRealNumber('10')); // false
 
 ### Operadores de Atribuição
 
-Atribuem valores a variáveis.
+Operadores de atribuição são usados para atribuir valores a variáveis. O mais simples é o de atribuição básica (`=`), mas existem também os operadores de atribuição composta, que são atalhos para atualizar o valor de uma variável.
 
-- `=` (Atribuição simples)
-- `+=` (Adição e atribuição, ex: `x += y` é o mesmo que `x = x + y`)
-- `-=` (Subtração e atribuição)
+**1. Atribuição Simples (`=`)**
+
+Atribui o valor do operando à direita para o operando à esquerda.
+
+```javascript
+let nome = "Alice";
+let x = 10;
+```
+
+Uma característica importante é que a atribuição retorna o valor atribuído, o que permite encadear atribuições (a associatividade é da direita para a esquerda).
+
+```javascript
+let a, b, c;
+a = b = c = 20;
+
+console.log(a); // 20
+console.log(b); // 20
+console.log(c); // 20
+```
+
+**2. Atribuição Composta**
+
+São atalhos para executar uma operação no valor de uma variável e atribuir o novo valor de volta a ela.
+
+- **Adição e atribuição (`+=`)**
+  `x += y` é o mesmo que `x = x + y`.
+  ```javascript
+  let saldo = 100;
+  saldo += 50; // saldo agora é 150
+  ```
+
+- **Subtração e atribuição (`-=`)**
+  `x -= y` é o mesmo que `x = x - y`.
+  ```javascript
+  let divida = 200;
+  divida -= 70; // divida agora é 130
+  ```
+
+- **Multiplicação e atribuição (`*=`)**
+  `x *= y` é o mesmo que `x = x * y`.
+  ```javascript
+  let score = 10;
+  score *= 3; // score agora é 30
+  ```
+
+- **Divisão e atribuição (`/=`)**
+  `x /= y` é o mesmo que `x = x / y`.
+  ```javascript
+  let fatias = 8;
+  fatias /= 2; // fatias agora é 4
+  ```
+
+- **Módulo e atribuição (`%=`)**
+  `x %= y` é o mesmo que `x = x % y`.
+  ```javascript
+  let numero = 10;
+  numero %= 3; // numero agora é 1 (o resto de 10 dividido por 3)
+  ```
+
+### Operadores de Incremento e Decremento
+
+São atalhos para adicionar ou subtrair 1 de uma variável.
+
+- `++` (Incremento): Aumenta o valor em 1.
+- `--` (Decremento): Diminui o valor em 1.
+
+Eles podem ser usados de duas formas:
+
+**1. Pós-fixado (ex: `variavel++`)**
+O valor da variável é **primeiro retornado** (usado na expressão) e **depois incrementado**.
+
+```javascript
+let a = 5;
+console.log(a++); // Imprime 5, e depois 'a' se torna 6
+console.log(a);   // Imprime 6
+```
+
+**2. Pré-fixado (ex: `++variavel`)**
+O valor da variável é **primeiro incrementado** e **depois retornado** (usado na expressão).
+
+```javascript
+let b = 5;
+console.log(++b); // Imprime 6, pois 'b' se torna 6 antes de ser usado
+console.log(b);   // Imprime 6
+```
+
+O mesmo se aplica ao decremento (`--`).
+
+```javascript
+let c = 10;
+console.log(c--); // Imprime 10, depois c vira 9
+console.log(--c); // c vira 8, e depois imprime 8
+```
 
 ### Operadores de Comparação
 
-Comparam dois valores e retornam um booleano (`true` ou `false`).
+Comparam dois valores e retornam um booleano (`true` ou `false`). A regra de ouro sobre igualdade estrita (`===`) também se aplica à desigualdade estrita (`!==`).
 
-- `==` (Igual a): Compara apenas o valor.
-- `===` (Estritamente igual a): Compara o valor **e** o tipo. **Prefira este!**
-- `!=` (Diferente de)
-- `!==` (Estritamente diferente de)
 - `>` (Maior que)
 - `<` (Menor que)
 - `>=` (Maior ou igual a)
 - `<=` (Menor ou igual a)
 
+- `===` (Estritamente igual a): Retorna `true` se os operandos são iguais e do mesmo tipo. **(Recomendado)**
+- `==` (Igual a): Retorna `true` se os operandos são iguais após a coerção de tipo.
+
+- `!==` (Estritamente diferente de): Retorna `true` se os operandos não são iguais ou não são do mesmo tipo. **(Recomendado)**
+- `!=` (Diferente de): Retorna `true` se os operandos não são iguais após a coerção de tipo.
+
+**Exemplos de Igualdade:**
 ```javascript
-10 == '10'  // true (compara apenas o valor)
-10 === '10' // false (compara valor E tipo, Number vs String)
+10 === '10'; // false (compara valor E tipo)
+10 == '10';  // true (compara apenas o valor após coerção)
+```
+
+**Exemplos de Desigualdade:**
+```javascript
+10 !== '10'; // true (porque os tipos são diferentes)
+10 != '10';  // false (porque após a coerção, os valores são iguais)
+
+1 !== true; // true (porque os tipos são diferentes)
+1 != true;  // false (porque após a coerção, os valores são iguais)
+```
+
+#### Detalhes sobre Comparações de Grandeza (>, <, >=, <=)
+
+Esses operadores funcionam como esperado para números, mas seu comportamento com outros tipos, como strings, é importante de se conhecer.
+
+**1. Comparando Números**
+A comparação é puramente matemática.
+```javascript
+10 > 5;    // true
+10 >= 10;  // true
+5 < 4;     // false
+```
+
+**2. Comparando Strings**
+As strings são comparadas caractere por caractere, com base em seus valores na tabela Unicode. A comparação é "lexicográfica" (alfabética).
+```javascript
+'a' < 'b'; // true
+'Gato' > 'Cachorro'; // true, porque 'G' vem depois de 'C' no alfabeto
+
+// Cuidado com maiúsculas e minúsculas!
+'Z' < 'a'; // true, porque letras maiúsculas têm valores Unicode menores que as minúsculas.
+```
+
+**3. Coerção de Tipo em Comparações**
+Quando um número é comparado com uma string, o JavaScript tenta converter a string para um número antes de comparar.
+```javascript
+'10' > 5;   // true, a string '10' é convertida para o número 10
+'1' < 10;   // true, a string '1' é convertida para o número 1
+
+// Se a conversão falhar, o resultado é NaN, e toda comparação com NaN é false.
+'Gato' > 10; // false, porque 'Gato' vira NaN, e NaN > 10 é false.
+'Gato' < 10; // false, porque NaN < 10 é false.
 ```
 
 ### Operadores Lógicos
 
-Usados para combinar expressões booleanas.
+Operadores lógicos são tipicamente usados com valores booleanos, mas eles na verdade retornam o valor de um dos operandos. Por isso, são muito úteis para controle de fluxo.
 
-- `&&` (E Lógico): Retorna `true` se **ambas** as condições forem verdadeiras.
-- `||` (OU Lógico): Retorna `true` se **pelo menos uma** das condições for verdadeira.
-- `!` (NÃO Lógico): Inverte o valor booleano.
+**1. NÃO Lógico (`!`)**
+
+É o mais simples. Ele inverte o valor booleano de um operando. Se o operando não for um booleano, ele primeiro o converte para um (usando as regras de truthy/falsy) e depois o inverte.
+
+```javascript
+!true;   // false
+!false;  // true
+
+// Coerção para booleano e inversão
+!'Gato'; // false (porque 'Gato' é truthy)
+!0;      // true (porque 0 é falsy)
+!null;   // true (porque null é falsy)
+```
+
+**2. E Lógico (`&&`)**
+
+Retorna o primeiro valor *falsy* que encontrar. Se todos os valores forem *truthy*, ele retorna o **último** valor.
+
+Isso leva a um comportamento chamado **"curto-circuito" (short-circuiting)**: se o primeiro operando for `false` (ou falsy), o segundo operando **nem é avaliado**.
+
+```javascript
+// Com booleanos
+true && true;   // true
+true && false;  // false
+false && true;  // false (o segundo 'true' não é avaliado)
+
+// Com outros tipos
+'Alice' && 'Bob';  // 'Bob' (ambos são truthy, retorna o último)
+'' && 'Bob';       // '' (string vazia é falsy, retorna ela e para)
+0 && 100;          // 0 (zero é falsy, retorna ele e para)
+```
+
+**Caso de uso comum: Execução condicional**
+Você pode usar o `&&` como um atalho para um `if`.
+
+```javascript
+const usuarioLogado = true;
+usuarioLogado && console.log("Bem-vindo!"); // A mensagem é exibida
+
+const usuarioVisitante = false;
+usuarioVisitante && console.log("Você não verá isso."); // A mensagem não é exibida
+```
+
+**3. OU Lógico (`||`)**
+
+Retorna o primeiro valor *truthy* que encontrar. Se todos os valores forem *falsy*, ele retorna o **último** valor.
+
+O "curto-circuito" aqui acontece quando o primeiro operando é `true` (ou truthy). O segundo operando não é avaliado.
+
+```javascript
+// Com booleanos
+true || false;  // true (o segundo 'false' não é avaliado)
+false || true;  // true
+false || false; // false
+
+// Com outros tipos
+'Alice' || 'Bob';  // 'Alice' (é o primeiro truthy, retorna ele e para)
+'' || 'Bob';       // 'Bob' (string vazia é falsy, continua e retorna 'Bob')
+0 || null;         // null (ambos são falsy, retorna o último)
+```
+
+**Caso de uso comum: Definir valores padrão**
+O `||` é muito usado para garantir que uma variável tenha um valor caso ela seja `null`, `undefined`, `0`, `''`, etc.
+
+```javascript
+const nomeUsuario = null;
+const nomeExibido = nomeUsuario || "Visitante"; // nomeExibido será "Visitante"
+
+const avatarUrl = "/img/avatar.png";
+const avatarFinal = avatarUrl || "/img/default.png"; // avatarFinal será "/img/avatar.png"
+```
+
+### Ordem de Precedência dos Operadores
+
+Quando múltiplos operadores são usados em uma única expressão, o JavaScript os avalia em uma ordem específica, conhecida como **ordem de precedência**. Isso determina qual operação é realizada primeiro.
+
+```javascript
+const resultado = 10 + 5 * 2; // O resultado é 20, não 30
+```
+
+Neste caso, a multiplicação (`*`) tem maior precedência que a adição (`+`), então `5 * 2` é calculado primeiro, resultando em `10`, e só depois a soma `10 + 10` é realizada.
+
+**A Regra dos Parênteses**
+
+A maneira mais clara e segura de garantir a ordem de execução é usar parênteses `()`. Expressões dentro de parênteses são sempre avaliadas primeiro, independentemente da precedência dos operadores.
+
+```javascript
+const resultadoCorreto = (10 + 5) * 2; // Agora o resultado é 30
+```
+**É uma boa prática usar parênteses sempre que uma expressão for complexa, mesmo que a ordem padrão já seja a desejada. Isso torna o código muito mais fácil de ler e entender.**
+
+**Tabela de Precedência (Simplificada)**
+
+Aqui está uma lista dos operadores mais comuns, da maior para a menor precedência:
+
+1.  **Agrupamento**: `()`
+2.  **Negação e Incremento/Decremento**: `!`, `++`, `--`
+3.  **Multiplicação, Divisão e Módulo**: `*`, `/`, `%`
+4.  **Adição e Subtração**: `+`, `-`
+5.  **Operadores Relacionais**: `<`, `<=`, `>`, `>=`
+6.  **Operadores de Igualdade**: `==`, `!=`, `===`, `!==`
+7.  **E Lógico**: `&&`
+8.  **OU Lógico**: `||`
+9.  **Operadores de Atribuição**: `=`, `+=`, `-=`, etc.
+
+**Associatividade**
+
+Quando operadores têm a mesma precedência (como `*` e `/`), a **associatividade** determina a ordem. A maioria tem associatividade **da esquerda para a direita**.
+
+```javascript
+const calculo = 100 / 10 * 2; // Primeiro 100/10=10, depois 10*2=20.
+```
+
+A principal exceção são os operadores de atribuição, que têm associatividade **da direita para a esquerda**.
+
+```javascript
+let x, y;
+x = y = 5; // Primeiro y recebe 5, depois x recebe o valor de y.
+```
+
 
 ### Conversão Explícita para Boolean
 
