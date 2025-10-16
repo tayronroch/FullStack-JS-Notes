@@ -47,12 +47,28 @@ Assim como o CSS, existem três maneiras principais de incluir JavaScript.
 */
 ```
 
+### Sensibilidade a Maiúsculas e Minúsculas (Case-Sensitive)
+
+JavaScript é uma linguagem **case-sensitive**. Isso significa que letras maiúsculas e minúsculas são tratadas como caracteres diferentes.
+
+Por exemplo, as variáveis `minhaVariavel` e `minhavariavel` são completamente distintas.
+
+```javascript
+let nome = "Alice";
+let Nome = "Bob";
+
+console.log(nome); // Saída: "Alice"
+console.log(Nome); // Saída: "Bob"
+```
+
+Isso se aplica a tudo: nomes de variáveis, funções, constantes e até mesmo eventos. Palavras-chave da linguagem, como `let`, `const`, `if`, `else`, etc., devem sempre ser escritas em minúsculas.
+
 ### Variáveis
 
 Variáveis são contêineres para armazenar valores. Em JavaScript moderno, usamos `let` e `const`.
 
-- `let`: Para variáveis cujo valor pode mudar.
-- `const`: Para constantes, cujo valor não pode ser alterado após a atribuição.
+- `let`: Permite declarar variáveis que podem ter seu valor alterado. Possui escopo de bloco.
+- `const`: Permite declarar constantes, cujo valor não pode ser alterado após a atribuição inicial. Também possui escopo de bloco.
 
 ```javascript
 let idade = 30;
@@ -62,6 +78,41 @@ const nome = "Maria";
 // nome = "Joana"; // Inválido, vai gerar um erro
 ```
 
+#### Uma nota sobre `var`
+
+Antes do ES6 (2015), a única forma de declarar variáveis era com `var`. A principal diferença é que `var` tem **escopo de função**, enquanto `let` e `const` têm **escopo de bloco** (`{}`). Isso significa que uma variável declarada com `var` é visível em toda a função onde foi criada, o que pode levar a bugs e comportamentos inesperados. Por isso, em código moderno, `let` e `const` são sempre preferidos.
+
+#### Regras e Convenções para Nomes de Variáveis
+
+Ao nomear suas variáveis, você precisa seguir algumas regras e convenções.
+
+**Regras (Obrigatório):**
+- Nomes podem conter letras, números, underscore (`_`) e cifrão (`$`).
+- Nomes devem começar com uma letra, `_` ou `$`. 
+- **Não podem** começar com um número.
+- **Não podem** conter espaços.
+- **Não podem** ser palavras reservadas da linguagem (como `let`, `const`, `if`, `function`, etc.).
+
+**Convenções (Boas Práticas):**
+- **camelCase:** A convenção mais comum em JavaScript. A primeira palavra começa com letra minúscula e as subsequentes começam com maiúscula. Ex: `minhaPrimeiraVariavel`.
+- **Nomes Descritivos:** Use nomes que descrevam o dado que a variável armazena. `nomeUsuario` é melhor que `nu`.
+- **Constantes:** Para valores que nunca mudam (constantes verdadeiras), a convenção é usar letras maiúsculas e `_`. Ex: `const PI = 3.14;`, `const TAMANHO_MAXIMO = 100;`.
+
+```javascript
+// Válido e bom
+let primeiroNome = "Tayron";
+const IDADE_MINIMA = 18;
+
+// Válido, mas não recomendado
+let _data = new Date();
+let $elemento = document.getElementById('id');
+
+// Inválido
+// let 1nome = "inválido"; // Começa com número
+// let nome completo = "inválido"; // Contém espaço
+// let if = "inválido"; // Palavra reservada
+```
+
 ### Tipos de Dados Primitivos
 
 - **String:** Texto. Ex: `"Olá, mundo"`
@@ -69,6 +120,8 @@ const nome = "Maria";
 - **Boolean:** Verdadeiro ou falso. Ex: `true`, `false`
 - **Undefined:** Uma variável que foi declarada, mas ainda não teve um valor atribuído.
 - **Null:** Representa a ausência intencional de um valor.
+- **Symbol:** Um valor único e imutável, frequentemente usado para adicionar chaves de propriedade únicas a um objeto.
+- **BigInt:** Usado para representar números inteiros maiores que o tipo `Number` pode suportar.
 
 ### Exemplo: Manipulando o DOM
 
