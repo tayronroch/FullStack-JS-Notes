@@ -82,29 +82,68 @@ null == undefined;  // true (esta é uma exceção específica da linguagem)
 '' == 0;  // true (a string vazia é coagida para o número 0)
 ```
 
-### Valores "Truthy" e "Falsy"
+### Valores "Truthy" e "Falsy": Um Mergulho Profundo
 
-No contexto de controle de fluxo (como um `if`), todo valor em JavaScript pode ser coagido para `true` ou `false`.
+Em JavaScript, todo valor tem um valor booleano inerente. Isso é crucial para o controle de fluxo (`if`, `while`, etc.) e para o comportamento dos operadores lógicos (`&&`, `||`).
 
-- **Valores Falsy:** São os únicos valores que se comportam como `false`.
-  - `false`
-  - `0`
-  - `""` (string vazia)
-  - `null`
-  - `undefined`
-  - `NaN` (Not a Number)
+- Um valor **truthy** é um valor que se traduz em `true` quando avaliado em um contexto booleano.
+- Um valor **falsy** é um valor que se traduz em `false` quando avaliado em um contexto booleano.
 
-- **Valores Truthy:** Qualquer outro valor que não esteja na lista acima. Inclui `'0'`, `'false'`, `[]` (array vazio), `{}` (objeto vazio), etc.
+**A Lista Definitiva dos Valores Falsy**
+
+É mais fácil memorizar os valores `falsy`, pois são poucos. Qualquer valor que não esteja nesta lista é, por definição, `truthy`.
+
+1.  `false` (o booleano falso)
+2.  `0` (o número zero)
+3.  `-0` (o número zero negativo)
+4.  `0n` (o BigInt zero)
+5.  `""` (a string vazia)
+6.  `null`
+7.  `undefined`
+8.  `NaN` (Not a Number)
+
+**O Universo dos Valores Truthy**
+
+Qualquer outro valor é `truthy`. Isso inclui alguns casos que podem surpreender iniciantes:
+
+| Valor                  | Representação | Booleano Equivalente | Motivo                                       |
+| ---------------------- | ------------- | -------------------- | -------------------------------------------- |
+| String com zero        | `'0'`         | `true`               | É uma string não-vazia.                      |
+| String com "false"     | `'false'`     | `true`               | É uma string não-vazia.                      |
+| String com espaços     | `' '`         | `true`               | É uma string não-vazia.                      |
+| Array vazio            | `[]`          | `true`               | Arrays (e objetos) são sempre truthy.        |
+| Objeto vazio           | `{}`          | `true`               | Objetos (e arrays) são sempre truthy.        |
+| Função vazia           | `function(){}`| `true`               | Funções são um tipo de objeto e são truthy.  |
+
+**Como Verificar Manualmente**
+
+Você pode converter explicitamente qualquer valor para seu equivalente booleano usando a função `Boolean()` ou o atalho de dupla negação `!!`.
 
 ```javascript
-if ('0') { // '0' é truthy
-  console.log("Esta mensagem será exibida!");
-}
+console.log(Boolean('hello')); // true
+console.log(Boolean(0));       // false
 
-if (0) { // 0 é falsy
-  // Este código não será executado.
-}
+console.log(!!{});   // true
+console.log(!!'');   // false
 ```
+
+**Onde o Conceito é Aplicado**
+
+- **Condicionais `if/else`**:
+  ```javascript
+  const carrinho = [];
+  if (carrinho) { // [] é truthy, então o bloco executa
+    console.log("O carrinho existe.");
+  }
+  ```
+- **Operadores Lógicos `||` e `&&`**: O comportamento de curto-circuito depende inteiramente desses conceitos.
+  ```javascript
+  const nomeUsuario = '';
+  const nomeFinal = nomeUsuario || 'Visitante'; // Retorna 'Visitante' porque '' é falsy
+
+  const temPermissao = true;
+  temPermissao && executarAcao(); // A função é chamada porque o primeiro valor é truthy
+  ```
 
 ### As Diferenças entre `undefined` e `null`
 
@@ -503,31 +542,161 @@ console.log(!!{});    // true
 
 ## Controle de Fluxo
 
-### Condicional `if / else`
+O controle de fluxo dita a ordem em que o código é executado. Com estruturas condicionais e laços de repetição, podemos criar lógicas complexas e dinâmicas.
 
-Executa um bloco de código se uma condição for verdadeira e, opcionalmente, outro bloco (`else`) se for falsa.
+### Condicional `if / else`: Uma Análise Detalhada
+
+A estrutura `if` é o bloco de construção fundamental para a tomada de decisões em JavaScript. Ela permite que o programa execute diferentes caminhos de código com base em uma condição.
+
+**1. A Estrutura Básica (`if`)**
+
+Executa um bloco de código somente se a condição fornecida for avaliada como `true` (ou um valor *truthy*).
 
 ```javascript
-const idade = 18;
+const temperatura = 25;
 
-if (idade >= 18) {
-  console.log("Você é maior de idade.");
+if (temperatura > 22) {
+  console.log("Está um dia quente!");
+}
+```
+*Opcional: Para um único comando, as chaves `{}` não são obrigatórias, mas **é uma forte boa prática sempre usá-las** para evitar erros e melhorar a legibilidade.*
+
+```javascript
+// Funciona, mas não é recomendado
+if (temperatura > 22) console.log("Dia quente!");
+```
+
+**2. A Cláusula `else`**
+
+A cláusula `else` fornece um bloco de código alternativo que é executado se a condição do `if` for `false` (ou um valor *falsy*).
+
+```javascript
+const numero = 7;
+
+if (numero % 2 === 0) {
+  console.log("O número é par.");
 } else {
-  console.log("Você é menor de idade.");
+  console.log("O número é ímpar.");
 }
 ```
 
-Você pode aninhar condições com `else if`.
+**3. Encadeando com `else if`**
+
+Para testar múltiplas condições em sequência, você pode usar `else if`. O JavaScript avaliará cada condição em ordem e executará o bloco de código correspondente à **primeira** condição verdadeira que encontrar. Se nenhuma for verdadeira, o bloco `else` final será executado (se existir).
 
 ```javascript
-const hora = 14;
+const nota = 85;
 
-if (hora < 12) {
-  console.log("Bom dia!");
-} else if (hora < 18) {
-  console.log("Boa tarde!");
+if (nota >= 90) {
+  console.log("Nota: A");
+} else if (nota >= 80) {
+  console.log("Nota: B"); // Esta condição é a primeira a ser verdadeira
+} else if (nota >= 70) {
+  console.log("Nota: C");
 } else {
-  console.log("Boa noite!");
+  console.log("Nota: Reprovado");
+}
+```
+
+**4. Aninhamento de Condicionais (Nested `if`)**
+
+Você pode colocar estruturas `if` dentro de outras para criar lógicas mais complexas.
+
+```javascript
+const usuario = { logado: true, permissao: "admin" };
+
+if (usuario.logado) {
+  console.log("Usuário está logado.");
+  if (usuario.permissao === "admin") {
+    console.log("Bem-vindo, Administrador!");
+  } else {
+    console.log("Bem-vindo, usuário!");
+  }
+} else {
+  console.log("Por favor, faça o login.");
+}
+```
+**Cuidado:** O aninhamento excessivo pode tornar o código difícil de ler e manter. Muitas vezes, pode ser simplificado com operadores lógicos ou refatorado em funções menores.
+
+**5. Boas Práticas**
+
+- **Sempre use chaves `{}`**: Aumenta a clareza e previne bugs ao adicionar novas linhas de código ao bloco `if` ou `else`.
+- **Use Igualdade Estrita (`===`)**: Evite surpresas com a coerção de tipo usando `===` em vez de `==` nas suas condições.
+- **Pense em "Guard Clauses"**: Para evitar aninhamento, você pode validar condições "negativas" no início de uma função.
+
+  ```javascript
+  // Em vez de aninhar...
+  function processar(usuario) {
+    if (usuario) {
+      if (usuario.ativo) {
+        // ...lógica principal aqui
+      }
+    }
+  }
+
+  // Use uma "Guard Clause"
+  function processar(usuario) {
+    if (!usuario || !usuario.ativo) {
+      return; // Sai da função mais cedo
+    }
+    // ...lógica principal aqui, com menos aninhamento
+  }
+  ```
+
+### Operador Condicional (Ternário)
+
+É um atalho para a estrutura `if/else`, muito útil para atribuições condicionais em uma única linha.
+
+A sintaxe é: `condição ? valorSeVerdadeiro : valorSeFalso`.
+
+```javascript
+const idade = 20;
+const status = idade >= 18 ? "Maior de idade" : "Menor de idade";
+
+console.log(status); // "Maior de idade"
+```
+Use-o para lógicas simples. Para múltiplas ações ou lógicas complexas, um `if/else` completo é mais legível.
+
+### Condicional `switch`
+
+É usado para comparar uma expressão com múltiplos valores diferentes. É uma alternativa mais limpa para uma cadeia longa de `if/else if`.
+
+```javascript
+const permissao = "admin"; // poderia ser "editor", "visitante", etc.
+
+switch (permissao) {
+  case "admin":
+    console.log("Acesso total.");
+    break; // Impede que o código continue para o próximo case
+  case "editor":
+    console.log("Acesso para editar conteúdo.");
+    break;
+  case "visitante":
+    console.log("Acesso apenas para visualização.");
+    break;
+  default: // Executado se nenhum dos cases corresponder
+    console.log("Permissão desconhecida.");
+}
+```
+
+**Atenção ao `break`!**
+Se você omitir o `break`, a execução "cairá" (fall-through) para o próximo `case` e o executará também, até encontrar um `break` ou o fim do `switch`.
+
+```javascript
+const diaSemana = 2;
+
+switch (diaSemana) {
+  case 1:
+  case 2:
+  case 3:
+  case 4:
+  case 5:
+    console.log("Dia útil.");
+    break; // Para aqui
+  case 6:
+  case 7:
+    console.log("Fim de semana.");
+    break;
 }
 ```
 
@@ -558,3 +727,89 @@ while (contador < 5) {
   contador++; // Importante: incrementar para não criar um loop infinito!
 }
 ```
+
+
+## Tratamento de Erros e Exceções
+
+Mesmo com o código bem escrito, erros podem acontecer. Uma entrada de usuário inválida, uma falha de rede, ou um bug inesperado podem interromper o fluxo normal do programa. O tratamento de exceções permite que você gerencie esses erros de forma elegante, sem que o programa quebre.
+
+### 1. A Estrutura `try...catch`
+
+É o principal mecanismo para tratar erros em JavaScript.
+
+- **`try`**: Envolve o código que você suspeita que pode lançar um erro.
+- **`catch`**: Bloco de código que é executado **se, e somente se**, um erro for lançado no bloco `try`. Ele recebe um objeto de erro como argumento, que contém informações sobre o erro.
+
+```javascript
+try {
+  // Código propenso a erros aqui
+  const dados = JSON.parse('{ "nome": "Ana", "idade": }'); // JSON inválido
+  console.log(dados.nome);
+} catch (erro) {
+  // Código para tratar o erro
+  console.log("Ocorreu um erro ao processar os dados.");
+  console.log("Detalhes do erro:", erro.message); // Exibe a mensagem do erro
+}
+
+console.log("O programa continua executando...");
+```
+Sem o `try...catch`, o erro `SyntaxError` quebraria o script. Com ele, o erro é capturado e o programa continua.
+
+**O Objeto de Erro**
+O objeto passado para o `catch` geralmente possui estas propriedades:
+- `name`: O nome do tipo do erro (ex: `SyntaxError`, `TypeError`).
+- `message`: Uma mensagem descritiva sobre o erro.
+- `stack`: O "caminho" no código que levou ao erro, útil para depuração.
+
+### 2. Lançando Exceções com `throw`
+
+Você não precisa depender apenas dos erros nativos do JavaScript. Você pode criar e "lançar" suas próprias exceções usando a palavra-chave `throw`. Isso é útil para sinalizar condições de erro específicas da lógica do seu aplicativo.
+
+A boa prática é sempre lançar um objeto `Error`.
+
+```javascript
+function calcularArea(largura, altura) {
+  if (typeof largura !== 'number' || typeof altura !== 'number') {
+    throw new Error("Largura e altura devem ser números.");
+  }
+  if (largura <= 0 || altura <= 0) {
+    throw new Error("Largura e altura devem ser valores positivos.");
+  }
+  return largura * altura;
+}
+
+try {
+  const area = calcularArea(10, "vinte");
+  console.log("Área:", area);
+} catch (e) {
+  console.error("Erro na função calcularArea:", e.message);
+}
+```
+
+### 3. A Cláusula `finally`
+
+O bloco `finally` é opcional e executa um código **após** o `try` e o `catch`, independentemente de um erro ter ocorrido ou não. É ideal para tarefas de "limpeza", como fechar uma conexão de rede ou um arquivo, garantindo que essas ações aconteçam em qualquer cenário.
+
+```javascript
+let conexaoAberta = true;
+
+try {
+  console.log("Abrindo conexão com o banco de dados...");
+  // throw new Error("Falha na comunicação!"); // Descomente para simular um erro
+  console.log("Processando dados...");
+} catch (erro) {
+  console.error("Erro durante o processamento:", erro.message);
+} finally {
+  // Este bloco SEMPRE executa
+  conexaoAberta = false;
+  console.log("Fechando conexão com o banco de dados. Status:", conexaoAberta);
+}
+```
+
+### 4. Tipos de Erros Comuns
+
+JavaScript tem vários tipos de objetos de erro nativos que são lançados em diferentes situações:
+- **`SyntaxError`**: Um erro na sintaxe do código que impede o programa de ser analisado.
+- **`ReferenceError`**: Ocorre ao tentar acessar uma variável que não foi declarada.
+- **`TypeError`**: Ocorre quando um valor não é do tipo esperado (ex: tentar chamar uma string como se fosse uma função).
+- **`RangeError`**: Ocorre quando um número está fora de uma faixa permitida.
