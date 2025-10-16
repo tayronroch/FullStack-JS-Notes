@@ -94,9 +94,11 @@ Ao nomear suas variáveis, você precisa seguir algumas regras e convenções.
 - **Não podem** ser palavras reservadas da linguagem (como `let`, `const`, `if`, `function`, etc.).
 
 **Convenções (Boas Práticas):**
-- **camelCase:** A convenção mais comum em JavaScript. A primeira palavra começa com letra minúscula e as subsequentes começam com maiúscula. Ex: `minhaPrimeiraVariavel`.
+- **camelCase:** É a convenção **padrão** e mais comum em JavaScript para variáveis e funções. A primeira palavra começa com letra minúscula e as subsequentes começam com maiúscula. Ex: `minhaPrimeiraVariavel`.
+- **PascalCase:** Usado para nomes de Classes. É igual ao camelCase, mas a primeira palavra também começa com maiúscula. Ex: `class MeuComponente { ... }`.
+- **snake_case:** Comum em outras linguagens (como Python), mas **não é uma convenção padrão em JavaScript** para variáveis. Você pode encontrá-lo em respostas de APIs ou em arquivos de configuração. Ex: `minha_variavel`.
+- **UPPER_SNAKE_CASE (ou SCREAMING_SNAKE_CASE):** Usado para constantes, ou seja, valores que nunca mudam. Ex: `const PI = 3.14;`, `const TAMANHO_MAXIMO = 100;`.
 - **Nomes Descritivos:** Use nomes que descrevam o dado que a variável armazena. `nomeUsuario` é melhor que `nu`.
-- **Constantes:** Para valores que nunca mudam (constantes verdadeiras), a convenção é usar letras maiúsculas e `_`. Ex: `const PI = 3.14;`, `const TAMANHO_MAXIMO = 100;`.
 
 ```javascript
 // Válido e bom
@@ -122,6 +124,45 @@ let $elemento = document.getElementById('id');
 - **Null:** Representa a ausência intencional de um valor.
 - **Symbol:** Um valor único e imutável, frequentemente usado para adicionar chaves de propriedade únicas a um objeto.
 - **BigInt:** Usado para representar números inteiros maiores que o tipo `Number` pode suportar.
+
+### Template Literals (ES6)
+
+O ES6 introduziu uma maneira mais fácil e poderosa de trabalhar com strings, chamada Template Literals ou Template Strings.
+
+**Forma antiga (concatenação com `+`):**
+```javascript
+const nome = "Maria";
+const saudacao = "Olá, " + nome + "! Bem-vinda.";
+// Resultado: "Olá, Maria! Bem-vinda."
+```
+
+**Forma moderna (Template Literals):**
+
+Eles usam crases (`` ` ``) em vez de aspas e permitem duas grandes melhorias:
+
+1.  **Interpolação de Expressões:** Você pode inserir variáveis ou qualquer expressão JavaScript diretamente na string usando a sintaxe `${...}`.
+2.  **Strings de Múltiplas Linhas:** Você pode quebrar a linha dentro da string simplesmente pressionando Enter, sem precisar do caractere `\n`.
+
+```javascript
+const usuario = "João";
+const idade = 25;
+
+// Exemplo com interpolação
+const mensagem = `Olá, meu nome é ${usuario} e eu tenho ${idade} anos.`;
+console.log(mensagem);
+// Saída: Olá, meu nome é João e eu tenho 25 anos.
+
+// Exemplo com múltiplas linhas
+const email = `
+Olá, ${usuario},
+
+Obrigado por se cadastrar.
+
+Atenciosamente,
+A Equipe.
+`;
+console.log(email);
+```
 
 ### Exemplo: Manipulando o DOM
 
