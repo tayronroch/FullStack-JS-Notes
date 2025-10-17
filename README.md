@@ -52,3 +52,4 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [6 - JavaScript Assíncrono (Promises, async-await)](<./2%20-%20JavaScript/6%20-%20JavaScript%20Assíncrono%20(Promises,%20async-await).md>)
 - [7 - Caminhos no JavaScript do Navegador](./2%20-%20JavaScript/7%20-%20Caminhos%20no%20JavaScript%20do%20Navegador.md)
 - [8 - Expressões Regulares](./2%20-%20JavaScript/8%20-%20Expressões%20Regulares.md)
+- [9 - Depuração de Código em JavaScript](./2%20-%20JavaScript/9%20-%20Depuração%20de%20Código%20em%20JavaScript.md)
