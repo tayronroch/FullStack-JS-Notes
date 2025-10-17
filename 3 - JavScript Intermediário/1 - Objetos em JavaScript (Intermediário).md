@@ -43,7 +43,261 @@ Objetos são a base do JavaScript e são usados para estruturar e organizar o c�
 
 ---
 
-## 2. Protótipos e Herança Prototípica
+## 2. Acessando Propriedades de Objetos
+
+Uma vez que um objeto é criado, você pode acessar, adicionar ou modificar suas propriedades e métodos de várias formas.
+
+### a. Notação de Ponto (Dot Notation)
+
+É a forma mais comum e direta. O nome da propriedade é usado diretamente após o objeto, separado por um ponto.
+
+**Requisito:** A chave da propriedade deve ser um identificador JavaScript válido (não pode conter espaços, começar com números ou ter caracteres especiais).
+
+```javascript
+const usuario = {
+  nome: "Maria",
+  idade: 28
+};
+
+console.log(usuario.nome); // "Maria"
+
+// Modificando um valor
+usuario.idade = 29;
+console.log(usuario.idade); // 29
+
+// Adicionando uma nova propriedade
+usuario.cidade = "São Paulo";
+console.log(usuario.cidade); // "São Paulo"
+```
+
+### b. Notação de Colchetes (Bracket Notation)
+
+Permite acessar propriedades usando uma string (ou uma variável que contém uma string) dentro de colchetes `[]`.
+
+**Vantagens:**
+1.  Permite o uso de chaves que **não são** identificadores válidos.
+2.  Permite o uso de **variáveis** para acessar propriedades dinamicamente.
+
+```javascript
+const produto = {
+  "código do produto": "XYZ-123",
+  estoque: 50
+};
+
+// Acesso com chave contendo espaços
+console.log(produto["código do produto"]); // "XYZ-123"
+
+// Acesso dinâmico usando uma variável
+let chaveDeAcesso = "estoque";
+console.log(produto[chaveDeAcesso]); // 50
+
+chaveDeAcesso = "código do produto";
+console.log(produto[chaveDeAcesso]); // "XYZ-123"
+```
+
+### c. Desestruturação de Objetos (Object Destructuring)
+
+Introduzida no ES6, é uma sintaxe que permite extrair valores de objetos (ou arrays) e atribuí-los a variáveis distintas. É extremamente útil para escrever código mais limpo e conciso.
+
+```javascript
+const dev = {
+  primeiroNome: "João",
+  linguagem: "JavaScript",
+  nivel: "Pleno",
+  empresa: "Google"
+};
+
+// Extrai 'linguagem' e 'nivel' para variáveis com o mesmo nome
+const { linguagem, nivel } = dev;
+console.log(linguagem); // "JavaScript"
+console.log(nivel);     // "Pleno"
+
+// Renomeando variáveis
+const { primeiroNome: nome, empresa: firma } = dev;
+console.log(nome);  // "João"
+console.log(firma); // "Google"
+
+// Atribuindo valores padrão
+const { salario = 5000 } = dev;
+console.log(salario); // 5000 (porque 'salario' não existe no objeto 'dev')
+```
+
+### d. Encadeamento Opcional (Optional Chaining)
+
+O operador `?.` permite ler o valor de uma propriedade localizada profundamente em uma cadeia de objetos conectados, sem ter que validar expressamente que cada referência na cadeia é válida. Se uma referência for `null` ou `undefined`, a expressão fará um "curto-circuito" e retornará `undefined` em vez de causar um erro.
+
+```javascript
+const apiResponse = {
+  usuario: {
+    nome: "Carlos",
+    // O objeto 'contato' está faltando
+    // contato: { email: "carlos@email.com" }
+  }
+};
+
+// Sem Encadeamento Opcional (causaria um erro)
+// const email = apiResponse.usuario.contato.email; // TypeError!
+
+// Com Encadeamento Opcional (seguro)
+const email = apiResponse.usuario?.contato?.email;
+console.log(email); // undefined (nenhum erro é lançado)
+
+// Também funciona com chamadas de método
+const metodoCustom = apiResponse.usuario?.metodoInexistente?.();
+console.log(metodoCustom); // undefined
+```
+
+---
+
+## 3. A Palavra-chave `this`: Acessando o Contexto do Objeto
+
+Dentro de um objeto, como um método acessa outra propriedade ou método do mesmo objeto? A resposta é a palavra-chave `this`.
+
+O valor de `this` é determinado pela forma como a função é chamada. Quando uma função é chamada como um método de um objeto, `this` se refere ao próprio objeto.
+
+```javascript
+const perfil = {
+  nome: "Ana",
+  profissao: "Desenvolvedora",
+  apresentar() {
+    // 'this' aqui se refere ao objeto 'perfil'
+    console.log(`Olá, eu sou ${this.nome}, e trabalho como ${this.profissao}.`);
+  }
+};
+
+perfil.apresentar(); // "Olá, eu sou Ana, e trabalho como Desenvolvedora."
+```
+
+### O Problema Comum: "Perdendo" o `this`
+
+O valor de `this` pode mudar de forma inesperada se o método for chamado fora de seu contexto original. Isso é comum ao passar métodos como callbacks.
+
+```javascript
+const contador = {
+  valor: 0,
+  incrementar() {
+    this.valor++;
+    console.log(this.valor);
+  }
+};
+
+// Chamada normal, 'this' é 'contador'
+contador.incrementar(); // 1
+
+// Passando o método como callback
+// A função 'incrementar' é chamada fora do contexto de 'contador'
+// Em modo não-estrito, 'this' se torna o objeto global (window no navegador)
+// Em modo estrito ('use strict'), 'this' se torna 'undefined', causando um erro.
+const funcaoIncrementar = contador.incrementar;
+funcaoIncrementar(); // NaN ou TypeError
+```
+
+### A Solução Moderna: Arrow Functions
+
+Arrow functions (`=>`) não possuem seu próprio `this`. Em vez disso, elas "herdam" o `this` do escopo em que foram criadas (comportamento léxico). Isso as torna perfeitas para callbacks dentro de métodos.
+
+```javascript
+const cronometro = {
+  segundos: 0,
+  iniciar() {
+    setInterval(() => {
+      // Esta arrow function não tem seu próprio 'this'.
+      // Ela usa o 'this' do método 'iniciar', que é o objeto 'cronometro'.
+      this.segundos++;
+      console.log(this.segundos);
+    }, 1000);
+  }
+};
+
+// cronometro.iniciar(); // Imprime 1, 2, 3... a cada segundo
+```
+
+A forma tradicional de resolver isso antes das arrow functions era usando o método `.bind(this)`.
+
+---
+
+## 4. Adicionando e Atualizando Propriedades
+
+Objetos em JavaScript são dinâmicos, o que significa que suas propriedades podem ser adicionadas, modificadas ou removidas a qualquer momento.
+
+### a. Atribuição Direta (Mutação)
+
+A forma mais simples de adicionar ou modificar uma propriedade é usando a notação de ponto ou de colchetes. Se a propriedade não existir, ela será criada. Se já existir, seu valor será sobrescrito.
+
+```javascript
+const user = {
+  nome: "João"
+};
+
+// Modificando uma propriedade existente
+user.nome = "João Silva";
+
+// Adicionando uma nova propriedade
+user.idade = 30;
+user["status social"] = "Solteiro";
+
+console.log(user); // { nome: "João Silva", idade: 30, "status social": "Solteiro" }
+```
+
+### b. `Object.assign()`
+
+Este método copia todas as propriedades enumeráveis de um ou mais objetos de origem para um objeto de destino. Ele **muta** (modifica) o objeto de destino.
+
+```javascript
+const config = {
+  theme: "dark",
+  notifications: true
+};
+
+const userConfig = {
+  notifications: false,
+  language: "pt-br"
+};
+
+// Mescla userConfig em config.
+// A propriedade 'notifications' será sobrescrita.
+// A propriedade 'language' será adicionada.
+const finalConfig = Object.assign(config, userConfig);
+
+console.log(config); // { theme: 'dark', notifications: false, language: 'pt-br' }
+console.log(finalConfig === config); // true -> O objeto original foi modificado!
+```
+
+### c. Sintaxe de Spread (`...`) para Atualizações Imutáveis
+
+Uma abordagem mais moderna e frequentemente mais segura é a **imutabilidade**. Em vez de modificar o objeto original, você cria um novo objeto com as propriedades atualizadas. A sintaxe de spread é perfeita para isso.
+
+```javascript
+const point = { x: 10, y: 20 };
+
+// Cria um NOVO objeto com o valor de 'y' atualizado
+const newPoint = { ...point, y: 30, z: 40 };
+
+console.log(point);    // { x: 10, y: 20 } -> O original permanece intacto
+console.log(newPoint); // { x: 10, y: 30, z: 40 }
+```
+Esta abordagem é preferida em frameworks como React, pois facilita o rastreamento de mudanças.
+
+### d. Deletando Propriedades
+
+O operador `delete` remove uma propriedade de um objeto.
+
+```javascript
+const carro = {
+  marca: "Ford",
+  modelo: "Ka",
+  ano: 2018
+};
+
+delete carro.ano;
+
+console.log(carro); // { marca: "Ford", modelo: "Ka" }
+```
+O operador `delete` retorna `true` se a operação for bem-sucedida.
+
+---
+
+## 5. Protótipos e Herança Prototípica
 
 Todo objeto em JavaScript tem um link interno para outro objeto chamado `prototype`. Quando tentamos acessar uma propriedade de um objeto que não existe nele, o JavaScript automaticamente busca essa propriedade no protótipo do objeto.
 
@@ -69,7 +323,7 @@ console.log(Object.getPrototypeOf(joao) === pessoa); // true
 
 ---
 
-## 3. Funções Construtoras
+## 6. Funções Construtoras
 
 Funções construtoras são usadas para criar múltiplos objetos com a mesma estrutura. Por convenção, seus nomes começam com letra maiúscula. O operador `new` cria um novo objeto, define `this` para esse objeto e o retorna implicitamente.
 
@@ -95,7 +349,7 @@ pedro.apresentar(); // Meu nome é Pedro e tenho 25 anos.
 
 ---
 
-## 4. Getters e Setters
+## 7. Getters e Setters
 
 Getters e Setters permitem definir métodos que parecem propriedades.
 
@@ -127,7 +381,7 @@ console.log(carro._marca);       // Chevrolet
 
 ---
 
-## 5. Descritores de Propriedade
+## 8. Descritores de Propriedade
 
 Cada propriedade de um objeto tem "descritores" que controlam seu comportamento.
 
@@ -167,7 +421,7 @@ console.log(Object.keys(obj)); // ['a'] ('c' não é enumerável)
 
 ---
 
-## 6. Métodos Úteis de `Object`
+## 9. Métodos Úteis de `Object`
 
 - **`Object.keys(obj)`**: Retorna um array com os nomes das propriedades enumeráveis de um objeto.
 - **`Object.values(obj)`**: Retorna um array com os valores das propriedades enumeráveis.
@@ -197,7 +451,7 @@ console.log(produto.preco); // 4500
 
 ---
 
-## 7. Shallow Copy vs. Deep Copy
+## 10. Shallow Copy vs. Deep Copy
 
 É crucial entender que `Object.assign()` e o operador spread (`...`) realizam uma **cópia rasa (shallow copy)**. Isso significa que se uma propriedade do objeto original for, ela mesma, um objeto, a cópia conterá uma **referência** a esse objeto aninhado, e não um novo objeto.
 
@@ -228,7 +482,7 @@ console.log(devDeepClone.linguagens); // ['JavaScript', 'Python', 'Go', 'Ruby']
 
 ---
 
-## 8. Classes (ES6)
+## 11. Classes (ES6)
 
 O ES6 introduziu a sintaxe de `class`, que é uma "açúcar sintático" sobre a herança baseada em protótipos. Ela torna o código mais limpo, mais organizado e mais familiar para quem vem de outras linguagens orientadas a objetos.
 
@@ -263,7 +517,7 @@ meuCarro.dirigir(); // Dirigindo um Toyota... (herdado de Veiculo)
 
 ---
 
-## 9. Exemplo Prático: E-commerce
+## 12. Exemplo Prático: E-commerce
 
 Vamos combinar vários conceitos para criar um objeto `Produto` para um e-commerce.
 
@@ -318,7 +572,7 @@ notebook.comprar(10); // Estoque insuficiente para '${this.nome}'.
 
 ---
 
-## 10. Formas de Criar Objetos em Detalhes
+## 13. Formas de Criar Objetos em Detalhes
 
 JavaScript oferece múltiplas maneiras de criar objetos. A escolha depende do caso de uso, da complexidade e do padrão de projeto desejado.
 
