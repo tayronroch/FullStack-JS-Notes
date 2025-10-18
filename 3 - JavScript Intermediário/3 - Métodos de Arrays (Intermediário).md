@@ -269,3 +269,120 @@ console.log(arrayDoEmoji); // ['👩‍💻'] (correto, preserva o caractere)
     const adicionarImposto = (preco) => preco * 1.1;
     const precosFinais = precos.map(adicionarImposto);
     ```
+
+---
+
+## 5. Adicionando e Removendo Elementos
+
+Manipular o conteúdo de um array é uma das tarefas mais comuns. Existem duas filosofias principais para isso: a abordagem **mutável** (que altera o array original) e a **imutável** (que cria um novo array com as mudanças).
+
+### a. A Abordagem Mutável (Tradicional)
+
+Estes métodos modificam o array diretamente. São úteis em alguns contextos, mas podem gerar efeitos colaterais (bugs) se o mesmo array estiver sendo usado em múltiplos lugares do seu código.
+
+- **`push()` e `pop()`**: Adicionam e removem do **final** do array.
+
+```javascript
+const frutas = ["maçã", "banana"];
+frutas.push("laranja"); // Adiciona no final
+console.log(frutas); // ["maçã", "banana", "laranja"]
+
+const frutaRemovida = frutas.pop(); // Remove do final
+console.log(frutaRemovida); // "laranja"
+console.log(frutas); // ["maçã", "banana"]
+```
+
+- **`unshift()` e `shift()`**: Adicionam e removem do **início** do array. (São computacionalmente mais "caros"/lentos que `push/pop`, pois precisam reordenar todos os índices).
+
+```javascript
+const numeros = [3, 4];
+numeros.unshift(1, 2); // Adiciona no início
+console.log(numeros); // [1, 2, 3, 4]
+
+numeros.shift(); // Remove do início
+console.log(numeros); // [2, 3, 4]
+```
+
+- **`splice()`: O "Canivete Suíço" da Mutação**
+
+  O método `splice()` é extremamente poderoso e pode remover, adicionar ou substituir elementos em qualquer posição do array.
+
+  `array.splice(startIndex, deleteCount, item1, item2, ...)`
+
+  - **Removendo:**
+
+  ```javascript
+  const letras = ['a', 'b', 'c', 'd', 'e'];
+  // A partir do índice 2, remova 1 elemento
+  const removidas = letras.splice(2, 1);
+  console.log(letras); // ['a', 'b', 'd', 'e']
+  console.log(removidas); // ['c']
+  ```
+
+  - **Adicionando:**
+
+  ```javascript
+  // A partir do índice 1, remova 0 elementos e adicione 'x' e 'y'
+  letras.splice(1, 0, 'x', 'y');
+  console.log(letras); // ['a', 'x', 'y', 'b', 'd', 'e']
+  ```
+
+  - **Substituindo:**
+
+  ```javascript
+  // A partir do índice 3, remova 2 elementos e adicione 'Z'
+  letras.splice(3, 2, 'Z');
+  console.log(letras); // ['a', 'x', 'y', 'Z', 'e']
+  ```
+
+### b. A Abordagem Imutável (Moderna e Recomendada)
+
+Esta abordagem, favorecida no React e em programação funcional, nunca altera o array original. Em vez disso, ela cria um **novo array** com as alterações desejadas. A sintaxe de espalhamento (`...`) é a principal ferramenta aqui.
+
+- **Adicionando Elementos:**
+
+```javascript
+const original = [1, 2, 3];
+
+// Adicionar no final
+const novoFinal = [...original, 4];
+console.log(novoFinal); // [1, 2, 3, 4]
+
+// Adicionar no início
+const novoInicio = [0, ...original];
+console.log(novoInicio); // [0, 1, 2, 3]
+
+console.log(original); // [1, 2, 3] (permanece intacto)
+```
+
+- **Removendo Elementos:**
+
+```javascript
+const paraRemover = ['a', 'b', 'c', 'd'];
+const indexParaRemover = 2; // Quero remover o 'c'
+
+// Usando slice()
+const removidoComSlice = [
+  ...paraRemover.slice(0, indexParaRemover), // Pega tudo ANTES do índice
+  ...paraRemover.slice(indexParaRemover + 1) // Pega tudo DEPOIS do índice
+];
+console.log(removidoComSlice); // ['a', 'b', 'd']
+
+// Usando filter() (mais legível)
+const removidoComFilter = paraRemover.filter((_, index) => index !== indexParaRemover);
+console.log(removidoComFilter); // ['a', 'b', 'd']
+```
+
+- **Substituindo um Elemento:**
+
+```javascript
+const paraSubstituir = ["maçã", "banana", "uva"];
+const indexParaSubstituir = 1;
+const novoValor = "morango";
+
+// Usando map()
+const substituido = paraSubstituir.map((item, index) => {
+  return index === indexParaSubstituir ? novoValor : item;
+});
+console.log(substituido); // ["maçã", "morango", "uva"]
+```
