@@ -1,4 +1,3 @@
-
 # Objetos em JavaScript (Intermediário)
 
 Este guia explora conceitos de objetos em JavaScript, começando pelo básico e aprofundando em tópicos intermediários como protótipos, construtores, e propriedades avançadas.
@@ -28,14 +27,14 @@ const carro = {
   desligar() {
     this.ligado = false;
     console.log("Carro desligado.");
-  }
+  },
 };
 
 // Acessando propriedades
 console.log(carro.modelo); // "Uno"
 
 // Chamando um método
-carro.ligar(); 
+carro.ligar();
 console.log(carro.ligado); // true
 ```
 
@@ -56,7 +55,7 @@ Uma vez que um objeto é criado, você pode acessar, adicionar ou modificar suas
 ```javascript
 const usuario = {
   nome: "Maria",
-  idade: 28
+  idade: 28,
 };
 
 console.log(usuario.nome); // "Maria"
@@ -75,13 +74,14 @@ console.log(usuario.cidade); // "São Paulo"
 Permite acessar propriedades usando uma string (ou uma variável que contém uma string) dentro de colchetes `[]`.
 
 **Vantagens:**
+
 1.  Permite o uso de chaves que **não são** identificadores válidos.
 2.  Permite o uso de **variáveis** para acessar propriedades dinamicamente.
 
 ```javascript
 const produto = {
   "código do produto": "XYZ-123",
-  estoque: 50
+  estoque: 50,
 };
 
 // Acesso com chave contendo espaços
@@ -104,17 +104,17 @@ const dev = {
   primeiroNome: "João",
   linguagem: "JavaScript",
   nivel: "Pleno",
-  empresa: "Google"
+  empresa: "Google",
 };
 
 // Extrai 'linguagem' e 'nivel' para variáveis com o mesmo nome
 const { linguagem, nivel } = dev;
 console.log(linguagem); // "JavaScript"
-console.log(nivel);     // "Pleno"
+console.log(nivel); // "Pleno"
 
 // Renomeando variáveis
 const { primeiroNome: nome, empresa: firma } = dev;
-console.log(nome);  // "João"
+console.log(nome); // "João"
 console.log(firma); // "Google"
 
 // Atribuindo valores padrão
@@ -132,7 +132,7 @@ const apiResponse = {
     nome: "Carlos",
     // O objeto 'contato' está faltando
     // contato: { email: "carlos@email.com" }
-  }
+  },
 };
 
 // Sem Encadeamento Opcional (causaria um erro)
@@ -162,7 +162,7 @@ const perfil = {
   apresentar() {
     // 'this' aqui se refere ao objeto 'perfil'
     console.log(`Olá, eu sou ${this.nome}, e trabalho como ${this.profissao}.`);
-  }
+  },
 };
 
 perfil.apresentar(); // "Olá, eu sou Ana, e trabalho como Desenvolvedora."
@@ -178,7 +178,7 @@ const contador = {
   incrementar() {
     this.valor++;
     console.log(this.valor);
-  }
+  },
 };
 
 // Chamada normal, 'this' é 'contador'
@@ -206,7 +206,7 @@ const cronometro = {
       this.segundos++;
       console.log(this.segundos);
     }, 1000);
-  }
+  },
 };
 
 // cronometro.iniciar(); // Imprime 1, 2, 3... a cada segundo
@@ -226,7 +226,7 @@ A forma mais simples de adicionar ou modificar uma propriedade é usando a nota�
 
 ```javascript
 const user = {
-  nome: "João"
+  nome: "João",
 };
 
 // Modificando uma propriedade existente
@@ -246,12 +246,12 @@ Este método copia todas as propriedades enumeráveis de um ou mais objetos de o
 ```javascript
 const config = {
   theme: "dark",
-  notifications: true
+  notifications: true,
 };
 
 const userConfig = {
   notifications: false,
-  language: "pt-br"
+  language: "pt-br",
 };
 
 // Mescla userConfig em config.
@@ -273,9 +273,10 @@ const point = { x: 10, y: 20 };
 // Cria um NOVO objeto com o valor de 'y' atualizado
 const newPoint = { ...point, y: 30, z: 40 };
 
-console.log(point);    // { x: 10, y: 20 } -> O original permanece intacto
+console.log(point); // { x: 10, y: 20 } -> O original permanece intacto
 console.log(newPoint); // { x: 10, y: 30, z: 40 }
 ```
+
 Esta abordagem é preferida em frameworks como React, pois facilita o rastreamento de mudanças.
 
 ### d. Deletando Propriedades
@@ -286,13 +287,14 @@ O operador `delete` remove uma propriedade de um objeto.
 const carro = {
   marca: "Ford",
   modelo: "Ka",
-  ano: 2018
+  ano: 2018,
 };
 
 delete carro.ano;
 
 console.log(carro); // { marca: "Ford", modelo: "Ka" }
 ```
+
 O operador `delete` retorna `true` se a operação for bem-sucedida.
 
 ---
@@ -309,12 +311,12 @@ Todo objeto em JavaScript tem um link interno para outro objeto chamado `prototy
 ```javascript
 const pessoa = {
   falar() {
-    console.log('Olá!');
-  }
+    console.log("Olá!");
+  },
 };
 
 const joao = Object.create(pessoa);
-joao.nome = 'João';
+joao.nome = "João";
 
 joao.falar(); // Olá! (herdado de 'pessoa')
 
@@ -325,26 +327,55 @@ console.log(Object.getPrototypeOf(joao) === pessoa); // true
 
 ## 6. Funções Construtoras
 
-Funções construtoras são usadas para criar múltiplos objetos com a mesma estrutura. Por convenção, seus nomes começam com letra maiúscula. O operador `new` cria um novo objeto, define `this` para esse objeto e o retorna implicitamente.
+Funções construtoras são o "molde" clássico em JavaScript para criar múltiplos objetos que compartilham a mesma estrutura e comportamento. Elas são funções normais, mas quando invocadas com o operador `new`, se comportam de maneira especial.
 
-O protótipo da função construtora (`MinhaFuncao.prototype`) é automaticamente atribuído como o protótipo dos objetos criados por ela.
+**Convenção:** Nomes de funções construtoras sempre começam com uma letra maiúscula (ex: `Pessoa`, `Carro`) para diferenciá-las de funções comuns.
+
+### O que o operador `new` faz?
+
+Quando você executa `new MinhaFuncao()`, o JavaScript faz o seguinte nos bastidores:
+
+1.  **Cria um objeto vazio:** Um novo objeto literal é criado internamente (`{}`).
+2.  **Define o protótipo:** O protótipo (`[[Prototype]]`) desse novo objeto é definido para ser o `prototype` da função construtora (`MinhaFuncao.prototype`). É assim que a herança acontece.
+3.  **Executa a função:** A função construtora é chamada, e o `this` dentro dela é definido para apontar para o novo objeto criado no passo 1. Isso permite que você adicione propriedades ao novo objeto (ex: `this.nome = ...`).
+4.  **Retorna o objeto:** Se a função não retornar explicitamente um objeto, o objeto criado no passo 1 é retornado automaticamente.
+
+### A Importância do `prototype` para Métodos
+
+Para economizar memória, os métodos (funções compartilhadas) devem ser colocados no `prototype` da função construtora, e não diretamente dentro dela.
+
+- **Ineficiente:** Se você define um método dentro da função construtora, cada objeto criado (instância) terá sua própria cópia da função.
+- **Eficiente:** Se você define o método no `prototype`, todas as instâncias compartilham a **mesma** função, que é acessada através da cadeia de protótipos.
 
 ```javascript
 function Pessoa(nome, idade) {
+  // Propriedades específicas de cada instância
   this.nome = nome;
   this.idade = idade;
+
+  // Forma INEFICIENTE de adicionar métodos
+  // Cada 'Pessoa' criada teria sua própria cópia desta função.
+  /*
+  this.apresentar = function () {
+    console.log(`Meu nome é ${this.nome} e tenho ${this.idade} anos.`);
+  };
+  */
 }
 
-// Métodos são adicionados ao prototype para economizar memória
-Pessoa.prototype.apresentar = function() {
+// Forma EFICIENTE: Métodos são adicionados ao prototype para serem compartilhados.
+Pessoa.prototype.apresentar = function () {
   console.log(`Meu nome é ${this.nome} e tenho ${this.idade} anos.`);
 };
 
-const maria = new Pessoa('Maria', 30);
-const pedro = new Pessoa('Pedro', 25);
+const maria = new Pessoa("Maria", 30);
+const pedro = new Pessoa("Pedro", 25);
 
 maria.apresentar(); // Meu nome é Maria e tenho 30 anos.
 pedro.apresentar(); // Meu nome é Pedro e tenho 25 anos.
+
+// Verificando a herança
+console.log(maria.apresentar === pedro.apresentar); // true -> Ambos usam a MESMA função do protótipo.
+console.log(Object.getPrototypeOf(maria) === Pessoa.prototype); // true
 ```
 
 ---
@@ -358,25 +389,25 @@ Getters e Setters permitem definir métodos que parecem propriedades.
 
 ```javascript
 const carro = {
-  _marca: 'Ford', // convenção para propriedade "privada"
-  _modelo: 'Mustang',
+  _marca: "Ford", // convenção para propriedade "privada"
+  _modelo: "Mustang",
 
   get nomeCompleto() {
     return `${this._marca} ${this._modelo}`;
   },
 
   set nomeCompleto(valor) {
-    const [marca, modelo] = valor.split(' ');
+    const [marca, modelo] = valor.split(" ");
     this._marca = marca;
     this._modelo = modelo;
-  }
+  },
 };
 
 console.log(carro.nomeCompleto); // Ford Mustang
 
-carro.nomeCompleto = 'Chevrolet Camaro';
+carro.nomeCompleto = "Chevrolet Camaro";
 console.log(carro.nomeCompleto); // Chevrolet Camaro
-console.log(carro._marca);       // Chevrolet
+console.log(carro._marca); // Chevrolet
 ```
 
 ---
@@ -397,11 +428,11 @@ Esses métodos permitem controlar finamente as propriedades de um objeto.
 ```javascript
 const obj = {};
 
-Object.defineProperty(obj, 'a', {
+Object.defineProperty(obj, "a", {
   value: 10,
-  writable: false,    // não pode ser alterado
-  enumerable: true,   // aparece na enumeração
-  configurable: false // não pode ser deletado/reconfigurado
+  writable: false, // não pode ser alterado
+  enumerable: true, // aparece na enumeração
+  configurable: false, // não pode ser deletado/reconfigurado
 });
 
 obj.a = 20;
@@ -412,8 +443,8 @@ console.log(obj.a); // 10 (não foi deletado)
 
 // Define várias propriedades de uma vez
 Object.defineProperties(obj, {
-  'b': { value: 2, writable: true },
-  'c': { value: 3, enumerable: false }
+  b: { value: 2, writable: true },
+  c: { value: 3, enumerable: false },
 });
 
 console.log(Object.keys(obj)); // ['a'] ('c' não é enumerável)
@@ -432,12 +463,12 @@ console.log(Object.keys(obj)); // ['a'] ('c' não é enumerável)
 
 ```javascript
 const produto = {
-  nome: 'Notebook',
+  nome: "Notebook",
   preco: 4500,
-  categoria: 'Eletrônicos'
+  categoria: "Eletrônicos",
 };
 
-console.log(Object.keys(produto));   // ['nome', 'preco', 'categoria']
+console.log(Object.keys(produto)); // ['nome', 'preco', 'categoria']
 console.log(Object.values(produto)); // ['Notebook', 4500, 'Eletrônicos']
 console.log(Object.entries(produto)); // [['nome', 'Notebook'], ...]
 
@@ -457,14 +488,14 @@ console.log(produto.preco); // 4500
 
 ```javascript
 const dev = {
-  nome: 'Ana',
-  linguagens: ['JavaScript', 'Python']
+  nome: "Ana",
+  linguagens: ["JavaScript", "Python"],
 };
 
 const devClone = { ...dev };
 
 // Modificar uma propriedade aninhada no clone afeta o original
-devClone.linguagens.push('Go');
+devClone.linguagens.push("Go");
 
 console.log(dev.linguagens); // ['JavaScript', 'Python', 'Go'] -> O original foi modificado!
 ```
@@ -474,9 +505,9 @@ Para uma **cópia profunda (deep copy)**, onde todos os níveis do objeto são d
 ```javascript
 const devDeepClone = JSON.parse(JSON.stringify(dev));
 
-devDeepClone.linguagens.push('Ruby');
+devDeepClone.linguagens.push("Ruby");
 
-console.log(dev.linguagens);       // ['JavaScript', 'Python', 'Go'] -> O original permanece intacto
+console.log(dev.linguagens); // ['JavaScript', 'Python', 'Go'] -> O original permanece intacto
 console.log(devDeepClone.linguagens); // ['JavaScript', 'Python', 'Go', 'Ruby']
 ```
 
@@ -510,8 +541,8 @@ class Carro extends Veiculo {
   }
 }
 
-const meuCarro = new Carro('Toyota', 'Corolla');
-meuCarro.info();    // Veículo: Toyota Corolla
+const meuCarro = new Carro("Toyota", "Corolla");
+meuCarro.info(); // Veículo: Toyota Corolla
 meuCarro.dirigir(); // Dirigindo um Toyota... (herdado de Veiculo)
 ```
 
@@ -529,20 +560,20 @@ class Produto {
     this.estoque = estoque;
 
     // Congela o objeto para que propriedades não possam ser adicionadas/removidas
-    // Object.seal(this); 
+    // Object.seal(this);
   }
 
   // Getter para o preço, garantindo que não seja negativo
   get preco() {
-    return this._preco > 0 ? `R$ ${this._preco.toFixed(2)}` : 'Preço inválido';
+    return this._preco > 0 ? `R$ ${this._preco.toFixed(2)}` : "Preço inválido";
   }
 
   // Setter para o preço, com validação
   set preco(novoPreco) {
-    if (typeof novoPreco === 'number' && novoPreco > 0) {
+    if (typeof novoPreco === "number" && novoPreco > 0) {
       this._preco = novoPreco;
     } else {
-      console.error('Valor de preço inválido.');
+      console.error("Valor de preço inválido.");
     }
   }
 
@@ -557,7 +588,7 @@ class Produto {
   }
 }
 
-const notebook = new Produto('Notebook Gamer', 5500, 10);
+const notebook = new Produto("Notebook Gamer", 5500, 10);
 
 console.log(notebook.preco); // R$ 5500.00
 
@@ -586,7 +617,7 @@ const livro = {
   autor: "J.R.R. Tolkien",
   descrever() {
     return `${this.titulo} por ${this.autor}`;
-  }
+  },
 };
 ```
 
@@ -600,9 +631,9 @@ function Filme(titulo, diretor) {
   this.diretor = diretor;
 }
 
-Filme.prototype.info = function() {
+Filme.prototype.info = function () {
   return `${this.titulo}, dirigido por ${this.diretor}`;
-}
+};
 
 const pulpFiction = new Filme("Pulp Fiction", "Quentin Tarantino");
 ```
@@ -615,7 +646,7 @@ Este método cria um novo objeto, usando um objeto existente como protótipo do 
 const animal = {
   fazerSom() {
     console.log(this.som);
-  }
+  },
 };
 
 const gato = Object.create(animal);
@@ -659,7 +690,7 @@ function criarCirculo(raio) {
     },
     desenhar() {
       console.log(`Desenhando um círculo com raio ${raio}`);
-    }
+    },
   };
 }
 
