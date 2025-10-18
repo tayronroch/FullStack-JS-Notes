@@ -58,3 +58,4 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 
 - [1 - Objetos em JavaScript (Intermediário)](<./3%20-%20JavScript%20Intermediário/1%20-%20Objetos%20em%20JavaScript%20(Intermediário).md>)
 - [2 - Métodos de Strings (Texto)](<./3%20-%20JavScript%20Intermediário/2%20-%20Métodos%20de%20Strings%20(Texto).md>)
+- [3 - Métodos de Arrays (Intermediário)](<./3%20-%20JavScript%20Intermediário/3%20-%20Métodos%20de%20Arrays%20(Intermediário).md>)

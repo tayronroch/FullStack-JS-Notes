@@ -190,14 +190,13 @@ console.log(parte1 + ", " + parte2 + "!"); // Mesma coisa, mais legível
 
 ---
 
-## 6. Dividindo e Preenchendo
+## 6. Dividindo e Completando Strings
 
-- **`split(separator, limit?)`**: Divide a string em um **array** de substrings, usando um `separator` para determinar onde fazer a divisão. Este é um dos métodos mais úteis.
-- **`padStart(targetLength, padString?)`**: Preenche o início da string com `padString` até que ela atinja o `targetLength`.
-- **`padEnd(targetLength, padString?)`**: Preenche o final da string.
+### a. Dividindo com `split()`
+
+O método `split(separator, limit?)` é um dos mais úteis para strings. Ele divide a string em um **array** de substrings, usando um `separator` para determinar onde fazer a divisão.
 
 ```javascript
-// split
 const csv = "ana;silva;30;desenvolvedora";
 const dados = csv.split(";");
 console.log(dados); // ['ana', 'silva', '30', 'desenvolvedora']
@@ -206,18 +205,64 @@ const fraseSplit = "Eu amo programar em JavaScript";
 const palavras = fraseSplit.split(" ");
 console.log(palavras); // ['Eu', 'amo', 'programar', 'em', 'JavaScript']
 
+// Usando uma string vazia como separador, você pode obter um array de todos os caracteres.
 const letras = "abc".split("");
 console.log(letras); // ['a', 'b', 'c']
+```
 
-// padStart / padEnd
-const codigo = "99";
+### b. Completando uma String com `padStart()` e `padEnd()`
 
-// Preenche com '0' no início até a string ter 4 caracteres
-console.log(codigo.padStart(4, "0")); // "0099"
+Esses métodos são úteis para formatar strings para que elas tenham um comprimento fixo, adicionando caracteres no início (`padStart`) ou no final (`padEnd`).
 
-const nomeProduto = "Notebook";
-// Preenche com '.' no final até a string ter 20 caracteres
-console.log(nomeProduto.padEnd(20, ".")); // "Notebook............"
+- **`padStart(targetLength, padString?)`**: Preenche o **início** da string atual com uma `padString` (repetidamente, se necessário) até que a string resultante atinja o `targetLength`.
+- **`padEnd(targetLength, padString?)`**: Preenche o **final** da string.
+
+**Parâmetros:**
+
+- `targetLength`: O comprimento final desejado para a string. Se for menor ou igual ao comprimento da string original, nada acontece.
+- `padString` (opcional): A string a ser usada para preencher. O padrão é um espaço (`' '`). Se a `padString` for muito longa, ela será truncada para caber.
+
+#### Exemplos Práticos e Avançados
+
+**1. Formatando Códigos e IDs:**
+
+```javascript
+const id = "123";
+// Garante que o ID sempre tenha 8 dígitos, preenchendo com zeros à esquerda
+const idFormatado = id.padStart(8, "0");
+console.log(idFormatado); // "00000123"
+```
+
+**2. Alinhamento de Texto (Relatórios):**
+
+```javascript
+const produtos = [
+  { nome: "Notebook", preco: 5200 },
+  { nome: "Mouse", preco: 150 },
+  { nome: "Teclado", preco: 300 },
+];
+
+console.log("--- Relatório de Preços ---");
+produtos.forEach((p) => {
+  const nomeFormatado = p.nome.padEnd(10, ".");
+  const precoFormatado = `R$ ${p.preco.toFixed(2)}`.padStart(10, " ");
+  console.log(`${nomeFormatado}${precoFormatado}`);
+});
+// Saída:
+// --- Relatório de Preços ---
+// Notebook.. R$ 5200.00
+// Mouse.....  R$ 150.00
+// Teclado...  R$ 300.00
+```
+
+**3. Mascaramento de Dados Sensíveis:**
+
+```javascript
+const numeroCartao = "1234567891234567";
+const ultimos4Digitos = numeroCartao.slice(-4);
+const cartaoMascarado = ultimos4Digitos.padStart(numeroCartao.length, "*");
+
+console.log(cartaoMascarado); // "************4567"
 ```
 
 ---
@@ -255,4 +300,49 @@ console.log(urlSlug2); // "minha-primeira-publicação-no-blog"
 
 // Nota: Uma função de slug real também removeria acentos e caracteres especiais,
 // o que geralmente requer o uso de Expressões Regulares (RegEx) com o método .replace().
+```
+
+---
+
+## 8. Buscas Avançadas com Expressões Regulares (RegEx)
+
+Para buscas e manipulações mais complexas, as Expressões Regulares (RegEx) são a ferramenta ideal. Elas são usadas com os métodos `search()` e `match()`.
+
+- **`search(regexp)`**: Similar ao `indexOf`, mas aceita uma expressão regular como argumento. Retorna o índice da **primeira** correspondência. Se não encontrar, retorna `-1`.
+
+- **`match(regexp)`**: O método mais poderoso para RegEx. Retorna um **array** com as correspondências encontradas.
+  - Se a RegEx não tiver a flag `g` (global), o `match()` retorna apenas a primeira correspondência, mas com detalhes extras (como os grupos de captura).
+  - Se a RegEx tiver a flag `g`, ele retorna um array com **todas** as correspondências encontradas.
+
+```javascript
+const log = "Erro: 404 - Página não encontrada. Status: 500 - Erro interno.";
+
+// --- Usando search() ---
+
+// Procura por um padrão: um ou mais dígitos (\d+)
+console.log(log.search(/\d+/)); // 7 (índice onde "404" começa)
+
+// Procura por uma palavra específica
+console.log(log.search(/Página/)); // 15
+
+// --- Usando match() ---
+
+// Encontra a primeira correspondência para um ou mais dígitos
+const primeiraOcorrencia = log.match(/\d+/);
+console.log(primeiraOcorrencia);
+// Saída:
+// [
+//   '404',
+//   index: 7,
+//   input: 'Erro: 404 - Página não encontrada. Status: 500 - Erro interno.',
+//   groups: undefined
+// ]
+
+// Encontra TODAS as correspondências usando a flag 'g' (global)
+const todasOcorrencias = log.match(/\d+/g);
+console.log(todasOcorrencias); // [ '404', '500' ]
+
+// Exemplo mais avançado: extrair todos os códigos de erro
+const codigosDeErro = log.match(/\d+/g);
+console.log(`Códigos de erro encontrados: ${codigosDeErro.join(", ")}`); // "Códigos de erro encontrados: 404, 500"
 ```
