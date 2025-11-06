@@ -24,6 +24,10 @@ Aplicações práticas para exercitar a manipulação do DOM e a lógica de prog
 
 Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o aprendizado.
 
+### Versionamento de código
+
+- [1 - Como Funciona o Git](./0%20-%20Versionamento%20de%20código/1%20-%20Como%20Funciona%20o%20Git.md)
+
 ### HTML
 
 - [1 - Guia Básico de HTML](./1%20-%20HTML%20E%20CSS/HTML/1%20-%20HTML-Guia.md)
@@ -60,3 +64,10 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - Métodos de Strings (Texto)](<./3%20-%20JavScript%20Intermediário/2%20-%20Métodos%20de%20Strings%20(Texto).md>)
 - [3 - Métodos de Arrays (Intermediário)](<./3%20-%20JavScript%20Intermediário/3%20-%20Métodos%20de%20Arrays%20(Intermediário).md>)
 - [4 - Repetição e Iteração](./3%20-%20JavScript%20Intermediário/4%20-%20Repetição%20e%20Iteração.md)
+
+### Node.js
+
+- [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
+- [2 - NPM e Módulos](./4%20-%20Node.js/2%20-%20NPM%20e%20Módulos.md)
+- [3 - Módulos Nativos Essenciais](./4%20-%20Node.js/3%20-%20Módulos%20Nativos%20Essenciais.md)
+- [4 - Caminhos Absolutos vs. Relativos](./4%20-%20Node.js/4%20-%20Caminhos%20Absolutos%20vs.%20Relativos.md)
