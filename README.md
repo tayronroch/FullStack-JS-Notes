@@ -30,6 +30,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [1 - Como Funciona o Git](./0%20-%20Versionamento%20de%20código/1%20-%20Como%20Funciona%20o%20Git.md)
 - [2 - Como Instalar o Git](./0%20-%20Versionamento%20de%20código/2%20-%20Como%20Instalar%20o%20Git.md)
 - [3 - Guia Prático de Comandos Locais](./0%20-%20Versionamento%20de%20código/3%20-%20Comandos%20Básicos%20Para%20Repositório%20Local.md)
+- [4 - Os 3 Estágios de um Arquivo no Git](./0%20-%20Versionamento%20de%20código/4%20-%20Os%203%20Estágios%20de%20um%20Arquivo%20no%20Git.md)
 
 ### HTML
 
