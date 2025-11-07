@@ -26,7 +26,10 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 
 ### Versionamento de código
 
+- [0 - História e Conceitos do Versionamento](./0%20-%20Versionamento%20de%20código/0%20-%20História%20e%20Conceitos%20do%20Versionamento.md)
 - [1 - Como Funciona o Git](./0%20-%20Versionamento%20de%20código/1%20-%20Como%20Funciona%20o%20Git.md)
+- [2 - Como Instalar o Git](./0%20-%20Versionamento%20de%20código/2%20-%20Como%20Instalar%20o%20Git.md)
+- [3 - Guia Prático de Comandos Locais](./0%20-%20Versionamento%20de%20código/3%20-%20Comandos%20Básicos%20Para%20Repositório%20Local.md)
 
 ### HTML
 
