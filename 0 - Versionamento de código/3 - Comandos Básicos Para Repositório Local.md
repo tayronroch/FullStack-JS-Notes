@@ -104,6 +104,42 @@ git commit -m "Docs: Explica o propósito do projeto no README"
 
 ---
 
+## Fazendo Commits de Forma Mais Rápida
+
+Existe um atalho muito útil para fazer commits que combina o `git add` e o `git commit` em um só comando, para arquivos que já estão sendo rastreados pelo Git.
+
+### O Atalho `git commit -am`
+
+-   **O que faz?** Ele automaticamente adiciona à Staging Area todas as modificações de arquivos **já rastreados** e, em seguida, faz o commit com a mensagem fornecida.
+-   **Como usar:**
+
+    ```bash
+    git commit -am "Sua mensagem de commit aqui"
+    ```
+
+    > **Atenção:** Este comando **não** adiciona arquivos novos (untracked files) à Staging Area. Para arquivos novos, você ainda precisará usar `git add nome-do-arquivo.txt` primeiro.
+
+### Aspas Simples vs. Aspas Duplas em Mensagens de Commit
+
+Ao passar a mensagem de commit no terminal, você pode usar aspas simples (`'`) ou duplas (`"`). Na maioria dos casos, o efeito é o mesmo, mas há uma diferença importante:
+
+-   **Aspas Simples (`'`):** O terminal interpreta o conteúdo entre aspas simples literalmente. É a forma recomendada para mensagens de commit, especialmente se você quiser usar acentos graves para destaque.
+
+    ```bash
+    git commit -m 'adiciona arquivo `.editorconfig`'
+    ```
+    No GitHub, isso será renderizado com `.editorconfig` em destaque (como código).
+
+-   **Aspas Duplas (`"`):** O terminal tenta interpretar o conteúdo entre aspas duplas. Isso pode ativar recursos como a **substituição de comando** (`command substitution`).
+
+    ```bash
+    # Exemplo PROBLEMÁTICO com aspas duplas e acento grave
+    git commit -m "adiciona arquivo `.editorconfig`"
+    ```
+    Neste caso, o terminal tentaria executar o comando `editorconfig` (se existisse) e passaria a saída desse comando para a mensagem de commit, o que não é o desejado. Para evitar isso, use aspas simples ou escape o acento grave com uma barra invertida (`\``) dentro das aspas duplas.
+
+---
+
 ## Git Diff e Amend
 
 Com o Git, você tem uma máquina do tempo. Não é um Delorean, mas permite que você viaje ao passado do seu repositório e altere as coisas. O `git commit --amend` é o seu primeiro poder de viagem no tempo: ele permite alterar o evento mais recente da sua história.
