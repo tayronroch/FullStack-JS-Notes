@@ -32,6 +32,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [3 - Guia Prático de Comandos Locais](./0%20-%20Versionamento%20de%20código/3%20-%20Comandos%20Básicos%20Para%20Repositório%20Local.md)
 - [4 - Os 3 Estágios de um Arquivo no Git](./0%20-%20Versionamento%20de%20código/4%20-%20Os%203%20Estágios%20de%20um%20Arquivo%20no%20Git.md)
 - [5 - Interagindo com Repositórios Remotos (git push)](./0%20-%20Versionamento%20de%20código/5%20-%20Interagindo%20com%20Repositórios%20Remotos%20(git%20push).md)
+- [6 - Organização de Tarefas no GitHub](./0%20-%20Versionamento%20de%20código/6%20-%20Organização%20de%20Tarefas%20no%20GitHub.md)
 
 ### HTML
 
