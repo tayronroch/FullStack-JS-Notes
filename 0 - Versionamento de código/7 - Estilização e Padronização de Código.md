@@ -154,6 +154,617 @@ const numbers = [1, 2, 3, 4, 5]
 
 ---
 
+## Configurar o Prettier - Estratégia Profissional
+
+### Por que uma Estratégia Madura é Necessária?
+
+O Prettier é **simples de configurar**, e isso é ótimo! Porém, essa simplicidade pode criar **brechas** em projetos profissionais se não for configurado adequadamente. Vejamos os principais problemas:
+
+#### Problemas Comuns (Brechas)
+
+1. **Falta de arquivo de configuração**: Prettier usa padrões que podem não ser os da equipe
+2. **Conflito com ESLint**: Regras de formatação brigando entre si
+3. **Inconsistência entre desenvolvedores**: Alguns formatam, outros não
+4. **Código não formatado no repositório**: Commits sem passar pelo Prettier
+5. **Configurações locais sobrescrevendo as do projeto**: Cada dev com config diferente
+
+### Estratégia Completa de 5 Camadas
+
+Para garantir 100% de formatação consistente, implemente estas 5 camadas de defesa:
+
+```
+┌─────────────────────────────────────────┐
+│  Camada 5: CI/CD (Verificação Final)   │  ← Última linha de defesa
+├─────────────────────────────────────────┤
+│  Camada 4: Pre-commit Hook (Git)       │  ← Antes de commitar
+├─────────────────────────────────────────┤
+│  Camada 3: Pre-save Hook (Editor)      │  ← Ao salvar arquivo
+├─────────────────────────────────────────┤
+│  Camada 2: Configuração do Projeto     │  ← Regras da equipe
+├─────────────────────────────────────────┤
+│  Camada 1: EditorConfig                │  ← Base fundamental
+└─────────────────────────────────────────┘
+```
+
+### Camada 1: Criar Arquivo de Configuração
+
+#### Por que criar o arquivo?
+
+Mesmo que você use as configurações padrão do Prettier, **sempre crie o arquivo**. Isso:
+- Torna explícitas as regras do projeto
+- Evita que desenvolvedores usem configs pessoais diferentes
+- Serve como documentação
+- Permite evolução futura
+
+#### Opções de Nome do Arquivo
+
+O Prettier aceita vários formatos:
+
+```bash
+# Opção 1: JavaScript Module (RECOMENDADO)
+prettier.config.mjs
+
+# Opção 2: CommonJS
+prettier.config.js
+.prettierrc.js
+
+# Opção 3: JSON
+.prettierrc
+.prettierrc.json
+
+# Opção 4: YAML
+.prettierrc.yaml
+.prettierrc.yml
+
+# Opção 5: Package.json
+# (adiciona chave "prettier" no package.json)
+```
+
+**Recomendação:** Use `prettier.config.mjs` para projetos modernos com ESM.
+
+#### Configuração Básica mas Completa
+
+```javascript
+// prettier.config.mjs
+/** @typedef {import('prettier').Config} PrettierConfig */
+
+/** @type {PrettierConfig} */
+const config = {
+  // Largura máxima da linha
+  printWidth: 80,
+
+  // Tamanho da tabulação
+  tabWidth: 2,
+
+  // Usar espaços ao invés de tabs
+  useTabs: false,
+
+  // Não adicionar ponto e vírgula no final
+  semi: false,
+
+  // Usar aspas simples ao invés de duplas
+  singleQuote: true,
+
+  // Aspas em propriedades de objetos apenas quando necessário
+  quoteProps: 'as-needed',
+
+  // Usar aspas duplas no JSX
+  jsxSingleQuote: false,
+
+  // Vírgula no final: 'none', 'es5', 'all'
+  trailingComma: 'es5',
+
+  // Espaço dentro de chaves: { foo: bar }
+  bracketSpacing: true,
+
+  // Tag de fechamento JSX na mesma linha ou próxima
+  bracketSameLine: false,
+
+  // Parênteses em arrow functions: 'avoid', 'always'
+  arrowParens: 'always',
+
+  // Quebra de linha: 'lf', 'crlf', 'cr', 'auto'
+  endOfLine: 'lf',
+
+  // Plugins adicionais (opcional)
+  plugins: [],
+}
+
+export default config
+```
+
+### Camada 2: Garantir que Prettier Exige Configuração
+
+Para **forçar** que o Prettier só funcione se houver arquivo de configuração:
+
+```json
+// .vscode/settings.json
+{
+  "prettier.requireConfig": true
+}
+```
+
+**O que isso faz:**
+- Se não existir arquivo `.prettierrc` ou `prettier.config.*`, Prettier **não formata**
+- Evita usar configurações padrão não documentadas
+- Garante que todos usem a mesma config
+
+### Camada 3: Integração com ESLint (Evitando Conflitos)
+
+#### O Problema
+
+ESLint e Prettier podem ter regras conflitantes:
+
+```javascript
+// ESLint pode querer ponto e vírgula
+const x = 1;
+
+// Prettier pode querer sem ponto e vírgula
+const x = 1
+```
+
+#### A Solução: eslint-config-prettier
+
+Instale o pacote que **desabilita regras do ESLint que conflitam com Prettier**:
+
+```bash
+npm install --save-dev eslint-config-prettier
+```
+
+#### Configure o ESLint
+
+```javascript
+// eslint.config.js ou .eslintrc.js
+module.exports = {
+  extends: [
+    '@rocketseat/eslint-config/react',
+    'prettier' // ⚠️ SEMPRE DEVE SER O ÚLTIMO!
+  ],
+  plugins: ['simple-import-sort'],
+  rules: {
+    'simple-import-sort/imports': 'error',
+  },
+}
+```
+
+**Importante:** `'prettier'` deve ser o **último item** em `extends` para sobrescrever outras configs.
+
+### Camada 4: Arquivos .prettierignore
+
+Assim como `.gitignore`, o `.prettierignore` define quais arquivos **não devem ser formatados**:
+
+```
+# .prettierignore
+
+# Dependências
+node_modules
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build outputs
+dist
+build
+.next
+out
+coverage
+
+# Arquivos gerados
+*.min.js
+*.bundle.js
+
+# Configurações que não devem ser formatadas
+.env
+.env.*
+
+# Markdown pode ter formatação específica (opcional)
+*.md
+
+# Arquivos de cache
+.cache
+.turbo
+```
+
+**Por que isso é importante?**
+- Evita formatação desnecessária de arquivos grandes (locks)
+- Não quebra arquivos gerados por ferramentas
+- Melhora performance
+
+### Camada 5: Plugins do Prettier
+
+O Prettier suporta plugins para formatação específica:
+
+#### Plugin para TailwindCSS
+
+Ordena automaticamente classes do Tailwind na ordem recomendada:
+
+```bash
+npm install --save-dev prettier-plugin-tailwindcss
+```
+
+```javascript
+// prettier.config.mjs
+const config = {
+  // ... outras configs
+  plugins: ['prettier-plugin-tailwindcss'],
+}
+
+export default config
+```
+
+**Antes:**
+```jsx
+<div className="text-white p-4 bg-blue-500 font-bold">
+```
+
+**Depois (ordenado automaticamente):**
+```jsx
+<div className="bg-blue-500 p-4 font-bold text-white">
+```
+
+#### Outros Plugins Úteis
+
+```bash
+# Para organizar imports (alternativa ao ESLint plugin)
+npm install --save-dev @trivago/prettier-plugin-sort-imports
+
+# Para formatar package.json
+npm install --save-dev prettier-plugin-packagejson
+
+# Para formatar SQL
+npm install --save-dev prettier-plugin-sql
+```
+
+### Configurações Críticas Explicadas
+
+#### printWidth: 80 vs 120
+
+```javascript
+printWidth: 80  // Padrão Prettier (mais conservador)
+printWidth: 120 // Comum em projetos modernos
+```
+
+**Recomendação:** Use 80 para:
+- Melhor legibilidade
+- Facilita code reviews lado a lado
+- Funciona bem em laptops menores
+
+Use 120 se:
+- Equipe prefere linhas mais longas
+- Monitores ultrawide
+- Menos quebras de linha
+
+#### semi: true vs false
+
+```javascript
+semi: false  // const x = 1
+semi: true   // const x = 1;
+```
+
+**Recomendação:**
+- `false` para projetos modernos (mais limpo)
+- `true` para projetos legados ou equipes acostumadas com Java/C#
+
+#### singleQuote: true vs false
+
+```javascript
+singleQuote: true   // const name = 'John'
+singleQuote: false  // const name = "John"
+```
+
+**Recomendação:**
+- `true` para JavaScript/TypeScript (padrão da comunidade)
+- `false` se equipe vem de outras linguagens
+
+#### trailingComma: 'es5' vs 'all' vs 'none'
+
+```javascript
+// es5: vírgula apenas onde ES5 permite
+const obj = {
+  a: 1,
+  b: 2,  // ✅ vírgula
+}
+
+// all: vírgula em todos os lugares possíveis
+const func = (
+  arg1,
+  arg2,  // ✅ vírgula (não era permitido antes do ES6)
+) => {}
+
+// none: sem vírgulas finais
+const obj = {
+  a: 1,
+  b: 2  // ❌ sem vírgula
+}
+```
+
+**Recomendação:** Use `'es5'` para:
+- Compatibilidade com navegadores antigos
+- Diffs mais limpos no Git
+- Equilíbrio entre legibilidade e compatibilidade
+
+### Verificando se Tudo Está Funcionando
+
+#### 1. Teste Manual
+
+Crie um arquivo de teste mal formatado:
+
+```javascript
+// test-prettier.js
+const   x={a:1,b:2,c:3}
+function    teste(   ){
+return      "hello"
+}
+```
+
+Execute:
+```bash
+npx prettier test-prettier.js
+```
+
+Deve retornar o código formatado.
+
+#### 2. Verificar Arquivos Não Formatados
+
+```bash
+# Verificar se há arquivos não formatados
+npx prettier --check .
+
+# Se encontrar arquivos, exibe quais
+npx prettier --check "src/**/*.{js,jsx,ts,tsx}"
+```
+
+#### 3. Formatar Todos os Arquivos
+
+```bash
+# Formata tudo de uma vez
+npx prettier --write .
+
+# Formatar apenas alguns tipos
+npx prettier --write "src/**/*.{js,jsx,ts,tsx,json}"
+```
+
+### Scripts Recomendados no package.json
+
+```json
+{
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "validate": "npm run format:check && npm run lint"
+  }
+}
+```
+
+**Como usar:**
+```bash
+# Formatar tudo
+npm run format
+
+# Verificar se está tudo formatado (CI/CD)
+npm run format:check
+
+# Validar formatação + lint (antes de PR)
+npm run validate
+```
+
+### Configuração Completa - Exemplo Real
+
+```javascript
+// prettier.config.mjs
+/** @typedef {import('prettier').Config} PrettierConfig */
+/** @typedef {import('prettier-plugin-tailwindcss').PluginOptions} TailwindConfig */
+
+/** @type {PrettierConfig | TailwindConfig} */
+const config = {
+  // Core formatting
+  printWidth: 80,
+  tabWidth: 2,
+  useTabs: false,
+  semi: false,
+  singleQuote: true,
+  quoteProps: 'as-needed',
+  jsxSingleQuote: false,
+  trailingComma: 'es5',
+  bracketSpacing: true,
+  bracketSameLine: false,
+  arrowParens: 'always',
+
+  // Line endings (importante para Windows/Linux/Mac)
+  endOfLine: 'lf',
+
+  // Plugins
+  plugins: ['prettier-plugin-tailwindcss'],
+
+  // Overrides para arquivos específicos
+  overrides: [
+    {
+      files: '*.md',
+      options: {
+        printWidth: 100,
+        proseWrap: 'always',
+      },
+    },
+    {
+      files: '*.json',
+      options: {
+        printWidth: 120,
+      },
+    },
+  ],
+}
+
+export default config
+```
+
+### Overrides: Configurações por Tipo de Arquivo
+
+Você pode ter regras diferentes para arquivos diferentes:
+
+```javascript
+overrides: [
+  {
+    files: '*.md',
+    options: {
+      printWidth: 100,
+      proseWrap: 'always', // Quebra texto em markdown
+    },
+  },
+  {
+    files: ['*.json', '.prettierrc'],
+    options: {
+      printWidth: 120,
+      tabWidth: 2,
+    },
+  },
+  {
+    files: '*.css',
+    options: {
+      singleQuote: false, // CSS usa aspas duplas
+    },
+  },
+]
+```
+
+### Debugging: Quando o Prettier Não Funciona
+
+#### Problema 1: Prettier não formata ao salvar
+
+**Soluções:**
+1. Verifique se a extensão está instalada: `Prettier - Code formatter`
+2. Verifique se é o formatter padrão:
+   ```json
+   {
+     "[javascript]": {
+       "editor.defaultFormatter": "esbenp.prettier-vscode"
+     }
+   }
+   ```
+3. Verifique se `editor.formatOnSave` está `true`
+
+#### Problema 2: Configuração sendo ignorada
+
+**Soluções:**
+1. Reinicie o VS Code
+2. Verifique se o arquivo de config está na raiz do projeto
+3. Verifique o nome do arquivo (`.prettierrc`, `prettier.config.mjs`, etc.)
+4. Veja os logs: `Output` → `Prettier`
+
+#### Problema 3: Conflito ESLint vs Prettier
+
+**Solução:**
+```bash
+npm install --save-dev eslint-config-prettier
+```
+
+E garanta que `'prettier'` seja o último em `extends`.
+
+#### Problema 4: Alguns arquivos não são formatados
+
+**Soluções:**
+1. Verifique o `.prettierignore`
+2. Verifique se o tipo de arquivo é suportado
+3. Force formatação: `npx prettier --write arquivo.js`
+
+### Estratégia para Projetos Existentes
+
+Se você está adicionando Prettier em um projeto que já existe:
+
+#### Passo 1: Crie um Branch Separado
+
+```bash
+git checkout -b feat/add-prettier
+```
+
+#### Passo 2: Configure Prettier
+
+1. Instale dependências
+2. Crie `prettier.config.mjs`
+3. Crie `.prettierignore`
+
+#### Passo 3: Formate Tudo de Uma Vez
+
+```bash
+npx prettier --write .
+```
+
+#### Passo 4: Commit Separado
+
+```bash
+git add .
+git commit -m 'chore: formata todo código com `prettier`
+
+Este commit apenas formata o código existente.
+Nenhuma lógica foi alterada.
+
+- Adiciona `prettier.config.mjs`
+- Adiciona `.prettierignore`
+- Formata todos os arquivos do projeto'
+```
+
+#### Passo 5: Merge e Comunique a Equipe
+
+Avise a equipe para:
+1. Fazer pull da branch
+2. Instalar extensão do Prettier
+3. Configurar `formatOnSave`
+
+### Prettier em Monorepos
+
+Para projetos com múltiplos pacotes:
+
+```
+projeto/
+├── prettier.config.mjs        # Config raiz (padrão global)
+├── apps/
+│   ├── web/
+│   │   └── prettier.config.mjs   # Override para web (opcional)
+│   └── api/
+│       └── prettier.config.mjs   # Override para api (opcional)
+└── packages/
+    └── ui/
+        └── prettier.config.mjs    # Override para UI (opcional)
+```
+
+**Ou**, centralize em um pacote compartilhado:
+
+```javascript
+// packages/prettier-config/index.mjs
+export default {
+  printWidth: 80,
+  semi: false,
+  // ... config compartilhada
+}
+```
+
+```javascript
+// apps/web/prettier.config.mjs
+import baseConfig from '@org/prettier-config'
+
+export default {
+  ...baseConfig,
+  // Overrides específicos se necessário
+}
+```
+
+### Checklist: Configuração Profissional do Prettier
+
+- [ ] Prettier instalado (`npm install --save-dev prettier`)
+- [ ] Arquivo de config criado (`prettier.config.mjs`)
+- [ ] `.prettierignore` configurado
+- [ ] `eslint-config-prettier` instalado e configurado
+- [ ] VS Code configurado (`formatOnSave: true`)
+- [ ] `prettier.requireConfig: true` no settings.json
+- [ ] Scripts no package.json (`format`, `format:check`)
+- [ ] Pre-commit hook configurado (próxima seção)
+- [ ] CI/CD verificando formatação
+- [ ] Documentação no README sobre formatação
+- [ ] Equipe alinhada e extensões instaladas
+
+---
+
 ## Configuração no VSCode
 
 Para que essas ferramentas funcionem automaticamente enquanto você desenvolve, configure o VSCode:
@@ -306,6 +917,226 @@ Se precisar desabilitar uma regra, explique o porquê:
 ```javascript
 // eslint-disable-next-line no-console
 console.log('Debug necessário nesta parte específica')
+```
+
+---
+
+## Mensagens de Commit: Aspas Duplas vs Aspas Simples
+
+### A Diferença Entre Aspas no Terminal
+
+Ao escrever mensagens de commit no terminal, você pode usar tanto **aspas duplas** (`"`) quanto **aspas simples** (`'`). Porém, existe uma diferença importante que pode afetar a renderização no GitHub e o comportamento do terminal.
+
+### Regra Geral
+
+```bash
+# Ambas funcionam da mesma forma
+git commit -m "adiciona arquivo de configuração"
+git commit -m 'adiciona arquivo de configuração'
+```
+
+As duas opções acima terão o **mesmo efeito** na maioria dos casos.
+
+### Quando Usar Aspas Simples
+
+**Use aspas simples (`'`) quando quiser destacar palavras especiais** no GitHub, como:
+- Nomes de funções
+- Nomes de arquivos
+- Nomes de variáveis
+- Comandos específicos
+
+#### Sintaxe para Destaque
+
+Para destacar uma palavra no GitHub, use **acentos graves** (`` ` ``) dentro das aspas simples:
+
+```bash
+git commit -m 'adiciona arquivo `.editorconfig`'
+```
+
+#### Como é Renderizado no GitHub
+
+A mensagem acima será renderizada no histórico de commits assim:
+
+```
+adiciona arquivo `.editorconfig`
+```
+
+O arquivo `.editorconfig` aparece destacado (geralmente em uma fonte monoespaçada e com fundo diferente).
+
+### Por Que Não Usar Aspas Duplas para Destaque?
+
+#### O Problema: Command Substitution
+
+Quando você usa **aspas duplas** com **acentos graves**, você ativa um recurso do terminal chamado **command substitution** (substituição de comando).
+
+```bash
+# ⚠️ PROBLEMA: Isso tentará executar um comando!
+git commit -m "adiciona arquivo `.editorconfig`"
+```
+
+#### O Que Acontece?
+
+O terminal interpreta o que está entre acentos graves como um **comando a ser executado**:
+
+```bash
+# O terminal tenta:
+1. Executar o comando: .editorconfig
+2. Pegar o resultado da execução
+3. Inserir o resultado na mensagem de commit
+```
+
+#### Exemplo do Problema
+
+```bash
+# Você escreve:
+git commit -m "executa comando `date`"
+
+# O terminal interpreta como:
+# 1. Execute o comando 'date' (que retorna a data atual)
+# 2. Substitua `date` pelo resultado
+
+# Resultado final:
+git commit -m "executa comando Seg Nov 18 14:30:00 2024"
+```
+
+### Exemplos Práticos
+
+#### ✅ Correto - Usando Aspas Simples
+
+```bash
+# Destacando nome de arquivo
+git commit -m 'cria arquivo `.prettierrc.mjs`'
+
+# Destacando função
+git commit -m 'refatora função `calculateTotal()`'
+
+# Destacando variável
+git commit -m 'corrige bug na variável `userName`'
+
+# Destacando comando
+git commit -m 'adiciona script `npm run lint`'
+
+# Múltiplos destaques
+git commit -m 'move função `getData()` para arquivo `utils.js`'
+```
+
+#### ❌ Incorreto - Usando Aspas Duplas com Acentos Graves
+
+```bash
+# Tentará executar o comando '.prettierrc.mjs'
+git commit -m "cria arquivo `.prettierrc.mjs`"
+
+# Tentará executar o comando 'calculateTotal()'
+git commit -m "refatora função `calculateTotal()`"
+```
+
+### Renderização no GitHub
+
+#### Com Aspas Simples e Acentos Graves
+
+```bash
+git commit -m 'adiciona configuração do `ESLint` e `Prettier`'
+```
+
+**Renderizado no GitHub:**
+> adiciona configuração do `ESLint` e `Prettier`
+
+Os termos `ESLint` e `Prettier` aparecem destacados.
+
+#### Sem Acentos Graves
+
+```bash
+git commit -m 'adiciona configuração do ESLint e Prettier'
+```
+
+**Renderizado no GitHub:**
+> adiciona configuração do ESLint e Prettier
+
+Texto normal, sem destaques.
+
+### Boas Práticas para Mensagens de Commit
+
+#### 1. Use Aspas Simples por Padrão
+
+```bash
+# Sempre prefira aspas simples
+git commit -m 'feat: adiciona validação de email'
+```
+
+#### 2. Destaque Elementos Técnicos
+
+```bash
+# Destaque arquivos, funções, variáveis
+git commit -m 'fix: corrige bug no método `validateUser()`'
+git commit -m 'docs: atualiza README com instruções do `.env`'
+```
+
+#### 3. Siga o Padrão Conventional Commits
+
+```bash
+# Tipo: descrição curta
+git commit -m 'feat: adiciona autenticação JWT'
+git commit -m 'fix: corrige erro no `login.js`'
+git commit -m 'docs: atualiza seção de configuração'
+git commit -m 'style: formata código com `prettier`'
+git commit -m 'refactor: reorganiza estrutura de pastas'
+git commit -m 'test: adiciona testes para `UserService`'
+git commit -m 'chore: atualiza dependências'
+```
+
+#### 4. Mensagens Mais Longas
+
+Para mensagens mais longas com corpo e rodapé:
+
+```bash
+git commit -m 'feat: adiciona sistema de autenticação
+
+Implementa JWT para autenticação de usuários.
+
+- Adiciona middleware `authMiddleware.js`
+- Cria service `AuthService`
+- Adiciona rotas em `auth.routes.js`
+
+Closes #123'
+```
+
+### Resumo Rápido
+
+| Situação | Use | Exemplo |
+|----------|-----|---------|
+| Mensagem simples | Aspas simples | `git commit -m 'adiciona feature'` |
+| Destacar elementos técnicos | Aspas simples + acentos graves | `git commit -m 'corrige bug no` `auth.js`'` |
+| Mensagem com aspóstrofo | Aspas duplas | `git commit -m "don't use deprecated API"` |
+| Evitar command substitution | Aspas simples | Sempre use `'` com `` ` `` |
+
+### Atalho para Mensagens Rápidas
+
+Muitos desenvolvedores criam aliases para commits frequentes:
+
+```bash
+# No arquivo .bashrc ou .zshrc
+alias gc='git commit -m'
+alias gca='git commit --amend --no-edit'
+```
+
+Uso:
+```bash
+gc 'fix: corrige validação no `form.js`'
+```
+
+### Escapando Caracteres Especiais
+
+Se sua mensagem contiver aspas simples dentro das aspas simples:
+
+```bash
+# Problema: aspas simples dentro de aspas simples
+git commit -m 'it's a fix'  # ❌ Erro de sintaxe
+
+# Solução 1: Use aspas duplas
+git commit -m "it's a fix"  # ✅
+
+# Solução 2: Escape a aspas simples
+git commit -m 'it'\''s a fix'  # ✅ (mais complicado)
 ```
 
 ---
@@ -549,24 +1380,225 @@ Quando alguém abre o projeto, o VS Code sugere instalar essas extensões automa
 
 ### .editorconfig - Configurações Universais
 
-O `.editorconfig` funciona em **qualquer editor** (VS Code, WebStorm, Sublime, etc.):
+#### O que é o EditorConfig?
+
+O **EditorConfig** é um configurador de editor que define regras **fundamentais** de como seu editor deve se comportar. Essas configurações são aplicadas em **qualquer editor** que suporte EditorConfig (VS Code, WebStorm, Sublime Text, Vim, etc.).
+
+#### Por que usar EditorConfig?
+
+1. **Universal**: Funciona em todos os editores populares
+2. **Básico e Fundamental**: Define regras essenciais de formatação
+3. **Aplica ANTES de salvar**: As regras são aplicadas automaticamente enquanto você digita
+4. **Independente**: Não depende de extensões específicas
+5. **Consistência da Equipe**: Garante que todos sigam as mesmas regras, independente do editor usado
+
+#### Diferença Importante: EditorConfig vs Prettier
+
+| Característica | EditorConfig | Prettier |
+|---------------|--------------|----------|
+| **Quando age** | ANTES de salvar (em tempo real) | AO salvar o arquivo |
+| **O que faz** | Regras básicas (indentação, charset) | Formatação completa do código |
+| **Compatibilidade** | Todos os editores | Precisa de plugin/extensão |
+| **Complexidade** | Configurações simples | Configurações avançadas |
+
+**Fluxo de trabalho:**
+1. Você digita o código → EditorConfig aplica regras básicas em tempo real
+2. Você salva o arquivo → Prettier formata completamente o código
+3. Antes do commit → ESLint valida e corrige problemas
+
+#### Exemplo de .editorconfig
 
 ```ini
 # .editorconfig
 root = true
 
+# Configurações para TODOS os arquivos
+[*]
+charset = utf-8                    # Codificação de caracteres
+end_of_line = lf                   # Tipo de quebra de linha (Unix)
+insert_final_newline = true        # Adiciona linha vazia no final do arquivo
+trim_trailing_whitespace = true    # Remove espaços em branco no final das linhas
+
+# Configurações específicas para arquivos JavaScript/TypeScript/JSON
+[*.{js,jsx,ts,tsx,json}]
+indent_style = space               # Usar espaços (não tabs)
+indent_size = 2                    # Indentação de 2 espaços
+
+# Configurações para arquivos Python
+[*.py]
+indent_style = space
+indent_size = 4                    # Python usa 4 espaços por convenção
+
+# Configurações para Markdown
+[*.md]
+trim_trailing_whitespace = false   # Manter espaços em branco (necessário para quebras de linha)
+
+# Configurações para arquivos YAML
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+```
+
+#### Principais Configurações
+
+##### 1. indent_style
+
+Define se a indentação usará **espaços** ou **tabs**:
+
+```ini
+indent_style = space   # Recomendado para JavaScript/TypeScript
+indent_style = tab     # Comum em Go, Makefile
+```
+
+**Por que espaços?**
+- Renderização consistente em todos os editores
+- Evita problemas de visualização
+- Padrão da comunidade JavaScript
+
+##### 2. indent_size
+
+Define a **largura da indentação**:
+
+```ini
+indent_size = 2   # JavaScript, TypeScript, JSON (mais compacto)
+indent_size = 4   # Python, Java (mais legível)
+```
+
+**Exemplo prático:**
+
+Com `indent_size = 2`:
+```javascript
+function exemplo() {
+··return 'dois espaços'
+}
+```
+
+Com `indent_size = 4`:
+```javascript
+function exemplo() {
+····return 'quatro espaços'
+}
+```
+
+##### 3. end_of_line
+
+Define o tipo de quebra de linha:
+
+```ini
+end_of_line = lf      # Unix/Linux/macOS (\n) - RECOMENDADO
+end_of_line = crlf    # Windows (\r\n)
+end_of_line = cr      # Mac antigo (\r) - obsoleto
+```
+
+**Melhor prática:** Use sempre `lf` para evitar problemas entre sistemas operacionais.
+
+##### 4. charset
+
+Define a codificação de caracteres:
+
+```ini
+charset = utf-8       # Padrão moderno (suporta todos os caracteres)
+charset = latin1      # Antigo (evite usar)
+```
+
+##### 5. trim_trailing_whitespace
+
+Remove espaços em branco no final das linhas:
+
+```ini
+trim_trailing_whitespace = true   # Remove espaços desnecessários
+trim_trailing_whitespace = false  # Mantém espaços (útil para Markdown)
+```
+
+##### 6. insert_final_newline
+
+Adiciona uma linha vazia no final do arquivo:
+
+```ini
+insert_final_newline = true   # Boa prática (padrão POSIX)
+```
+
+#### Como Instalar o Suporte ao EditorConfig
+
+##### No VS Code
+
+1. Instale a extensão **EditorConfig for VS Code**
+2. Ou pelo terminal:
+```bash
+code --install-extension EditorConfig.EditorConfig
+```
+
+##### Em Outros Editores
+
+- **WebStorm/IntelliJ**: Suporte nativo (já vem instalado)
+- **Sublime Text**: Instale via Package Control
+- **Vim**: Instale o plugin `editorconfig-vim`
+
+#### EditorConfig em Ação
+
+**Antes de criar o .editorconfig:**
+```javascript
+function teste(){
+→→→→return "usando tabs" // 4 tabs
+}
+```
+
+**Depois de criar o .editorconfig com `indent_style = space` e `indent_size = 2`:**
+```javascript
+function teste() {
+··return 'usando espaços' // 2 espaços
+}
+```
+
+O próprio editor já corrige automaticamente enquanto você digita!
+
+#### Exemplo Completo para Projeto Full Stack
+
+```ini
+# .editorconfig
+root = true
+
+# Padrões para todos os arquivos
 [*]
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{js,jsx,ts,tsx,json}]
+# JavaScript, TypeScript, JSX, TSX, JSON
+[*.{js,mjs,cjs,jsx,ts,tsx,json}]
 indent_style = space
 indent_size = 2
 
+# CSS, SCSS, Less
+[*.{css,scss,less}]
+indent_style = space
+indent_size = 2
+
+# HTML, Vue
+[*.{html,vue}]
+indent_style = space
+indent_size = 2
+
+# Markdown
 [*.md]
 trim_trailing_whitespace = false
+indent_size = 2
+
+# YAML (arquivos de config)
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Package.json (sempre 2 espaços)
+[package.json]
+indent_style = space
+indent_size = 2
+
+# Arquivos de configuração diversos
+[*.{config.js,rc}]
+indent_style = space
+indent_size = 2
 ```
 
 ### Diferença entre Sync Pessoal e Configs do Projeto
