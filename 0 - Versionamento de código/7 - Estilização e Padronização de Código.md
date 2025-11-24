@@ -7,18 +7,23 @@ Estilização de código refere-se ao conjunto de regras e ferramentas que garan
 ## Por que é Importante?
 
 ### 1. Consistência
+
 Quando múltiplos desenvolvedores trabalham no mesmo projeto, cada um tem seu próprio estilo de escrita. Ferramentas de estilização garantem que todo o código pareça ter sido escrito pela mesma pessoa.
 
 ### 2. Legibilidade
+
 Código bem formatado é mais fácil de ler e entender, reduzindo o tempo necessário para compreender o que o código faz.
 
 ### 3. Prevenção de Erros
+
 Algumas ferramentas detectam erros comuns antes mesmo de você executar o código, economizando tempo de debugging.
 
 ### 4. Revisão de Código Facilitada
+
 Em pull requests, diferenças de estilo não aparecem como mudanças, permitindo que os revisores foquem na lógica real.
 
 ### 5. Onboarding Mais Rápido
+
 Novos membros da equipe se adaptam mais rapidamente quando o código segue padrões consistentes.
 
 ---
@@ -28,6 +33,7 @@ Novos membros da equipe se adaptam mais rapidamente quando o código segue padr�
 ### ESLint - Analisador Estático de Código
 
 O **ESLint** é uma ferramenta que analisa seu código JavaScript/TypeScript para encontrar problemas de:
+
 - Qualidade de código
 - Possíveis bugs
 - Padrões de código ruins
@@ -36,6 +42,7 @@ O **ESLint** é uma ferramenta que analisa seu código JavaScript/TypeScript par
 #### Como Funciona
 
 O ESLint percorre seu código e verifica se ele segue as regras configuradas. Se encontrar violações, ele pode:
+
 - Avisar você (warning)
 - Gerar erro (error)
 - Corrigir automaticamente (quando possível)
@@ -45,15 +52,16 @@ O ESLint percorre seu código e verifica se ele segue as regras configuradas. Se
 ```javascript
 // .eslintrc.js ou eslint.config.js
 module.exports = {
-  extends: ['@rocketseat/eslint-config/react'],
-  plugins: ['simple-import-sort'],
+  extends: ["@rocketseat/eslint-config/react"],
+  plugins: ["simple-import-sort"],
   rules: {
-    'simple-import-sort/imports': 'error',
+    "simple-import-sort/imports": "error",
   },
-}
+};
 ```
 
 **O que essa configuração faz:**
+
 - `extends`: Herda regras de uma configuração base (no caso, da Rocketseat para React)
 - `plugins`: Adiciona funcionalidades extras (organização automática de imports)
 - `rules`: Define regras específicas (imports devem estar ordenados)
@@ -61,32 +69,34 @@ module.exports = {
 #### Exemplos Práticos de Regras
 
 **Antes (com erro):**
+
 ```javascript
 // Imports desordenados
-import { useState } from 'react'
-import axios from 'axios'
-import { Button } from './components/Button'
-import React from 'react'
+import { useState } from "react";
+import axios from "axios";
+import { Button } from "./components/Button";
+import React from "react";
 
 const Component = () => {
-  const data = getData()  // Variável não utilizada
-  return <div>Hello</div>
-}
+  const data = getData(); // Variável não utilizada
+  return <div>Hello</div>;
+};
 ```
 
 **Depois (corrigido pelo ESLint):**
+
 ```javascript
 // Imports ordenados
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 
-import axios from 'axios'
+import axios from "axios";
 
-import { Button } from './components/Button'
+import { Button } from "./components/Button";
 
 const Component = () => {
-  return <div>Hello</div>
-}
+  return <div>Hello</div>;
+};
 ```
 
 ---
@@ -107,49 +117,52 @@ Ambos trabalham juntos de forma complementar!
 ```javascript
 // prettier.config.mjs
 const config = {
-  plugins: ['prettier-plugin-tailwindcss'],
-  printWidth: 80,           // Máximo de caracteres por linha
-  tabWidth: 2,              // Tamanho da indentação
-  useTabs: false,           // Usar espaços em vez de tabs
-  semi: false,              // Não usar ponto e vírgula
-  singleQuote: true,        // Usar aspas simples
-  quoteProps: 'as-needed',  // Aspas em propriedades apenas quando necessário
-  jsxSingleQuote: false,    // Aspas duplas em JSX
-  trailingComma: 'es5',     // Vírgula final em objetos e arrays
-  bracketSpacing: true,     // Espaço dentro de chaves { foo: bar }
-  arrowParens: 'always',    // Sempre usar parênteses em arrow functions
-  endOfLine: 'auto',        // Quebra de linha automática
-  bracketSameLine: false    // Fecha tag JSX na próxima linha
-}
+  plugins: ["prettier-plugin-tailwindcss"],
+  printWidth: 80, // Máximo de caracteres por linha
+  tabWidth: 2, // Tamanho da indentação
+  useTabs: false, // Usar espaços em vez de tabs
+  semi: false, // Não usar ponto e vírgula
+  singleQuote: true, // Usar aspas simples
+  quoteProps: "as-needed", // Aspas em propriedades apenas quando necessário
+  jsxSingleQuote: false, // Aspas duplas em JSX
+  trailingComma: "es5", // Vírgula final em objetos e arrays
+  bracketSpacing: true, // Espaço dentro de chaves { foo: bar }
+  arrowParens: "always", // Sempre usar parênteses em arrow functions
+  endOfLine: "auto", // Quebra de linha automática
+  bracketSameLine: false, // Fecha tag JSX na próxima linha
+};
 
-export default config
+export default config;
 ```
 
 #### Exemplos Práticos de Formatação
 
 **Antes:**
+
 ```javascript
-const user={name:"John",age:30,email:"john@example.com",}
+const user = { name: "John", age: 30, email: "john@example.com" };
 
-function greet(name){
-return "Hello, "+name+"!"}
+function greet(name) {
+  return "Hello, " + name + "!";
+}
 
-const numbers=[1,2,3,4,5]
+const numbers = [1, 2, 3, 4, 5];
 ```
 
 **Depois (formatado pelo Prettier com a config acima):**
+
 ```javascript
 const user = {
-  name: 'John',
+  name: "John",
   age: 30,
-  email: 'john@example.com',
-}
+  email: "john@example.com",
+};
 
 function greet(name) {
-  return 'Hello, ' + name + '!'
+  return "Hello, " + name + "!";
 }
 
-const numbers = [1, 2, 3, 4, 5]
+const numbers = [1, 2, 3, 4, 5];
 ```
 
 ---
@@ -191,6 +204,7 @@ Para garantir 100% de formatação consistente, implemente estas 5 camadas de de
 #### Por que criar o arquivo?
 
 Mesmo que você use as configurações padrão do Prettier, **sempre crie o arquivo**. Isso:
+
 - Torna explícitas as regras do projeto
 - Evita que desenvolvedores usem configs pessoais diferentes
 - Serve como documentação
@@ -246,13 +260,13 @@ const config = {
   singleQuote: true,
 
   // Aspas em propriedades de objetos apenas quando necessário
-  quoteProps: 'as-needed',
+  quoteProps: "as-needed",
 
   // Usar aspas duplas no JSX
   jsxSingleQuote: false,
 
   // Vírgula no final: 'none', 'es5', 'all'
-  trailingComma: 'es5',
+  trailingComma: "es5",
 
   // Espaço dentro de chaves: { foo: bar }
   bracketSpacing: true,
@@ -261,16 +275,16 @@ const config = {
   bracketSameLine: false,
 
   // Parênteses em arrow functions: 'avoid', 'always'
-  arrowParens: 'always',
+  arrowParens: "always",
 
   // Quebra de linha: 'lf', 'crlf', 'cr', 'auto'
-  endOfLine: 'lf',
+  endOfLine: "lf",
 
   // Plugins adicionais (opcional)
   plugins: [],
-}
+};
 
-export default config
+export default config;
 ```
 
 ### Camada 2: Garantir que Prettier Exige Configuração
@@ -285,6 +299,7 @@ Para **forçar** que o Prettier só funcione se houver arquivo de configuração
 ```
 
 **O que isso faz:**
+
 - Se não existir arquivo `.prettierrc` ou `prettier.config.*`, Prettier **não formata**
 - Evita usar configurações padrão não documentadas
 - Garante que todos usem a mesma config
@@ -300,7 +315,7 @@ ESLint e Prettier podem ter regras conflitantes:
 const x = 1;
 
 // Prettier pode querer sem ponto e vírgula
-const x = 1
+const x = 1;
 ```
 
 #### A Solução: eslint-config-prettier
@@ -317,14 +332,14 @@ npm install --save-dev eslint-config-prettier
 // eslint.config.js ou .eslintrc.js
 module.exports = {
   extends: [
-    '@rocketseat/eslint-config/react',
-    'prettier' // ⚠️ SEMPRE DEVE SER O ÚLTIMO!
+    "@rocketseat/eslint-config/react",
+    "prettier", // ⚠️ SEMPRE DEVE SER O ÚLTIMO!
   ],
-  plugins: ['simple-import-sort'],
+  plugins: ["simple-import-sort"],
   rules: {
-    'simple-import-sort/imports': 'error',
+    "simple-import-sort/imports": "error",
   },
-}
+};
 ```
 
 **Importante:** `'prettier'` deve ser o **último item** em `extends` para sobrescrever outras configs.
@@ -366,6 +381,7 @@ coverage
 ```
 
 **Por que isso é importante?**
+
 - Evita formatação desnecessária de arquivos grandes (locks)
 - Não quebra arquivos gerados por ferramentas
 - Melhora performance
@@ -386,18 +402,20 @@ npm install --save-dev prettier-plugin-tailwindcss
 // prettier.config.mjs
 const config = {
   // ... outras configs
-  plugins: ['prettier-plugin-tailwindcss'],
-}
+  plugins: ["prettier-plugin-tailwindcss"],
+};
 
-export default config
+export default config;
 ```
 
 **Antes:**
+
 ```jsx
 <div className="text-white p-4 bg-blue-500 font-bold">
 ```
 
 **Depois (ordenado automaticamente):**
+
 ```jsx
 <div className="bg-blue-500 p-4 font-bold text-white">
 ```
@@ -420,16 +438,18 @@ npm install --save-dev prettier-plugin-sql
 #### printWidth: 80 vs 120
 
 ```javascript
-printWidth: 80  // Padrão Prettier (mais conservador)
-printWidth: 120 // Comum em projetos modernos
+printWidth: 80; // Padrão Prettier (mais conservador)
+printWidth: 120; // Comum em projetos modernos
 ```
 
 **Recomendação:** Use 80 para:
+
 - Melhor legibilidade
 - Facilita code reviews lado a lado
 - Funciona bem em laptops menores
 
 Use 120 se:
+
 - Equipe prefere linhas mais longas
 - Monitores ultrawide
 - Menos quebras de linha
@@ -437,22 +457,24 @@ Use 120 se:
 #### semi: true vs false
 
 ```javascript
-semi: false  // const x = 1
-semi: true   // const x = 1;
+semi: false; // const x = 1
+semi: true; // const x = 1;
 ```
 
 **Recomendação:**
+
 - `false` para projetos modernos (mais limpo)
 - `true` para projetos legados ou equipes acostumadas com Java/C#
 
 #### singleQuote: true vs false
 
 ```javascript
-singleQuote: true   // const name = 'John'
-singleQuote: false  // const name = "John"
+singleQuote: true; // const name = 'John'
+singleQuote: false; // const name = "John"
 ```
 
 **Recomendação:**
+
 - `true` para JavaScript/TypeScript (padrão da comunidade)
 - `false` se equipe vem de outras linguagens
 
@@ -462,23 +484,24 @@ singleQuote: false  // const name = "John"
 // es5: vírgula apenas onde ES5 permite
 const obj = {
   a: 1,
-  b: 2,  // ✅ vírgula
-}
+  b: 2, // ✅ vírgula
+};
 
 // all: vírgula em todos os lugares possíveis
 const func = (
   arg1,
-  arg2,  // ✅ vírgula (não era permitido antes do ES6)
-) => {}
+  arg2 // ✅ vírgula (não era permitido antes do ES6)
+) => {};
 
 // none: sem vírgulas finais
 const obj = {
   a: 1,
-  b: 2  // ❌ sem vírgula
-}
+  b: 2, // ❌ sem vírgula
+};
 ```
 
 **Recomendação:** Use `'es5'` para:
+
 - Compatibilidade com navegadores antigos
 - Diffs mais limpos no Git
 - Equilíbrio entre legibilidade e compatibilidade
@@ -491,13 +514,14 @@ Crie um arquivo de teste mal formatado:
 
 ```javascript
 // test-prettier.js
-const   x={a:1,b:2,c:3}
-function    teste(   ){
-return      "hello"
+const x = { a: 1, b: 2, c: 3 };
+function teste() {
+  return "hello";
 }
 ```
 
 Execute:
+
 ```bash
 npx prettier test-prettier.js
 ```
@@ -539,6 +563,7 @@ npx prettier --write "src/**/*.{js,jsx,ts,tsx,json}"
 ```
 
 **Como usar:**
+
 ```bash
 # Formatar tudo
 npm run format
@@ -565,38 +590,38 @@ const config = {
   useTabs: false,
   semi: false,
   singleQuote: true,
-  quoteProps: 'as-needed',
+  quoteProps: "as-needed",
   jsxSingleQuote: false,
-  trailingComma: 'es5',
+  trailingComma: "es5",
   bracketSpacing: true,
   bracketSameLine: false,
-  arrowParens: 'always',
+  arrowParens: "always",
 
   // Line endings (importante para Windows/Linux/Mac)
-  endOfLine: 'lf',
+  endOfLine: "lf",
 
   // Plugins
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ["prettier-plugin-tailwindcss"],
 
   // Overrides para arquivos específicos
   overrides: [
     {
-      files: '*.md',
+      files: "*.md",
       options: {
         printWidth: 100,
-        proseWrap: 'always',
+        proseWrap: "always",
       },
     },
     {
-      files: '*.json',
+      files: "*.json",
       options: {
         printWidth: 120,
       },
     },
   ],
-}
+};
 
-export default config
+export default config;
 ```
 
 ### Overrides: Configurações por Tipo de Arquivo
@@ -606,26 +631,26 @@ Você pode ter regras diferentes para arquivos diferentes:
 ```javascript
 overrides: [
   {
-    files: '*.md',
+    files: "*.md",
     options: {
       printWidth: 100,
-      proseWrap: 'always', // Quebra texto em markdown
+      proseWrap: "always", // Quebra texto em markdown
     },
   },
   {
-    files: ['*.json', '.prettierrc'],
+    files: ["*.json", ".prettierrc"],
     options: {
       printWidth: 120,
       tabWidth: 2,
     },
   },
   {
-    files: '*.css',
+    files: "*.css",
     options: {
       singleQuote: false, // CSS usa aspas duplas
     },
   },
-]
+];
 ```
 
 ### Debugging: Quando o Prettier Não Funciona
@@ -633,6 +658,7 @@ overrides: [
 #### Problema 1: Prettier não formata ao salvar
 
 **Soluções:**
+
 1. Verifique se a extensão está instalada: `Prettier - Code formatter`
 2. Verifique se é o formatter padrão:
    ```json
@@ -647,6 +673,7 @@ overrides: [
 #### Problema 2: Configuração sendo ignorada
 
 **Soluções:**
+
 1. Reinicie o VS Code
 2. Verifique se o arquivo de config está na raiz do projeto
 3. Verifique o nome do arquivo (`.prettierrc`, `prettier.config.mjs`, etc.)
@@ -655,6 +682,7 @@ overrides: [
 #### Problema 3: Conflito ESLint vs Prettier
 
 **Solução:**
+
 ```bash
 npm install --save-dev eslint-config-prettier
 ```
@@ -664,6 +692,7 @@ E garanta que `'prettier'` seja o último em `extends`.
 #### Problema 4: Alguns arquivos não são formatados
 
 **Soluções:**
+
 1. Verifique o `.prettierignore`
 2. Verifique se o tipo de arquivo é suportado
 3. Force formatação: `npx prettier --write arquivo.js`
@@ -707,6 +736,7 @@ Nenhuma lógica foi alterada.
 #### Passo 5: Merge e Comunique a Equipe
 
 Avise a equipe para:
+
 1. Fazer pull da branch
 2. Instalar extensão do Prettier
 3. Configurar `formatOnSave`
@@ -736,17 +766,17 @@ export default {
   printWidth: 80,
   semi: false,
   // ... config compartilhada
-}
+};
 ```
 
 ```javascript
 // apps/web/prettier.config.mjs
-import baseConfig from '@org/prettier-config'
+import baseConfig from "@org/prettier-config";
 
 export default {
   ...baseConfig,
   // Overrides específicos se necessário
-}
+};
 ```
 
 ### Checklist: Configuração Profissional do Prettier
@@ -783,11 +813,7 @@ Para que essas ferramentas funcionem automaticamente enquanto você desenvolve, 
     "source.fixAll.eslint": true,
     "source.organizeImports": true
   },
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -801,6 +827,7 @@ Para que essas ferramentas funcionem automaticamente enquanto você desenvolve, 
 ```
 
 **O que cada configuração faz:**
+
 - `formatOnSave`: Formata o arquivo automaticamente ao salvar
 - `source.fixAll.eslint`: Corrige automaticamente problemas do ESLint ao salvar
 - `source.organizeImports`: Organiza os imports automaticamente
@@ -882,10 +909,7 @@ Para garantir que código não formatado nunca chegue ao repositório, use **Hus
 // package.json
 {
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"]
   }
 }
 ```
@@ -897,26 +921,32 @@ Isso executará ESLint e Prettier automaticamente em arquivos modificados antes 
 ## Boas Práticas
 
 ### 1. Configure Desde o Início
+
 Adicione ESLint e Prettier no início do projeto, não depois de meses de desenvolvimento.
 
 ### 2. Seja Consistente com a Equipe
+
 Discuta e documente as regras escolhidas. Use configurações compartilhadas.
 
 ### 3. Automatize Tudo
+
 Configure formatação automática ao salvar. Ninguém deveria precisar pensar em formatação.
 
 ### 4. Use Configurações Prontas
+
 Aproveite configs da comunidade (como @rocketseat/eslint-config, @vercel/style-guide, etc.).
 
 ### 5. Não Ignore Warnings Sem Motivo
+
 Se o ESLint está reclamando, geralmente há um bom motivo. Entenda antes de desabilitar.
 
 ### 6. Documente Exceções
+
 Se precisar desabilitar uma regra, explique o porquê:
 
 ```javascript
 // eslint-disable-next-line no-console
-console.log('Debug necessário nesta parte específica')
+console.log("Debug necessário nesta parte específica");
 ```
 
 ---
@@ -940,6 +970,7 @@ As duas opções acima terão o **mesmo efeito** na maioria dos casos.
 ### Quando Usar Aspas Simples
 
 **Use aspas simples (`'`) quando quiser destacar palavras especiais** no GitHub, como:
+
 - Nomes de funções
 - Nomes de arquivos
 - Nomes de variáveis
@@ -1039,6 +1070,7 @@ git commit -m 'adiciona configuração do `ESLint` e `Prettier`'
 ```
 
 **Renderizado no GitHub:**
+
 > adiciona configuração do `ESLint` e `Prettier`
 
 Os termos `ESLint` e `Prettier` aparecem destacados.
@@ -1050,6 +1082,7 @@ git commit -m 'adiciona configuração do ESLint e Prettier'
 ```
 
 **Renderizado no GitHub:**
+
 > adiciona configuração do ESLint e Prettier
 
 Texto normal, sem destaques.
@@ -1102,12 +1135,12 @@ Closes #123'
 
 ### Resumo Rápido
 
-| Situação | Use | Exemplo |
-|----------|-----|---------|
-| Mensagem simples | Aspas simples | `git commit -m 'adiciona feature'` |
+| Situação                    | Use                            | Exemplo                                     |
+| --------------------------- | ------------------------------ | ------------------------------------------- |
+| Mensagem simples            | Aspas simples                  | `git commit -m 'adiciona feature'`          |
 | Destacar elementos técnicos | Aspas simples + acentos graves | `git commit -m 'corrige bug no` `auth.js`'` |
-| Mensagem com aspóstrofo | Aspas duplas | `git commit -m "don't use deprecated API"` |
-| Evitar command substitution | Aspas simples | Sempre use `'` com `` ` `` |
+| Mensagem com aspóstrofo     | Aspas duplas                   | `git commit -m "don't use deprecated API"`  |
+| Evitar command substitution | Aspas simples                  | Sempre use `'` com `` ` ``                  |
 
 ### Atalho para Mensagens Rápidas
 
@@ -1120,6 +1153,7 @@ alias gca='git commit --amend --no-edit'
 ```
 
 Uso:
+
 ```bash
 gc 'fix: corrige validação no `form.js`'
 ```
@@ -1172,10 +1206,10 @@ Isso desabilita regras do ESLint que conflitam com o Prettier.
 // .eslintrc.js
 module.exports = {
   extends: [
-    '@rocketseat/eslint-config/react',
-    'prettier' // Deve ser o último
-  ]
-}
+    "@rocketseat/eslint-config/react",
+    "prettier", // Deve ser o último
+  ],
+};
 ```
 
 ---
@@ -1194,17 +1228,19 @@ npm install --save-dev eslint-plugin-simple-import-sort
 ### 2. Criar Configurações
 
 **eslint.config.js:**
+
 ```javascript
 module.exports = {
-  extends: ['@rocketseat/eslint-config/react', 'prettier'],
-  plugins: ['simple-import-sort'],
+  extends: ["@rocketseat/eslint-config/react", "prettier"],
+  plugins: ["simple-import-sort"],
   rules: {
-    'simple-import-sort/imports': 'error',
+    "simple-import-sort/imports": "error",
   },
-}
+};
 ```
 
 **prettier.config.mjs:**
+
 ```javascript
 const config = {
   printWidth: 80,
@@ -1212,12 +1248,12 @@ const config = {
   useTabs: false,
   semi: false,
   singleQuote: true,
-  trailingComma: 'es5',
+  trailingComma: "es5",
   bracketSpacing: true,
-  arrowParens: 'always',
-}
+  arrowParens: "always",
+};
 
-export default config
+export default config;
 ```
 
 ### 3. Adicionar Scripts ao package.json
@@ -1263,6 +1299,7 @@ coverage
 ### Como Funciona no VS Code
 
 O VS Code usa sua conta Microsoft ou GitHub para sincronizar:
+
 - **Settings**: Todas as configurações do `settings.json`
 - **Extensões**: Lista de extensões instaladas
 - **Keybindings**: Atalhos de teclado personalizados
@@ -1316,15 +1353,14 @@ Ao trabalhar com estilização de código, certifique-se de que estas configura�
   },
 
   // ESLint working directories (para monorepos)
-  "eslint.workingDirectories": [
-    { "mode": "auto" }
-  ]
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
 ```
 
 ### GitHub Codespaces e Settings Sync
 
 Quando você cria um Codespace, ele automaticamente:
+
 1. Puxa suas configurações sincronizadas do VS Code
 2. Instala as extensões configuradas
 3. Aplica seus atalhos de teclado
@@ -1366,9 +1402,7 @@ Quando alguém abre o projeto, o VS Code sugere instalar essas extensões automa
 
 ```json
 {
-  "eslint.workingDirectories": [
-    { "mode": "auto" }
-  ],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.rulers": [80, 120],
   "files.exclude": {
@@ -1394,14 +1428,15 @@ O **EditorConfig** é um configurador de editor que define regras **fundamentais
 
 #### Diferença Importante: EditorConfig vs Prettier
 
-| Característica | EditorConfig | Prettier |
-|---------------|--------------|----------|
-| **Quando age** | ANTES de salvar (em tempo real) | AO salvar o arquivo |
-| **O que faz** | Regras básicas (indentação, charset) | Formatação completa do código |
-| **Compatibilidade** | Todos os editores | Precisa de plugin/extensão |
-| **Complexidade** | Configurações simples | Configurações avançadas |
+| Característica      | EditorConfig                         | Prettier                      |
+| ------------------- | ------------------------------------ | ----------------------------- |
+| **Quando age**      | ANTES de salvar (em tempo real)      | AO salvar o arquivo           |
+| **O que faz**       | Regras básicas (indentação, charset) | Formatação completa do código |
+| **Compatibilidade** | Todos os editores                    | Precisa de plugin/extensão    |
+| **Complexidade**    | Configurações simples                | Configurações avançadas       |
 
 **Fluxo de trabalho:**
+
 1. Você digita o código → EditorConfig aplica regras básicas em tempo real
 2. Você salva o arquivo → Prettier formata completamente o código
 3. Antes do commit → ESLint valida e corrige problemas
@@ -1412,7 +1447,7 @@ O **EditorConfig** é um configurador de editor que define regras **fundamentais
 # .editorconfig
 root = true
 
-# Configurações para TODOS os arquivos
+# Padrões para todos os arquivos
 [*]
 charset = utf-8                    # Codificação de caracteres
 end_of_line = lf                   # Tipo de quebra de linha (Unix)
@@ -1451,6 +1486,7 @@ indent_style = tab     # Comum em Go, Makefile
 ```
 
 **Por que espaços?**
+
 - Renderização consistente em todos os editores
 - Evita problemas de visualização
 - Padrão da comunidade JavaScript
@@ -1467,6 +1503,7 @@ indent_size = 4   # Python, Java (mais legível)
 **Exemplo prático:**
 
 Com `indent_size = 2`:
+
 ```javascript
 function exemplo() {
 ··return 'dois espaços'
@@ -1474,6 +1511,7 @@ function exemplo() {
 ```
 
 Com `indent_size = 4`:
+
 ```javascript
 function exemplo() {
 ····return 'quatro espaços'
@@ -1524,6 +1562,7 @@ insert_final_newline = true   # Boa prática (padrão POSIX)
 
 1. Instale a extensão **EditorConfig for VS Code**
 2. Ou pelo terminal:
+
 ```bash
 code --install-extension EditorConfig.EditorConfig
 ```
@@ -1537,6 +1576,7 @@ code --install-extension EditorConfig.EditorConfig
 #### EditorConfig em Ação
 
 **Antes de criar o .editorconfig:**
+
 ```javascript
 function teste(){
 →→→→return "usando tabs" // 4 tabs
@@ -1544,6 +1584,7 @@ function teste(){
 ```
 
 **Depois de criar o .editorconfig com `indent_style = space` e `indent_size = 2`:**
+
 ```javascript
 function teste() {
 ··return 'usando espaços' // 2 espaços
@@ -1603,11 +1644,11 @@ indent_size = 2
 
 ### Diferença entre Sync Pessoal e Configs do Projeto
 
-| Tipo | Sincronizado como? | Onde fica? | Para que serve? |
-|------|-------------------|------------|-----------------|
-| **Settings Sync** | Nuvem (GitHub/Microsoft) | Conta pessoal | Preferências pessoais (tema, fonte, atalhos) |
-| **Configs do Projeto** | Git (versionadas) | Repositório `.vscode/` | Regras da equipe (linter, formatter) |
-| **EditorConfig** | Git (versionadas) | Raiz do projeto | Configurações básicas universais |
+| Tipo                   | Sincronizado como?       | Onde fica?             | Para que serve?                              |
+| ---------------------- | ------------------------ | ---------------------- | -------------------------------------------- |
+| **Settings Sync**      | Nuvem (GitHub/Microsoft) | Conta pessoal          | Preferências pessoais (tema, fonte, atalhos) |
+| **Configs do Projeto** | Git (versionadas)        | Repositório `.vscode/` | Regras da equipe (linter, formatter)         |
+| **EditorConfig**       | Git (versionadas)        | Raiz do projeto        | Configurações básicas universais             |
 
 ### Boas Práticas
 
@@ -1644,18 +1685,21 @@ Quando você tem uma Issue complexa (como configurar estilização de código em
 
 #### Exemplo Prático de Issue
 
-````markdown
+```markdown
 # [SETUP] Configurar Padronização de Código
 
 ## Descrição
+
 Configurar ESLint e Prettier no projeto para garantir qualidade e consistência do código.
 
 ## Objetivo
+
 Ter formatação automática e validação de código funcionando para todos os desenvolvedores.
 
 ## Tarefas
 
 ### 1. Dependências
+
 - [ ] Instalar `eslint` e `prettier`
 - [ ] Instalar `@rocketseat/eslint-config`
 - [ ] Instalar `eslint-plugin-simple-import-sort`
@@ -1663,6 +1707,7 @@ Ter formatação automática e validação de código funcionando para todos os 
 - [ ] Instalar `prettier-plugin-tailwindcss`
 
 ### 2. Configuração
+
 - [ ] Criar `eslint.config.js` na raiz
 - [ ] Criar `prettier.config.mjs` na raiz
 - [ ] Criar `.editorconfig`
@@ -1670,29 +1715,34 @@ Ter formatação automática e validação de código funcionando para todos os 
 - [ ] Criar `.vscode/extensions.json`
 
 ### 3. Scripts
+
 - [ ] Adicionar script `lint` no package.json
 - [ ] Adicionar script `lint:fix` no package.json
 - [ ] Adicionar script `format` no package.json
 
 ### 4. Git Hooks
+
 - [ ] Instalar `husky` e `lint-staged`
 - [ ] Configurar pre-commit hook
 - [ ] Testar hook antes de commit
 
 ### 5. Documentação
+
 - [ ] Documentar setup no README
 - [ ] Adicionar seção "Como Contribuir"
 - [ ] Criar guia de troubleshooting
 
 ## Critérios de Aceitação
+
 - ✅ Código formata automaticamente ao salvar no VS Code
 - ✅ ESLint reporta erros no editor
 - ✅ Commits são validados antes de serem criados
 - ✅ Todos os desenvolvedores usam as mesmas extensões
 
 ## Milestone
+
 Sprint 1 - Setup Inicial
-````
+```
 
 ### Trabalhando com a Primeira Tarefa
 
@@ -1724,6 +1774,7 @@ npm install --save-dev prettier-plugin-tailwindcss
 ```
 
 Após completar, marcar no GitHub:
+
 ```markdown
 - [x] Instalar `eslint` e `prettier`
 - [x] Instalar `@rocketseat/eslint-config`
@@ -1749,15 +1800,18 @@ Após completar, marcar no GitHub:
 # Sprint 1 - Setup Inicial
 
 ## Objetivo
+
 Configurar ambiente de desenvolvimento e ferramentas de qualidade de código.
 
 ## Issues Incluídas
+
 - #1 Configurar ESLint e Prettier
 - #2 Configurar TypeScript
 - #3 Setup CI/CD básico
 - #4 Documentação inicial
 
 ## Meta
+
 Concluir até: 30/11/2024
 ```
 
@@ -1770,6 +1824,7 @@ Concluir até: 30/11/2024
 ### Progresso Visual
 
 O GitHub mostra automaticamente:
+
 - Quantas tarefas foram completadas (ex: 5/10)
 - Porcentagem de conclusão da issue
 - Progresso da milestone
@@ -1804,43 +1859,50 @@ Refs #5 (issue principal)"
 
 Crie `.github/ISSUE_TEMPLATE/setup-feature.md`:
 
-````markdown
+```markdown
 ---
 name: Setup/Configuração
 about: Template para tarefas de configuração
-title: '[SETUP] '
+title: "[SETUP] "
 labels: setup, enhancement
-assignees: ''
+assignees: ""
 ---
 
 ## Descrição
+
 <!-- Descreva o que será configurado -->
 
 ## Objetivo
+
 <!-- O que queremos alcançar com esta configuração? -->
 
 ## Tarefas
 
 ### Instalação
+
 - [ ] Instalar dependências
 - [ ] Configurar arquivos
 
 ### Configuração
+
 - [ ] Criar configs
 - [ ] Testar funcionamento
 
 ### Documentação
+
 - [ ] Atualizar README
 - [ ] Adicionar exemplos
 
 ## Critérios de Aceitação
+
 - [ ] Tudo funciona localmente
 - [ ] Tudo funciona no CI/CD
 - [ ] Documentação está atualizada
 
 ## Milestone
+
 <!-- Qual sprint/milestone? -->
-````
+```
 
 ### Automatizando com GitHub Actions
 
@@ -1869,12 +1931,38 @@ jobs:
 ## Conclusão
 
 Estilização e padronização de código não são apenas sobre estética. São sobre:
+
 - **Colaboração eficiente** em equipe
 - **Prevenção de bugs** antes que aconteçam
 - **Manutenibilidade** do código a longo prazo
 - **Profissionalismo** no desenvolvimento
 
 Investir tempo em configurar essas ferramentas no início do projeto economiza horas de discussões sobre formatação e problemas de código posteriormente.
+
+---
+
+## Página "Em Construção" e Encerramento da Milestone 0
+
+(Isso é um recorte do que eu vi no curso.dev)
+
+Chegamos no ponto de começar a expandir o nosso alcance e começar a encontrar mais pessoas para criar um impacto e ter uma reação delas. Como se a gente fosse um radar e começasse a aumentar a potência dele, aumentar a potência do que você acredita que deva ser melhorado no mundo, aqueles 0.0000000000001% e aí você vai ver que mais pontinhos vão começar a aparecer no radar 💪
+
+Em paralelo a isto, eu apresento a Ideia McDonalds e mostro como eu usei ela para destravar o desenvolvimento de times em situações da vida real e também para conseguir destravar as minhas próprias ideias 🤝
+
+---
+
+## Milestone 1: Fundação
+
+A "Milestone 1: Fundação" é o grande marco inicial do seu projeto. O objetivo é construir uma base sólida que permita que o projeto cresça de forma organizada e sustentável. É nesta fase que você vai aplicar os conceitos de versionamento, padronização e organização para garantir que o desenvolvimento seja coeso desde o começo.
+
+Completar esta milestone significa que você conseguiu:
+
+- **Estruturar o projeto**: Definir a organização inicial de pastas e arquivos.
+- **Versionar o código**: Iniciar o repositório Git e realizar os primeiros commits seguindo um padrão.
+- **Padronizar o código**: Configurar e aplicar ferramentas como ESLint e Prettier.
+- **Gerenciar as tarefas**: Criar as primeiras Issues e um plano de ação no GitHub.
+
+Superar esta fase é crucial para entender como subir um projeto que "pára em pé", de forma organizada e, mais importante, sem "endoidar" e sem desistir no meio do caminho. É a garantia de que você tem um processo claro para seguir, o que aumenta a motivação e a clareza para os próximos passos.
 
 ---
 
