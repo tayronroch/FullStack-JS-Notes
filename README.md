@@ -78,3 +78,9 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - NPM e Módulos](./4%20-%20Node.js/2%20-%20NPM%20e%20Módulos.md)
 - [3 - Módulos Nativos Essenciais](./4%20-%20Node.js/3%20-%20Módulos%20Nativos%20Essenciais.md)
 - [4 - Caminhos Absolutos vs. Relativos](./4%20-%20Node.js/4%20-%20Caminhos%20Absolutos%20vs.%20Relativos.md)
+
+### Arquitetura de Software
+
+- [1 - Arquitetura e Organização de Projetos](./5%20-%20Arquitetura%20de%20Software/1%20-%20Arquitetura%20e%20Organização%20de%20Projetos.md)
+- [2 - Fundamentos de Infraestrutura e Qualidade](./5%20-%20Arquitetura%20de%20Software/2%20-%20Fundamentos%20de%20Infraestrutura%20e%20Qualidade.md)
+- [3 - PoCs e MVPs](./5%20-%20Arquitetura%20de%20Software/3%20-%20PoCs%20e%20MVPs.md)
