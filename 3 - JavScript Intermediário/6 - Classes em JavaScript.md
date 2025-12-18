@@ -817,3 +817,62 @@ try {
 // PaymentError: Não foi possível processar sua compra.
 // [cause]: Error: Timeout no gateway de pagamento
 ```
+
+### d. Serialização e APIs (toJSON)
+
+Um problema comum ao usar erros customizados em APIs (Node.js) é que, ao tentar converter o erro para JSON para enviar ao front-end, ele aparece vazio!
+
+Isso acontece porque propriedades como `message` e `stack` são "não-enumeráveis" por padrão. Para resolver isso, implementamos o método `toJSON`.
+
+```javascript
+class HttpError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.name = "HttpError";
+    this.status = status;
+  }
+
+  // Método mágico chamado pelo JSON.stringify
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      status: this.status,
+      // Dica: Inclua stack apenas em ambiente de desenvolvimento!
+      // stack: process.env.NODE_ENV === 'development' ? this.stack : undefined
+    };
+  }
+}
+
+const erro = new HttpError("Usuário não autenticado", 401);
+
+console.log(JSON.stringify(erro));
+// Saída correta: {"name":"HttpError","message":"Usuário não autenticado","status":401}
+
+// Sem o toJSON, a saída seria apenas: {}
+```
+
+### e. Lidando com Múltiplos Erros (AggregateError)
+
+Às vezes, uma operação pode falhar por vários motivos simultâneos (ex: validar 5 campos de um formulário ou tentar conectar em 3 servidores diferentes).
+
+Antigamente, criávamos classes complexas para guardar uma lista de erros. Hoje, o JavaScript (ES2021+) possui o **`AggregateError`** nativo.
+
+```javascript
+try {
+  // Imagine uma Promise.any() falhando em todas as tentativas
+  throw new AggregateError(
+    [new Error("Falha no servidor A"), new Error("Falha no servidor B")],
+    "Todos os servidores estão fora do ar!"
+  );
+} catch (e) {
+  if (e instanceof AggregateError) {
+    console.log(e.message); // "Todos os servidores estão fora do ar!"
+    
+    // Acessando a lista de erros individuais
+    for (const erroIndividual of e.errors) {
+      console.log(`- ${erroIndividual.message}`);
+    }
+  }
+}
+```
