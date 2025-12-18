@@ -18,6 +18,13 @@ Aplicações práticas para exercitar a manipulação do DOM e a lógica de prog
 - **[Calculadora Padrão](./2%20-%20JavaScript/CALCULADORA-EM-JAVASCRIPT/)**
 - **[Lista de Tarefas (To-Do List)](./2%20-%20JavaScript/TO%20DO%20LIST/Exercicio%20Lista%20de%20Tarefas/)**
 
+### Projetos em JavaScript Intermediário
+
+Projetos que utilizam conceitos mais avançados como ES6 Modules, Classes e manipulação avançada de dados.
+
+- **[Refund (Sistema de Reembolso)](./3%20-%20JavScript%20Intermediário/Refund/)**
+- **[To-Do List (Lista de Tarefas)](./3%20-%20JavScript%20Intermediário/TodoList/)**
+
 ---
 
 ## Guias de Estudo
@@ -31,7 +38,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - Como Instalar o Git](./0%20-%20Versionamento%20de%20código/2%20-%20Como%20Instalar%20o%20Git.md)
 - [3 - Guia Prático de Comandos Locais](./0%20-%20Versionamento%20de%20código/3%20-%20Comandos%20Básicos%20Para%20Repositório%20Local.md)
 - [4 - Os 3 Estágios de um Arquivo no Git](./0%20-%20Versionamento%20de%20código/4%20-%20Os%203%20Estágios%20de%20um%20Arquivo%20no%20Git.md)
-- [5 - Interagindo com Repositórios Remotos (git push)](./0%20-%20Versionamento%20de%20código/5%20-%20Interagindo%20com%20Repositórios%20Remotos%20(git%20push).md)
+- [5 - Interagindo com Repositórios Remotos (git push)](<./0%20-%20Versionamento%20de%20código/5%20-%20Interagindo%20com%20Repositórios%20Remotos%20(git%20push).md>)
 - [6 - Organização de Tarefas no GitHub](./0%20-%20Versionamento%20de%20código/6%20-%20Organização%20de%20Tarefas%20no%20GitHub.md)
 - [7 - Estilização e Padronização de Código](./0%20-%20Versionamento%20de%20código/7%20-%20Estilização%20e%20Padronização%20de%20Código.md)
 
@@ -71,6 +78,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - Métodos de Strings (Texto)](<./3%20-%20JavScript%20Intermediário/2%20-%20Métodos%20de%20Strings%20(Texto).md>)
 - [3 - Métodos de Arrays (Intermediário)](<./3%20-%20JavScript%20Intermediário/3%20-%20Métodos%20de%20Arrays%20(Intermediário).md>)
 - [4 - Repetição e Iteração](./3%20-%20JavScript%20Intermediário/4%20-%20Repetição%20e%20Iteração.md)
+- [5 - Datas e Horas em JavaScript](./3%20-%20JavScript%20Intermediário/5%20-%20Datas%20e%20Horas%20em%20JavaScript.md)
+- [6 - Classes em JavaScript](./3%20-%20JavScript%20Intermediário/6%20-%20Classes%20em%20JavaScript.md)
 
 ### Node.js
 
