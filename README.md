@@ -23,7 +23,7 @@ Aplicações práticas para exercitar a manipulação do DOM e a lógica de prog
 Projetos que utilizam conceitos mais avançados como ES6 Modules, Classes e manipulação avançada de dados.
 
 - **[Refund (Sistema de Reembolso)](./3%20-%20JavScript%20Intermediário/Refund/)**
-- **[To-Do List (Lista de Tarefas)](./3%20-%20JavScript%20Intermediário/TodoList/)**
+- **[To-Do List (Refatorado)](./3%20-%20JavScript%20Intermediário/TodoList/)**
 
 ---
 
