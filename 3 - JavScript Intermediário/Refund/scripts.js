@@ -83,7 +83,7 @@ function expenseAdd(newExpense) {
     // Create amount span
     const expenseAmount = document.createElement("span");
     expenseAmount.classList.add("expense-amount");
-    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount
+    expenseAmount.innerHTML = `<small>R$</small>${formatCurrency(newExpense.amount)
       .toUpperCase()
       .replace("R$", "")}`;
 
@@ -135,7 +135,7 @@ function updateTotals() {
           "Não foi possível calcular o total. O valor não parece ser um número."
         );
       }
-      total += value;
+      total += Number(value);
     }
 
     // Format total and update display
@@ -143,7 +143,9 @@ function updateTotals() {
     symbolBRL.textContent = "R$";
 
     // Format to currency string first to match locale
-    const totalFormatted = formatCurrency(total).toUpperCase().replace("R$", "");
+    const totalFormatted = formatCurrency(total)
+      .toUpperCase()
+      .replace("R$", "");
 
     expensesTotal.innerHTML = "";
     expensesTotal.append(symbolBRL, totalFormatted);
