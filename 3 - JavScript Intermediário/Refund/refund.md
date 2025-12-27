@@ -96,10 +96,10 @@ form.onsubmit = (event) => {
 
 ## 5. Adicionando Item na Tela (`expenseAdd`)
 
-Esta função cria dinamicamente o HTML de cada despesa.
+Esta função cria dinamicamente o HTML de cada despesa. Recebe um parâmetro opcional `shouldUpdateUI` que controla se deve atualizar a interface após adicionar o item (usado para otimizar o carregamento inicial).
 
 ```javascript
-function expenseAdd(newExpense) {
+function expenseAdd(newExpense, shouldUpdateUI = true) {
   try {
     // 1. Cria o elemento de lista (<li>)
     const expenseItem = document.createElement("li");
@@ -127,10 +127,8 @@ function expenseAdd(newExpense) {
     // 4. Cria o span do valor
     const expenseAmount = document.createElement("span");
     expenseAmount.classList.add("expense-amount");
-    // Formata o valor visualmente, colocando o R$ em uma tag <small>
-    expenseAmount.innerHTML = `<small>R$</small>${formatCurrency(newExpense.amount)
-      .toUpperCase()
-      .replace("R$", "")}`;
+    // Formata o valor com R$ no mesmo tamanho da fonte
+    expenseAmount.textContent = formatCurrency(newExpense.amount).toUpperCase();
 
     // 5. Cria o ícone de remover (lixeira)
     const removeIcon = document.createElement("img");
@@ -149,9 +147,12 @@ function expenseAdd(newExpense) {
     expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon);
     expenseList.append(expenseItem);
 
-    // Atualiza os totais e limpa o formulário
-    updateTotals();
-    formReset();
+    // 7. Atualiza os totais e limpa o formulário apenas quando shouldUpdateUI = true
+    // Quando false (carregamento do localStorage), otimiza para não recalcular a cada item
+    if (shouldUpdateUI) {
+      updateTotals();
+      formReset();
+    }
 
   } catch (error) {
     alert("Não foi possível atualizar a lista de despesas.");
@@ -179,25 +180,24 @@ function updateTotals() {
     let total = 0;
     for (let item of items) {
       const itemAmount = item.querySelector(".expense-amount").textContent;
-      
+
       // Limpa a string para pegar apenas o número (substitui vírgula por ponto)
       let value = itemAmount.replace(/[^\d,]/g, "").replace(",", ".");
       value = parseFloat(value);
 
       if (isNaN(value)) {
-        return alert("Não foi possível calcular o total.");
+        return alert(
+          "Não foi possível calcular o total. O valor não parece ser um número."
+        );
       }
-      total += value;
+      total += Number(value);
     }
 
-    // 4. Formata o total final e exibe na tela
-    const symbolBRL = document.createElement("small");
-    symbolBRL.textContent = "R$";
-
-    const totalFormatted = formatCurrency(total).toUpperCase().replace("R$", "");
+    // 4. Formata o total final e exibe na tela (R$ no mesmo tamanho)
+    const totalFormatted = formatCurrency(total).toUpperCase();
 
     expensesTotal.innerHTML = "";
-    expensesTotal.append(symbolBRL, totalFormatted);
+    expensesTotal.textContent = totalFormatted;
   } catch (error) {
     console.log(error);
     alert("Não foi possível atualizar os totais.");
@@ -205,20 +205,82 @@ function updateTotals() {
 }
 ```
 
-## 7. Funções de Persistência (LocalStorage)
+## 7. Limpeza do Formulário (`formReset`)
 
-Para não perder os dados ao fechar a aba.
+Após adicionar uma despesa, esta função limpa os campos e retorna o foco para o campo de nome.
+
+```javascript
+function formReset() {
+  expense.value = "";
+  category.value = "";
+  amount.value = "";
+  expense.focus(); // Retorna o cursor para o campo de nome
+}
+```
+
+## 8. Funções de Persistência (LocalStorage)
+
+Para não perder os dados ao fechar a aba, salvamos tudo no `localStorage` do navegador.
 
 ### `saveExpense(newExpense)`
 Lê o array existente no `localStorage`, adiciona a nova despesa e salva de volta convertido em string JSON.
 
+```javascript
+function saveExpense(newExpense) {
+  try {
+    // Busca as despesas existentes ou cria array vazio
+    const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
+
+    // Adiciona a nova despesa ao array
+    expenses.push(newExpense);
+
+    // Salva de volta no localStorage como string JSON
+    localStorage.setItem("refund_expenses", JSON.stringify(expenses));
+  } catch (error) {
+    console.error("Erro ao salvar despesa:", error);
+  }
+}
+```
+
 ### `removeExpense(id)`
 Lê o array, filtra (remove) o item que tem o ID passado e salva a lista atualizada.
+
+```javascript
+function removeExpense(id) {
+  try {
+    const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
+
+    // Filtra removendo a despesa com o ID correspondente
+    const updatedExpenses = expenses.filter((expense) => expense.id !== id);
+
+    // Salva a lista atualizada
+    localStorage.setItem("refund_expenses", JSON.stringify(updatedExpenses));
+  } catch (error) {
+    console.error("Erro ao remover despesa:", error);
+  }
+}
+```
 
 ### `loadExpenses()`
 Executada ao abrir a página. Lê o `localStorage` e, para cada item encontrado, chama a função `expenseAdd` para desenhá-lo na tela.
 
+**IMPORTANTE:** Usa o parâmetro `shouldUpdateUI = false` para otimizar o carregamento - adiciona todos os itens primeiro e só depois calcula os totais uma única vez.
+
 ```javascript
+function loadExpenses() {
+  try {
+    const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
+
+    // Adiciona cada despesa sem atualizar UI (false)
+    expenses.forEach((expense) => expenseAdd(expense, false));
+
+    // Atualiza totais apenas UMA vez após carregar tudo
+    updateTotals();
+  } catch (error) {
+    console.error("Erro ao carregar despesas:", error);
+  }
+}
+
 // Carrega as despesas assim que o script roda
 loadExpenses();
 ```

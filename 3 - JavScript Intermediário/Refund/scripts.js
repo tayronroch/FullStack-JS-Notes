@@ -60,7 +60,7 @@ form.onsubmit = (event) => {
   saveExpense(newExpense);
 };
 
-function expenseAdd(newExpense) {
+function expenseAdd(newExpense, shouldUpdateUI = true) {
   try {
     // create a new element list item
     const expenseItem = document.createElement("li");
@@ -86,9 +86,7 @@ function expenseAdd(newExpense) {
     // Create amount span
     const expenseAmount = document.createElement("span");
     expenseAmount.classList.add("expense-amount");
-    expenseAmount.innerHTML = `<small>R$</small>${formatCurrency(newExpense.amount)
-      .toUpperCase()
-      .replace("R$", "")}`;
+    expenseAmount.textContent = formatCurrency(newExpense.amount).toUpperCase();
 
     // Create remove icon
     const removeIcon = document.createElement("img");
@@ -108,10 +106,11 @@ function expenseAdd(newExpense) {
     // Add to list
     expenseList.append(expenseItem);
 
-    // Update totals
-    updateTotals();
-    // Clear form
-    formReset();
+    // Update totals and clear form only when adding new expense (not loading)
+    if (shouldUpdateUI) {
+      updateTotals();
+      formReset();
+    }
   } catch (error) {
     alert("Não foi possível atualizar a lista de despesas.");
     console.error(error);
@@ -119,9 +118,34 @@ function expenseAdd(newExpense) {
 }
 
 function updateTotals() {
-// ... (existing updateTotals logic) ...
+  try {
+    // Count items
+    const items = expenseList.children;
+    expensesQuantity.textContent = `${items.length} ${
+      items.length > 1 ? "despesas" : "despesa"
+    }`;
+
+    // Sum totals
+    let total = 0;
+    for (let item of items) {
+      const itemAmount = item.querySelector(".expense-amount").textContent;
+      // Remove R$ and replace comma with dot
+      let value = itemAmount.replace(/[^\d,]/g, "").replace(",", ".");
+      value = parseFloat(value);
+
+      if (isNaN(value)) {
+        return alert(
+          "Não foi possível calcular o total. O valor não parece ser um número."
+        );
+      }
+      total += Number(value);
+    }
+
+    // Format total and update display
+    const totalFormatted = formatCurrency(total).toUpperCase();
+
     expensesTotal.innerHTML = "";
-    expensesTotal.append(symbolBRL, totalFormatted);
+    expensesTotal.textContent = totalFormatted;
   } catch (error) {
     console.log(error);
     alert("Não foi possível atualizar os totais.");
@@ -158,7 +182,9 @@ function removeExpense(id) {
 function loadExpenses() {
   try {
     const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
-    expenses.forEach((expense) => expenseAdd(expense));
+    expenses.forEach((expense) => expenseAdd(expense, false));
+    // Update totals only once after loading all expenses
+    updateTotals();
   } catch (error) {
     console.error("Erro ao carregar despesas:", error);
   }
