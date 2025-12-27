@@ -49,12 +49,15 @@ form.onsubmit = (event) => {
 
   const amountValue = parseFloat(amount.value);
 
+// ... (existing code) ...
+
   if (isNaN(amountValue) || amountValue <= 0) {
     alert("Please enter a valid refund amount.");
     return;
   }
 
   expenseAdd(newExpense);
+  saveExpense(newExpense);
 };
 
 function expenseAdd(newExpense) {
@@ -95,6 +98,7 @@ function expenseAdd(newExpense) {
 
     // Add remove functionality
     removeIcon.onclick = () => {
+      removeExpense(newExpense.id);
       expenseItem.remove();
       updateTotals();
     };
@@ -115,38 +119,7 @@ function expenseAdd(newExpense) {
 }
 
 function updateTotals() {
-  try {
-    // Count items
-    const items = expenseList.children;
-    expensesQuantity.textContent = `${items.length} ${
-      items.length > 1 ? "despesas" : "despesa"
-    }`;
-
-    // Sum totals
-    let total = 0;
-    for (let item of items) {
-      const itemAmount = item.querySelector(".expense-amount").textContent;
-      // Remove R$ and replace comma with dot
-      let value = itemAmount.replace(/[^\d,]/g, "").replace(",", ".");
-      value = parseFloat(value);
-
-      if (isNaN(value)) {
-        return alert(
-          "Não foi possível calcular o total. O valor não parece ser um número."
-        );
-      }
-      total += Number(value);
-    }
-
-    // Format total and update display
-    const symbolBRL = document.createElement("small");
-    symbolBRL.textContent = "R$";
-
-    // Format to currency string first to match locale
-    const totalFormatted = formatCurrency(total)
-      .toUpperCase()
-      .replace("R$", "");
-
+// ... (existing updateTotals logic) ...
     expensesTotal.innerHTML = "";
     expensesTotal.append(symbolBRL, totalFormatted);
   } catch (error) {
@@ -161,3 +134,35 @@ function formReset() {
   amount.value = "";
   expense.focus();
 }
+
+function saveExpense(newExpense) {
+  try {
+    const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
+    expenses.push(newExpense);
+    localStorage.setItem("refund_expenses", JSON.stringify(expenses));
+  } catch (error) {
+    console.error("Erro ao salvar despesa:", error);
+  }
+}
+
+function removeExpense(id) {
+  try {
+    const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
+    const updatedExpenses = expenses.filter((expense) => expense.id !== id);
+    localStorage.setItem("refund_expenses", JSON.stringify(updatedExpenses));
+  } catch (error) {
+    console.error("Erro ao remover despesa:", error);
+  }
+}
+
+function loadExpenses() {
+  try {
+    const expenses = JSON.parse(localStorage.getItem("refund_expenses")) || [];
+    expenses.forEach((expense) => expenseAdd(expense));
+  } catch (error) {
+    console.error("Erro ao carregar despesas:", error);
+  }
+}
+
+// Load expenses on startup
+loadExpenses();
