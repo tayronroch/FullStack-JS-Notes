@@ -113,6 +113,10 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [7 - Metodo Reduce](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/7%20-%20Metodo%20Reduce.md)
 - [8 - Metodo Sort](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/8%20-%20Metodo%20Sort.md)
 
+#### 3.1.3 - Imutabilidade
+
+- [1 - Conceitos de Imutabilidade](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/1%20-%20Conceitos%20de%20Imutabilidade.md)
+
 ### 4 - Node.js
 
 - [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
