@@ -117,6 +117,7 @@ const grupos = itens.reduce((acc, item) => {
 }, {});
 ```
 
+<<<<<<< HEAD
 ## Exemplo detalhado do acumulador
 
 Este exemplo mostra como o `reduce()` percorre o array e como o acumulador muda a cada passo (o mesmo pode ser visto em detalhes no console do navegador ou no terminal, o que preferir rs:
@@ -145,6 +146,8 @@ const sum = values.reduce((accumulator, currentValue, index) => {
 console.log("RESULTADO DA SOMA FINAL:", sum);
 ```
 
+=======
+>>>>>>> a2e0fd85bda02fbe9f7a09e71c22fd3df839e45b
 ## Reduce com objetos e arrays
 
 Voce pode reduzir para qualquer estrutura:
@@ -209,9 +212,18 @@ const porId = lista.reduce((acc, item) => {
 
 ## Resumo final em tabela
 
+<<<<<<< HEAD
 | Situacao          | Exemplo                              | Observacao             |
 | ----------------- | ------------------------------------ | ---------------------- |
 | Somar valores     | `arr.reduce((acc, v) => acc + v, 0)` | Acumulador soma        |
 | Contar            | `reduce` + objeto                    | Gera contagem          |
 | Agrupar           | `reduce` + objeto                    | Agrupa por chave       |
 | Sem valor inicial | `reduce((acc, v) => acc + v)`        | Primeiro item vira acc |
+=======
+| Situacao | Exemplo | Observacao |
+| --- | --- | --- |
+| Somar valores | `arr.reduce((acc, v) => acc + v, 0)` | Acumulador soma |
+| Contar | `reduce` + objeto | Gera contagem |
+| Agrupar | `reduce` + objeto | Agrupa por chave |
+| Sem valor inicial | `reduce((acc, v) => acc + v)` | Primeiro item vira acc |
+>>>>>>> a2e0fd85bda02fbe9f7a09e71c22fd3df839e45b
