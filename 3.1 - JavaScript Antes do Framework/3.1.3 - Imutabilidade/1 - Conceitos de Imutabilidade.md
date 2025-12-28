@@ -22,6 +22,7 @@ Em objetos mutados, fica mais dificil saber **o que mudou**, porque o mesmo obje
 ### Beneficio na renderizacao
 
 Como os dados imutaveis permitem detectar mudancas com facilidade, fica mais simples decidir **quando** um componente deve ser renderizado novamente. Isso ajuda a atualizar apenas o que mudou na tela, economizando processamento.
+
 ## Principios e valores da imutabilidade
 
 - **Nao mutar o original**: sempre gerar uma nova versao dos dados.
@@ -47,7 +48,7 @@ console.log(lista); // ["a", "b", "c", "d"]
 const lista = ["a", "b", "c"];
 const novaLista = [...lista, "d"];
 
-console.log(lista);     // ["a", "b", "c"]
+console.log(lista); // ["a", "b", "c"]
 console.log(novaLista); // ["a", "b", "c", "d"]
 ```
 
@@ -142,6 +143,61 @@ console.log(address1.number); // 20
 console.log(address2.number); // 30
 ```
 
+## Referencia vs objeto separado (na pratica)
+
+Da para perceber a diferenca entre **referencia** e **novo objeto** com esses exemplos:
+
+### Objeto: referencia (errado para imutabilidade)
+
+```javascript
+const address1 = {
+  street: "Av. Brasil",
+  number: 20,
+};
+
+const address2 = address1; // referencia
+address2.number = 30;
+
+console.log(address1.number); // 30
+console.log(address2.number); // 30
+```
+
+### Objeto: copia separada (correto)
+
+```javascript
+const address1 = {
+  street: "Av. Brasil",
+  number: 20,
+};
+
+const address2 = { ...address1, number: 30 };
+
+console.log(address1.number); // 20
+console.log(address2.number); // 30
+```
+
+### Array: referencia (errado para imutabilidade)
+
+```javascript
+const list1 = ["Apple", "Banana"];
+const list2 = list1; // referencia
+
+list2.push("Watermelon");
+
+console.log(list1); // ["Apple", "Banana", "Watermelon"]
+console.log(list2); // ["Apple", "Banana", "Watermelon"]
+```
+
+### Array: copia separada (correto)
+
+```javascript
+const list1 = ["Apple", "Banana"];
+const list2 = [...list1, "Watermelon"];
+
+console.log(list1); // ["Apple", "Banana"]
+console.log(list2); // ["Apple", "Banana", "Watermelon"]
+```
+
 ## Metodos que mutam vs nao mutam
 
 ### Mutam o array
@@ -212,9 +268,7 @@ const pessoas = [
   { id: 2, idade: 25 },
 ];
 
-const atualizadas = pessoas.map((p) =>
-  p.id === 2 ? { ...p, idade: 30 } : p
-);
+const atualizadas = pessoas.map((p) => (p.id === 2 ? { ...p, idade: 30 } : p));
 ```
 
 ### 2) Remover item por nome
@@ -241,9 +295,9 @@ const novo = { ...usuario, status: "ativo" };
 
 ## Resumo final em tabela
 
-| Situacao | Exemplo | Observacao |
-| --- | --- | --- |
-| Adicionar item | `[...arr, novo]` | Nao muta |
-| Remover item | `arr.filter(...)` | Cria novo array |
-| Atualizar item | `arr.map(...)` | Cria novo array |
-| Atualizar objeto | `{ ...obj, chave: valor }` | Copia rasa |
+| Situacao         | Exemplo                    | Observacao      |
+| ---------------- | -------------------------- | --------------- |
+| Adicionar item   | `[...arr, novo]`           | Nao muta        |
+| Remover item     | `arr.filter(...)`          | Cria novo array |
+| Atualizar item   | `arr.map(...)`             | Cria novo array |
+| Atualizar objeto | `{ ...obj, chave: valor }` | Copia rasa      |

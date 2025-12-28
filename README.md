@@ -117,6 +117,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 
 - [1 - Conceitos de Imutabilidade](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/1%20-%20Conceitos%20de%20Imutabilidade.md)
 - [2 - Aplicacao de Imutabilidade](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/2%20-%20Aplicacao%20de%20Imutabilidade.md)
+- [3 - Shallow e Deep Copy](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/3%20-%20Shallow%20e%20Deep%20Copy.md)
+- [4 - Shallow Freezing.md](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/4%20-%20Shallow%20Freezing.md)
 
 ### 4 - Node.js
 
