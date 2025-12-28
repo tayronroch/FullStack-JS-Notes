@@ -112,9 +112,6 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [6 - Metodo Some](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/6%20-%20Metodo%20Some.md)
 - [7 - Metodo Reduce](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/7%20-%20Metodo%20Reduce.md)
 - [8 - Metodo Sort](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/8%20-%20Metodo%20Sort.md)
-- [3 - Metodo FindIndex.md](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/3%20-%20Metodo%20FindIndex.md)
-- [5 - Metodo Every.md](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/5%20-%20Metodo%20Every.md)
--
 
 ### 4 - Node.js
 
