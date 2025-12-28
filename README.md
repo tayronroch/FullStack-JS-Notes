@@ -83,6 +83,13 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [5 - Datas e Horas em JavaScript](./3%20-%20JavScript%20Intermediário/5%20-%20Datas%20e%20Horas%20em%20JavaScript.md)
 - [6 - Classes em JavaScript](./3%20-%20JavScript%20Intermediário/6%20-%20Classes%20em%20JavaScript.md)
 
+### JavaScript Antes do Framework
+
+- [1 - Conhecendo o ECMAScript](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/1%20-%20Conhecendo%20o%20ECMAScript.md)
+- [2 - Strict Mode](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/2%20-%20Strict%20Mode.md)
+- [3 - Desestruturacao de Arrays](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/3%20-%20Desestruturacao%20de%20Arrays.md)
+- [4 - Desestruturacao de Objetos](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/4%20-%20Desestruturacao%20de%20Objetos.md)
+
 ### Node.js
 
 - [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
