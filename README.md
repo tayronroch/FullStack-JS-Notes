@@ -99,6 +99,22 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - Strict Mode](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/2%20-%20Strict%20Mode.md)
 - [3 - Desestruturacao de Arrays](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/3%20-%20Desestruturacao%20de%20Arrays.md)
 - [4 - Desestruturacao de Objetos](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/4%20-%20Desestruturacao%20de%20Objetos.md)
+- [5 - Rest Params](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/5%20-%20Rest%20Params.md)
+- [6 - Spread Operator](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.1%20-%20JavaScript%20Moderno/6%20-%20Spread%20Operator.md)
+
+#### 3.1.2 - Metodos de Array
+
+- [1 - Metodo Map](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/1%20-%20Metodo%20Map.md)
+- [2 - Metodo Filter](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/2%20-%20Metodo%20Filter.md)
+- [3 - Metodo FindIndex](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/3%20-%20Metodo%20FindIndex.md)
+- [4 - Metodo Find](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/4%20-%20Metodo%20Find.md)
+- [5 - Metodo Every](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/5%20-%20Metodo%20Every.md)
+- [6 - Metodo Some](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/6%20-%20Metodo%20Some.md)
+- [7 - Metodo Reduce](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/7%20-%20Metodo%20Reduce.md)
+- [8 - Metodo Sort](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/8%20-%20Metodo%20Sort.md)
+- [3 - Metodo FindIndex.md](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/3%20-%20Metodo%20FindIndex.md)
+- [5 - Metodo Every.md](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.2%20-%20Métodos%20de%20Array/5%20-%20Metodo%20Every.md)
+-
 
 ### 4 - Node.js
 
