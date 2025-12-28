@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Calculadora</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <h1>Mini Calculadora</h1>
+        <p class="subtitle">Operacoes basicas com JS modular</p>
+
+        <div class="inputs">
+          <label>
+            Valor A
+            <input id="valueA" type="number" inputmode="decimal" />
+          </label>
+          <label>
+            Valor B
+            <input id="valueB" type="number" inputmode="decimal" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button data-op="add">Somar</button>
+          <button data-op="sub">Subtrair</button>
+          <button data-op="mul">Multiplicar</button>
+          <button data-op="div">Dividir</button>
+          <button class="secondary" data-op="clear">Limpar</button>
+        </div>
+
+        <div class="result">
+          <span>Resultado:</span>
+          <strong id="result">0</strong>
+        </div>
+
+        <p id="message" class="message" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
+</html>

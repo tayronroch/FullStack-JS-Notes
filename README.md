@@ -122,6 +122,13 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [5 - Deep Freeze](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/5%20-%20Deep%20Freeze.md)
 - [6 - Manipulando Objetos Imutaveis](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.3%20-%20Imutabilidade/6%20-%20Manipulando%20Objetos%20Imutaveis.md)
 
+#### 3.1.4 - Modulos
+
+- [1 - Modulos ES](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/1%20-%20Modulos%20ES.md)
+- [2 - Criando Modulos](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/2%20-%20Criando%20Modulos.md)
+- [3 - Exportar Tudo](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/3%20-%20Exportar%20Tudo.md)
+- [4 - Exportacao Padrao ou Nomeada](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/4%20-%20Exportacao%20Padrao%20ou%20Nomeada.md)
+
 ### 4 - Node.js
 
 - [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
