@@ -136,6 +136,40 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [3 - Módulos Nativos Essenciais](./4%20-%20Node.js/3%20-%20Módulos%20Nativos%20Essenciais.md)
 - [4 - Caminhos Absolutos vs. Relativos](./4%20-%20Node.js/4%20-%20Caminhos%20Absolutos%20vs.%20Relativos.md)
 
+### 4.1 - Node.js Avançado
+
+#### 4.1.1 - Migrations
+
+- [1 - O que são Migrations](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/1%20-%20O%20que%20são%20Migrations.md)
+- [2 - Migrations com Sequelize](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/2%20-%20Migrations%20com%20Sequelize.md)
+- [3 - Migrations com Knex](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/3%20-%20Migrations%20com%20Knex.md)
+- [4 - Migrations com Prisma](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/4%20-%20Migrations%20com%20Prisma.md)
+- [5 - Boas Práticas](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/5%20-%20Boas%20Práticas.md)
+
+#### 4.1.2 - Testes Automatizados
+
+- [1 - Introdução aos Testes](./4.1%20-%20Node.js%20Avançado/4.1.2%20-%20Testes%20Automatizados/1%20-%20Introdução%20aos%20Testes.md)
+- [2 - Jest](./4.1%20-%20Node.js%20Avançado/4.1.2%20-%20Testes%20Automatizados/2%20-%20Jest.md)
+- [3 - Testes Unitários](./4.1%20-%20Node.js%20Avançado/4.1.2%20-%20Testes%20Automatizados/3%20-%20Testes%20Unitários.md)
+- [4 - Testes de Integração](./4.1%20-%20Node.js%20Avançado/4.1.2%20-%20Testes%20Automatizados/4%20-%20Testes%20de%20Integração.md)
+- [5 - TDD](./4.1%20-%20Node.js%20Avançado/4.1.2%20-%20Testes%20Automatizados/5%20-%20TDD.md)
+
+#### 4.1.3 - Segurança
+
+- [1 - Conceitos de Segurança](./4.1%20-%20Node.js%20Avançado/4.1.3%20-%20Segurança/1%20-%20Conceitos%20de%20Segurança.md)
+- [2 - Autenticação e Autorização](./4.1%20-%20Node.js%20Avançado/4.1.3%20-%20Segurança/2%20-%20Autenticação%20e%20Autorização.md)
+- [3 - JWT](./4.1%20-%20Node.js%20Avançado/4.1.3%20-%20Segurança/3%20-%20JWT.md)
+- [4 - Bcrypt e Hash de Senhas](./4.1%20-%20Node.js%20Avançado/4.1.3%20-%20Segurança/4%20-%20Bcrypt%20e%20Hash%20de%20Senhas.md)
+- [5 - OWASP Top 10](./4.1%20-%20Node.js%20Avançado/4.1.3%20-%20Segurança/5%20-%20OWASP%20Top%2010.md)
+
+#### 4.1.4 - Deploy e CI-CD
+
+- [1 - Conceitos de Deploy](./4.1%20-%20Node.js%20Avançado/4.1.4%20-%20Deploy%20e%20CI-CD/1%20-%20Conceitos%20de%20Deploy.md)
+- [2 - CI-CD](./4.1%20-%20Node.js%20Avançado/4.1.4%20-%20Deploy%20e%20CI-CD/2%20-%20CI-CD.md)
+- [3 - Docker](./4.1%20-%20Node.js%20Avançado/4.1.4%20-%20Deploy%20e%20CI-CD/3%20-%20Docker.md)
+- [4 - Variáveis de Ambiente](./4.1%20-%20Node.js%20Avançado/4.1.4%20-%20Deploy%20e%20CI-CD/4%20-%20Variáveis%20de%20Ambiente.md)
+- [5 - Plataformas de Deploy](./4.1%20-%20Node.js%20Avançado/4.1.4%20-%20Deploy%20e%20CI-CD/5%20-%20Plataformas%20de%20Deploy.md)
+
 ### 5 - Arquitetura de Software
 
 - [1 - Arquitetura e Organização de Projetos](./5%20-%20Arquitetura%20de%20Software/1%20-%20Arquitetura%20e%20Organização%20de%20Projetos.md)
