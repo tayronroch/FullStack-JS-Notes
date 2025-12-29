@@ -145,6 +145,14 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [3 - Migrations com Knex](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/3%20-%20Migrations%20com%20Knex.md)
 - [4 - Migrations com Prisma](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/4%20-%20Migrations%20com%20Prisma.md)
 - [5 - Boas Práticas](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/5%20-%20Boas%20Práticas.md)
+- [6 - Seeds e Fixtures](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/6%20-%20Seeds%20e%20Fixtures.md)
+- [7 - Migrations com Dados Existentes](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/7%20-%20Migrations%20com%20Dados%20Existentes.md)
+- [8 - Zero-Downtime Migrations](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/8%20-%20Zero-Downtime%20Migrations.md)
+- [9 - Migrations em Equipe](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/9%20-%20Migrations%20em%20Equipe.md)
+- [10 - Casos Avançados](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/10%20-%20Casos%20Avançados.md)
+- [11 - Troubleshooting](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/11%20-%20Troubleshooting.md)
+- [12 - Performance e Otimização](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/12%20-%20Performance%20e%20Otimização.md)
+- [13 - Migrations com node-pg-migrate](./4.1%20-%20Node.js%20Avançado/4.1.1%20-%20Migrations/13%20-%20Migrations%20com%20node-pg-migrate.md)
 
 #### 4.1.2 - Testes Automatizados
 
