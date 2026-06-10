@@ -161,6 +161,11 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [8 - Passando Parâmetros na Requisição](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/8%20-%20Passando%20Par%C3%A2metros%20na%20Requisi%C3%A7%C3%A3o.md)
 - [9 - Fetch com POST](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/9%20-%20Fetch%20com%20POST.md)
 
+#### 3.1.8 - Compiladores
+
+- [1 - Por que Aprender Compiladores Antes do Framework](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/1%20-%20Por%20que%20Aprender%20Compiladores%20Antes%20do%20Framework.md)
+- [2 - Conhecendo os Compiladores](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/2%20-%20Conhecendo%20os%20Compiladores.md)
+
 ### 4 - Node.js
 
 - [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
