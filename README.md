@@ -135,11 +135,31 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 
 #### 3.1.5 - Funções Assíncronas
 
-- [1 - Conhecendo o setTimeout()](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/1%20-%20Conhecendo%20o%20setTimeout().md)
-- [2 - Conhecendo o setInterval()](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/2%20-%20Conhecendo%20o%20setInterval().md)
+- [1 - Conhecendo o setTimeout()](<./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/1%20-%20Conhecendo%20o%20setTimeout().md>)
+- [2 - Conhecendo o setInterval()](<./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/2%20-%20Conhecendo%20o%20setInterval().md>)
 - [3 - Conhecendo as Funções Assíncronas](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/3%20-%20Conhecendo%20as%20Funções%20Assíncronas.md)
 - [4 - Conhecendo as Promises](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/4%20-%20Conhecendo%20as%20Promises.md)
 - [5 - Conhecendo o Async e Await](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/5%20-%20Conhecendo%20o%20Async%20e%20Await.md)
+
+#### 3.1.6 - Pacotes
+
+- [1 - O que são Pacotes](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/1%20-%20O%20que%20são%20pacotes.md)
+- [2 - Conhecendo o pacote Day.js](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/2%20-%20Conhecendo%20o%20pacote%20dayjs.md)
+- [4 - Gerenciadores de Pacotes](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/4%20-%20Gerenciadores%20de%20Pacotes.md)
+- [5 - Conhecendo o Node e o NPM](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/5%20-%20Conhecendo%20o%20Node%20e%20o%20NPM.md)
+- [6 - Resolução de Dependências](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/6%20-%20Resolução%20de%20Dependências.md)
+
+#### 3.1.7 - Work API's
+
+- [1 - Iniciando com Requisições](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/1%20-%20Iniciando%20com%20Requisições.md)
+- [2 - O que é uma API](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/2%20-%20O%20que%20é%20uma%20API.md)
+- [3 - Instalando o json-server](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/3%20-%20Instalando%20o%20json-server.md)
+- [4 - Instalando uma Versão Específica](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/4%20-%20Instalando%20uma%20Vers%C3%A3o%20Espec%C3%ADfica.md)
+- [5 - Criando uma API de Exemplo](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/5%20-%20Criando%20uma%20API%20de%20Exemplo.md)
+- [6 - Utilizando o Fetch](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/6%20-%20Utilizando%20o%20Fetch.md)
+- [7 - Utilizando Async e Await](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/7%20-%20Utilizando%20Async%20e%20Await.md)
+- [8 - Passando Parâmetros na Requisição](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/8%20-%20Passando%20Par%C3%A2metros%20na%20Requisi%C3%A7%C3%A3o.md)
+- [9 - Fetch com POST](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.7%20-%20Work%20API%27s/9%20-%20Fetch%20com%20POST.md)
 
 ### 4 - Node.js
 
