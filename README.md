@@ -128,6 +128,18 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - Criando Modulos](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/2%20-%20Criando%20Modulos.md)
 - [3 - Exportar Tudo](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/3%20-%20Exportar%20Tudo.md)
 - [4 - Exportacao Padrao ou Nomeada](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/4%20-%20Exportacao%20Padrao%20ou%20Nomeada.md)
+- [5 - Exportação Padrão vs Nomeada](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/5%20-%20Exportação%20padrão%20ou%20nomeada.md)
+- [6 - Renomeando as Exportações](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/6%20-%20Renomeando%20as%20Exportações.md)
+- [7 - Renomeando as Importações](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/7%20-%20Renomeando%20as%20Importações.md)
+- [8 - Usando Classes nos Módulos](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.4%20-%20Módulos/8%20-%20Usando%20classes%20nos%20módulos.md)
+
+#### 3.1.5 - Funções Assíncronas
+
+- [1 - Conhecendo o setTimeout()](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/1%20-%20Conhecendo%20o%20setTimeout().md)
+- [2 - Conhecendo o setInterval()](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/2%20-%20Conhecendo%20o%20setInterval().md)
+- [3 - Conhecendo as Funções Assíncronas](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/3%20-%20Conhecendo%20as%20Funções%20Assíncronas.md)
+- [4 - Conhecendo as Promises](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/4%20-%20Conhecendo%20as%20Promises.md)
+- [5 - Conhecendo o Async e Await](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/5%20-%20Conhecendo%20o%20Async%20e%20Await.md)
 
 ### 4 - Node.js
 
