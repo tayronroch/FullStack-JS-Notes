@@ -165,6 +165,16 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 
 - [1 - Por que Aprender Compiladores Antes do Framework](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/1%20-%20Por%20que%20Aprender%20Compiladores%20Antes%20do%20Framework.md)
 - [2 - Conhecendo os Compiladores](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/2%20-%20Conhecendo%20os%20Compiladores.md)
+- [3 - Instalando o Babel](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/3%20-%20Instalando%20o%20Babel.md)
+- [4 - Configurando e Utilizando o Babel](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/4%20-%20Configurando%20e%20Utilizando%20o%20Babel.md)
+- [5 - Criando um Script para Compilar](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/5%20-%20Criando%20um%20Script%20para%20Compilar.md)
+- [6 - Utilizando o Arquivo Compilado](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/6%20-%20Utilizando%20o%20Arquivo%20Compilado.md)
+- [7 - Automatizando as Mudancas](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/7%20-%20Automatizando%20as%20Mudancas.md)
+- [8 - Configurando Targets](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.8%20-%20Compiladores/8%20-%20Configurando%20Targets.md)
+
+#### 3.1.9 - Bundlers
+
+- [1 - Conhecendo os Bundlers](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/1%20-%20Conhecendo%20os%20Bundlers.md)
 
 ### 4 - Node.js
 
