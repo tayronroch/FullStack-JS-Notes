@@ -23,6 +23,30 @@ Sem um bundler, voce precisaria carregar cada arquivo com uma tag `<script>` sep
 
 Com um bundler, voce aponta para `index.js` e ele resolve todo o grafo de dependencias automaticamente, gerando um unico `bundle.js`.
 
+## Mapeando o grafo de dependencias
+
+A primeira coisa que um bundler faz e gerar um mapa de relacionamento de todos os arquivos do projeto. Esse processo e chamado de **resolucao de dependencias**.
+
+O bundler exige um **arquivo de entrada** — geralmente o arquivo principal da aplicacao, como `index.js`. A partir dele, o processo funciona assim:
+
+1. Le o arquivo de entrada e analisa todos os seus `import` e `require`.
+2. Para cada dependencia encontrada, localiza o arquivo correspondente.
+3. Analisa esse arquivo em busca de novas dependencias.
+4. Repete o processo recursivamente ate que todas as dependencias de todas as dependencias tenham sido mapeadas.
+
+O resultado e uma arvore completa de modulos — do arquivo de entrada ate o ultimo modulo folha — que representa tudo o que a aplicacao precisa para funcionar. So entao o bundler começa a agrupar e otimizar.
+
+```
+index.js
+├── utils/format.js
+│   └── utils/date.js
+├── services/api.js
+│   └── utils/format.js  (ja mapeado, nao processa de novo)
+└── components/button.js
+```
+
+Se um arquivo e importado por multiplos modulos, o bundler o inclui apenas uma vez no bundle final.
+
 ## O que um bundler faz
 
 1. **Resolve o grafo de dependencias**: a partir do ponto de entrada, percorre todos os `import` e `require` recursivamente ate mapear todos os modulos usados.

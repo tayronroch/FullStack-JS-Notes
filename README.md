@@ -175,6 +175,12 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 #### 3.1.9 - Bundlers
 
 - [1 - Conhecendo os Bundlers](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/1%20-%20Conhecendo%20os%20Bundlers.md)
+- [2 - Instalando e Executando o Webpack](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/2%20-%20Instalando%20e%20Executando%20o%20Webpack.md)
+- [3 - Configurando o Webpack](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/3%20-%20Configurando%20o%20Webpack.md)
+- [4 - Como Incluir o HTML](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/4%20-%20Como%20Incluir%20o%20HTML.md)
+- [5 - Como Incluir o CSS](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/5%20-%20Como%20Incluir%20o%20CSS.md)
+- [6 - Como Incluir o Babel](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/6%20-%20Como%20Incluir%20o%20Babel.md)
+- [7 - Webpack Dev Server](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/7%20-%20Webpack%20Dev%20Server.md)
 
 ### 4 - Node.js
 
