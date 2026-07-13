@@ -182,6 +182,17 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [6 - Como Incluir o Babel](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/6%20-%20Como%20Incluir%20o%20Babel.md)
 - [7 - Webpack Dev Server](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.9%20-%20Bundles/7%20-%20Webpack%20Dev%20Server.md)
 
+### 3.2 - TypeScript
+
+#### 3.2.1 - Introdução
+
+- [1 - Introdução ao TypeScript](./3.2%20-%20TypeScript/3.2.1%20-%20Introdução/1%20-%20Introdução%20ao%20TypeScript.md)
+- [2 - Verificação de Tipo Estático](./3.2%20-%20TypeScript/3.2.1%20-%20Introdução/2%20-%20Verificação%20de%20Tipo%20Estático.md)
+
+#### 3.2.2 - Tipos primitivos no TypeScript
+
+- [1 - Tipos primitivos](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/1%20-%20Tipos%20primitivos.md)
+
 ### 4 - Node.js
 
 - [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
