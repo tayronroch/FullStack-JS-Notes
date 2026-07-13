@@ -192,6 +192,10 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 #### 3.2.2 - Tipos primitivos no TypeScript
 
 - [1 - Tipos primitivos](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/1%20-%20Tipos%20primitivos.md)
+- [2 - Inferência de tipos e tipagem explícita](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/2%20-%20Inferência%20de%20tipos%20e%20tipagem%20explícita.md)
+- [3 - Tipo Any](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/3%20-%20Tipo%20Any.md)
+- [4 - Tipagem em arrays](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/4%20-%20Tipagem%20em%20arrays.md)
+- [5 - Tipagem em funções](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/5%20-%20Tipagem%20em%20funções.md)
 
 ### 4 - Node.js
 
