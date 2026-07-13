@@ -200,6 +200,15 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [7 - Null e Undefined](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/7%20-%20Null%20e%20Undefined.md)
 - [8 - Union Types](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/8%20-%20Union%20Types.md)
 
+#### 3.2.3 - Tipos personalizados no TypeScript
+
+- [1 - Criando tipos personalizados](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/1%20-%20Criando%20tipos%20personalizados.md)
+- [2 - Conhecendo interface no TypeScript](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/2%20-%20Conhecendo%20interface%20no%20TypeScript.md)
+- [3 - Como estender interfaces](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/3%20-%20Como%20estender%20interfaces.md)
+- [4 - Usando Type](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/4%20-%20Usando%20Type.md)
+- [5 - Interseção de tipos](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/5%20-%20Interseção%20de%20tipos.md)
+- [6 - Diferença entre Type e Interface](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/6%20-%20Diferença%20entre%20Type%20e%20Interface.md)
+
 ### 4 - Node.js
 
 - [1 - Introdução ao Node.js](./4%20-%20Node.js/1%20-%20Introdução%20ao%20Node.js.md)
