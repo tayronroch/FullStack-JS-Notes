@@ -196,6 +196,9 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [3 - Tipo Any](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/3%20-%20Tipo%20Any.md)
 - [4 - Tipagem em arrays](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/4%20-%20Tipagem%20em%20arrays.md)
 - [5 - Tipagem em funções](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/5%20-%20Tipagem%20em%20funções.md)
+- [6 - Tipagem em objetos](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/6%20-%20Tipagem%20em%20objetos.md)
+- [7 - Null e Undefined](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/7%20-%20Null%20e%20Undefined.md)
+- [8 - Union Types](./3.2%20-%20TypeScript/3.2.2%20-%20Tipos%20primitivos%20no%20TypeScript/8%20-%20Union%20Types.md)
 
 ### 4 - Node.js
 
