@@ -140,6 +140,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [3 - Conhecendo as Funções Assíncronas](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/3%20-%20Conhecendo%20as%20Funções%20Assíncronas.md)
 - [4 - Conhecendo as Promises](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/4%20-%20Conhecendo%20as%20Promises.md)
 - [5 - Conhecendo o Async e Await](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/5%20-%20Conhecendo%20o%20Async%20e%20Await.md)
+- [6 - Conhecendo o Event Loop](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/6%20-%20Conhecendo%20o%20Event%20Loop.md)
+- [7 - Prioridade e ordem de execução](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.5%20-%20Funções%20Assíncronas/7%20-%20Prioridade%20e%20ordem%20de%20execução.md)
 
 #### 3.1.6 - Pacotes
 
@@ -148,6 +150,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [4 - Gerenciadores de Pacotes](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/4%20-%20Gerenciadores%20de%20Pacotes.md)
 - [5 - Conhecendo o Node e o NPM](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/5%20-%20Conhecendo%20o%20Node%20e%20o%20NPM.md)
 - [6 - Resolução de Dependências](./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/6%20-%20Resolução%20de%20Dependências.md)
+- [7 - Guia de Configuração (NVM, Node e PNPM)](<./3.1%20-%20JavaScript%20Antes%20do%20Framework/3.1.6%20-%20Pacotes/7%20-%20Guia%20de%20Configuração%20(NVM,%20Node%20e%20PNPM).md>)
 
 #### 3.1.7 - Work API's
 
@@ -208,6 +211,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [4 - Usando Type](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/4%20-%20Usando%20Type.md)
 - [5 - Interseção de tipos](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/5%20-%20Interseção%20de%20tipos.md)
 - [6 - Diferença entre Type e Interface](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/6%20-%20Diferença%20entre%20Type%20e%20Interface.md)
+- [7 - Asserção de tipos](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/7%20-%20Asserção%20de%20tipos.md)
+- [8 - Restringindo valores](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/8%20-%20Restringindo%20valores.md)
 
 ### 4 - Node.js
 
