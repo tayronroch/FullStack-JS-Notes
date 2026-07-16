@@ -213,6 +213,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [6 - Diferença entre Type e Interface](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/6%20-%20Diferença%20entre%20Type%20e%20Interface.md)
 - [7 - Asserção de tipos](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/7%20-%20Asserção%20de%20tipos.md)
 - [8 - Restringindo valores](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/8%20-%20Restringindo%20valores.md)
+- [9 - Enums](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/9%20-%20Enums.md)
+- [10 - Generics](./3.2%20-%20TypeScript/3.2.3%20-%20Tipos%20personalizados%20no%20TypeScript/10%20-%20Generics.md)
 
 ### 4 - Node.js
 
