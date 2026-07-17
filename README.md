@@ -221,6 +221,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [1 - Utilitários do TypeScript](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/1%20-%20Utilitários%20do%20TypeScript.md)
 - [2 - Partial](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/2%20-%20Partial.md)
 - [3 - Pick](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/3%20-%20Pick.md)
+- [4 - Omit](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/4%20-%20Omit.md)
 
 ### 4 - Node.js
 
