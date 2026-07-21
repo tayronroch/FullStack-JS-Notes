@@ -224,6 +224,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [4 - Omit](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/4%20-%20Omit.md)
 - [5 - Record](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/5%20-%20Record.md)
 - [6 - Typeof](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/6%20-%20Typeof.md)
+- [7 - Keyof](./3.2%20-%20TypeScript/3.2.4%20-%20Utilitários%20do%20TypeScript/7%20-%20Keyof.md)
 
 ### 4 - Node.js
 
