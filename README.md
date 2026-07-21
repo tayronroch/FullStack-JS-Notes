@@ -244,6 +244,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 #### 4.0.2 - Fundamentos de API
 
 - [1 - O que é uma API](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/1%20-%20O%20que%20é%20uma%20API.md)
+- [2 - API Client - Insomnia](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/2%20-%20API%20Client%20-%20Insomnia.md)
+- [3 - Utilizando o Insomnia](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/3%20-%20Utilizando%20o%20Insomnia.md)
 
 ### 4.1 - Node.js Avançado
 

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1016"/>
+      <stop offset="100%" stop-color="#1A1B26"/>
+    </linearGradient>
+    
+    <!-- Markers for arrowheads -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#CCCCCC"/>
+    </marker>
+  </defs>
+
+  <style>
+    .font-sans { font-family: system-ui, -apple-system, sans-serif; }
+    .box-title { font-size: 22px; font-weight: 800; text-anchor: middle; }
+    .box-subtitle { font-size: 13px; text-anchor: middle; font-weight: 500; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #A0A0C0; text-anchor: middle; }
+    
+    /* Box Styles */
+    .box-client { fill: #102624; stroke: #00F5D4; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-client { fill: #00F5D4; }
+    .subtext-client { fill: #82C9BC; }
+    
+    .box-api { fill: #2C2016; stroke: #FF9F1C; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-api { fill: #FF9F1C; }
+    .subtext-api { fill: #DDA15E; }
+    
+    .box-server { fill: #1D1826; stroke: #9D4EDD; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-server { fill: #9D4EDD; }
+    .subtext-server { fill: #C77DFF; }
+  </style>
+
+  <!-- Background -->
+  <rect width="900" height="320" fill="url(#bgGrad)" rx="8"/>
+
+  <!-- 1. Client Box (Cliente) -->
+  <g>
+    <rect x="50" y="70" width="220" height="180" rx="12" class="box-client"/>
+    <text x="160" y="150" class="font-sans box-title text-client">Client</text>
+    <text x="160" y="180" class="font-sans box-subtitle subtext-client">(Cliente do restaurante)</text>
+  </g>
+
+  <!-- 2. API Box (Garçom) -->
+  <g>
+    <rect x="340" y="70" width="220" height="180" rx="12" class="box-api"/>
+    <text x="450" y="150" class="font-sans box-title text-api">API</text>
+    <text x="450" y="180" class="font-sans box-subtitle subtext-api">(Garçom)</text>
+  </g>
+
+  <!-- 3. Server Box (Cozinha) -->
+  <g>
+    <rect x="630" y="70" width="220" height="180" rx="12" class="box-server"/>
+    <text x="740" y="150" class="font-sans box-title text-server">Server</text>
+    <text x="740" y="180" class="font-sans box-subtitle subtext-server">(Cozinha)</text>
+  </g>
+
+  <!-- Arrows Client to API -->
+  <!-- Top: Requisição -->
+  <path d="M 280,135 L 330,135" fill="none" stroke="#CCCCCC" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+  <text x="305" y="120" class="font-sans arrow-label">Requisição</text>
+  
+  <!-- Bottom: Resposta -->
+  <path d="M 330,195 L 280,195" fill="none" stroke="#CCCCCC" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+  <text x="305" y="215" class="font-sans arrow-label">Resposta</text>
+
+  <!-- Arrows API to Server -->
+  <!-- Top: Requisição -->
+  <path d="M 570,135 L 620,135" fill="none" stroke="#CCCCCC" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+  <text x="595" y="120" class="font-sans arrow-label">Requisição</text>
+  
+  <!-- Bottom: Resposta -->
+  <path d="M 620,195 L 570,195" fill="none" stroke="#CCCCCC" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
+  <text x="595" y="215" class="font-sans arrow-label">Resposta</text>
+
+</svg>

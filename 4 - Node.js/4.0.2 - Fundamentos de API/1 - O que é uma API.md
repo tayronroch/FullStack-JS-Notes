@@ -18,28 +18,21 @@ Em termos simples, uma API é um **contrato de comunicação** entre dois sistem
 
 A forma mais fácil e didática de entender o papel de uma API é imaginando um restaurante:
 
-```
-┌─────────────────┐        Solicitação (Pedido)       ┌────────────────────────┐
-│     CLIENTE     ├──────────────────────────────────►│                        │
-│   (Frontend /   │                                   │       O GARÇOM         │
-│   Aplicativo)   │◄──────────────────────────────────┤         (API)          │
-└─────────────────┘        Resposta (Prato)           └───────────┬────────────┘
-                                                                  │
-                                            Leva o pedido         │  Traz o prato
-                                            para a cozinha        │  pronto
-                                                                  ▼
-                                                      ┌────────────────────────┐
-                                                      │       A COZINHA        │
-                                                      │   (Servidor / Banco)   │
-                                                      └────────────────────────┘
-```
+![Analogia da API com o Garçom](./assets/api-restaurant-analogy.svg)
 
-1. **Você (O Cliente / Frontend):** Está sentado na mesa e quer comer algo. Você tem em mãos um cardápio com as opções disponíveis.
-2. **A Cozinha (O Servidor / Banco de Dados):** É onde a comida é preparada e os ingredientes são guardados. Você não entra na cozinha e nem fala diretamente com o cozinheiro.
-3. **O Garçom (A API):** É o intermediário. Ele vai até a sua mesa, anota o seu pedido (sua requisição), leva o pedido até a cozinha, espera a comida ficar pronta e traz o prato (a resposta) de volta para você.
+### 🔄 Como o fluxo funciona (Passo a Passo)
 
-**Por que essa estrutura é benéfica?**
-Como cliente, você não precisa saber como a cozinha funciona, quais panelas são usadas ou onde os ingredientes são comprados. Você só precisa saber como fazer o pedido para o garçom. Da mesma forma, o Frontend não precisa saber como o Banco de Dados funciona, apenas como fazer a requisição para a API.
+Observando as setas do diagrama, o ciclo de comunicação ocorre em 4 passos bem definidos:
+
+1. **Passo 1 (Requisição do Cliente):** O **Client** (Cliente do restaurante / Frontend) inicia a ação enviando uma **Requisição** (pedido) para a **API** (Garçom).
+2. **Passo 2 (Encaminhamento):** A **API** recebe o pedido, valida as informações e o repassa (envia uma nova **Requisição**) para o **Server** (Cozinha / Backend).
+3. **Passo 3 (Processamento e Resposta do Servidor):** O **Server** recebe a solicitação, realiza as ações necessárias (busca dados no banco, executa cálculos, etc.) e envia a **Resposta** (prato pronto) de volta para a **API**.
+4. **Passo 4 (Entrega Final):** A **API** recebe a resposta do servidor e a entrega (envia a **Resposta** final em formato como JSON) para o **Client** que a solicitou.
+
+> [!NOTE]
+> **O poder da abstração:**
+> Como cliente do restaurante, você não precisa saber quais panelas a cozinha usa ou como o cozinheiro prepara os pratos. Você só precisa interagir com o garçom seguindo as opções do menu. 
+> No desenvolvimento, o **Client** (aplicativo) não precisa saber qual linguagem ou banco de dados o **Server** utiliza por baixo dos panos; ele só precisa saber como fazer a requisição para a **API**.
 
 ---
 
