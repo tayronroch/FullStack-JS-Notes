@@ -237,6 +237,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [7 - Import com CommonJS e ES Modules](./4%20-%20Node.js/7%20-%20Import%20com%20CommonJS%20e%20ES%20Modules.md)
 - [8 - Criando o primeiro servidor Node.js](./4%20-%20Node.js/8%20-%20Criando%20o%20primeiro%20servidor%20Node.js.md)
 - [9 - Node watch](./4%20-%20Node.js/9%20-%20Node%20watch.md)
+- [10 - Criando scripts personalizados](./4%20-%20Node.js/10%20-%20Criando%20scripts%20personalizados.md)
 
 ### 4.1 - Node.js Avançado
 
