@@ -232,6 +232,11 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - NPM e Módulos](./4%20-%20Node.js/2%20-%20NPM%20e%20Módulos.md)
 - [3 - Módulos Nativos Essenciais](./4%20-%20Node.js/3%20-%20Módulos%20Nativos%20Essenciais.md)
 - [4 - Caminhos Absolutos vs. Relativos](./4%20-%20Node.js/4%20-%20Caminhos%20Absolutos%20vs.%20Relativos.md)
+- [5 - Criando um projeto Node.js](./4%20-%20Node.js/5%20-%20Criando%20um%20projeto%20Node.js.md)
+- [6 - Executando um arquivo JavaScript](./4%20-%20Node.js/6%20-%20Executando%20um%20arquivo%20JavaScript.md)
+- [7 - Import com CommonJS e ES Modules](./4%20-%20Node.js/7%20-%20Import%20com%20CommonJS%20e%20ES%20Modules.md)
+- [8 - Criando o primeiro servidor Node.js](./4%20-%20Node.js/8%20-%20Criando%20o%20primeiro%20servidor%20Node.js.md)
+- [9 - Node watch](./4%20-%20Node.js/9%20-%20Node%20watch.md)
 
 ### 4.1 - Node.js Avançado
 
