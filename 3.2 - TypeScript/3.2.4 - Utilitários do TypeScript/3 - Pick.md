@@ -150,3 +150,42 @@ console.log(link); // "/artigos/art_991-como-usar-typescript"
 
 * O **`Pick`** é focado em **incluir** propriedades. É a melhor escolha quando você quer poucas chaves de um tipo grande.
 * O **`Omit`** (que veremos na sequência) é focado em **excluir** propriedades. É a melhor escolha quando você quer quase todas as chaves, exceto uma ou duas.
+
+---
+
+## 5. Limitação Importante: O `Pick` é "Raso" (Shallow)
+
+Assim como o `Partial` e o `Omit`, o `Pick` opera apenas no **primeiro nível** do objeto. Se você precisar selecionar apenas algumas propriedades de um objeto que está aninhado, você não consegue fazer isso passando caminhos separados por ponto (como `"endereco.cidade"`).
+
+```typescript
+interface Endereco {
+  rua: string;
+  numero: number;
+  cidade: string;
+}
+
+interface Cliente {
+  nome: string;
+  endereco: Endereco;
+}
+
+// Isso NÃO funciona:
+type ClienteSimplificado = Pick<Cliente, "nome" | "endereco.cidade">; // Erro de compilação!
+```
+
+### Solução: Resolvendo Pick em níveis aninhados
+Para selecionar propriedades de objetos internos, você deve aplicar o `Pick` de forma aninhada combinando as tipagens usando a interseção (`&`):
+
+```typescript
+type ClienteSimplificado = Pick<Cliente, "nome"> & {
+  endereco: Pick<Endereco, "cidade">;
+};
+
+const cliente: ClienteSimplificado = {
+  nome: "Taylor",
+  endereco: {
+    cidade: "São Paulo"
+    // rua e numero foram ignorados com sucesso!
+  }
+};
+```

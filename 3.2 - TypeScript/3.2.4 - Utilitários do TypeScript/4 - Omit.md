@@ -121,3 +121,72 @@ A escolha entre `Pick` e `Omit` é puramente estratégica sobre qual caminho exi
 * **Use `Omit`** se a interface original tiver **muitos** campos e você quiser **quase todos, removendo apenas alguns**.
   * Exemplo: Interface com 20 propriedades, você quer 18 (removendo 2).
   * `Omit<T, "propExcluida1" | "propExcluida2">` (curto e direto).
+
+---
+
+## 5. Limitações e Comportamentos Importantes do `Omit`
+
+### A. O `Omit` não valida se a chave existe (Falta de Type Safety)
+
+Ao contrário do `Pick`, que gera um erro se você tentar selecionar uma chave que não existe no tipo original, o `Omit` **não reclama** se você tentar omitir uma chave inexistente.
+
+```typescript
+interface Usuario {
+  id: number;
+  nome: string;
+}
+
+// O TypeScript compila isso sem erros, mesmo que "idade" não exista em Usuario!
+type UsuarioSemIdade = Omit<Usuario, "idade">; 
+```
+
+Isso acontece porque a definição interna do `Omit` usa `K extends keyof any` (permitindo qualquer `string | number | symbol` no segundo argumento). Devido a isso, o editor de código (IDE) também não consegue sugerir o **autocomplete** das chaves disponíveis de `Usuario` ao preencher o segundo parâmetro.
+
+#### Solução: Criando um `StrictOmit` personalizado
+Se você deseja que o compilador acuse um erro caso tente omitir uma propriedade que não existe no tipo original, e também deseja ter o autocomplete das chaves, você pode definir seu próprio tipo utilitário:
+
+```typescript
+type StrictOmit<T, K extends keyof T> = Omit<T, K>;
+
+// Agora o TypeScript gera um erro:
+// type Teste = StrictOmit<Usuario, "idade">; 
+// ❌ Error: Type '"idade"' does not satisfy the constraint 'keyof Usuario'.
+```
+
+---
+
+### B. O `Omit` é "Raso" (Shallow)
+
+Assim como o `Partial`, o `Omit` opera apenas no **primeiro nível** do objeto. Se você precisar remover uma propriedade de um objeto aninhado, você não pode simplesmente passar caminhos separados por ponto como `"endereco.numero"`.
+
+```typescript
+interface Endereco {
+  rua: string;
+  numero: number;
+}
+
+interface Cliente {
+  nome: string;
+  endereco: Endereco;
+}
+
+// Isso NÃO remove o 'numero' de dentro de 'endereco':
+type ClienteSemNumero = Omit<Cliente, "endereco.numero">; // Não funciona!
+```
+
+#### Solução: Omitindo em níveis aninhados
+Para resolver isso, você precisa omitir a propriedade inteira do objeto principal e depois redeclará-la aplicando o `Omit` no tipo interno:
+
+```typescript
+type ClienteSemNumero = Omit<Cliente, "endereco"> & {
+  endereco: Omit<Endereco, "numero">;
+};
+
+const cliente: ClienteSemNumero = {
+  nome: "Taylor",
+  endereco: {
+    rua: "Av. Paulista"
+    // numero foi omitido com sucesso!
+  }
+};
+```

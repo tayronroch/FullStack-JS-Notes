@@ -161,18 +161,54 @@ const clienteParcial: Partial<Cliente> = {
 ```
 
 ### Solução: Criando um `DeepPartial` personalizado
-Para tornar todas as propriedades opcionais recursivamente (incluindo objetos filhos), você pode usar o seguinte tipo utilitário personalizado usando tipos condicionais:
+
+Para tornar todas as propriedades opcionais recursivamente (incluindo objetos filhos), você pode usar um tipo utilitário personalizado utilizando tipos condicionais e recursividade.
+
+No entanto, uma implementação muito simples pode trazer problemas:
+```typescript
+// CUIDADO: Implementação ingênua/incompleta
+type SimpleDeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? SimpleDeepPartial<T[P]> : T[P];
+};
+```
+**O problema:** No JavaScript/TypeScript, objetos nativos (como `Date`, `RegExp`, `Map`, `Set`) e funções também herdam de `object`. Se seu tipo tiver um campo `createdAt: Date`, o `SimpleDeepPartial` tentará tornar opcionais as propriedades internas do objeto `Date`, quebrando o tipo e impedindo o uso de métodos como `.getTime()` ou `.toISOString()`.
+
+#### A Solução Robusta de `DeepPartial`
+Para evitar corromper tipos nativos, arrays ou funções, a definição ideal trata esses casos especiais:
 
 ```typescript
 type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+  [P in keyof T]?: T[P] extends Date
+    ? Date
+    : T[P] extends RegExp
+    ? RegExp
+    : T[P] extends (infer U)[]
+    ? DeepPartial<U>[]
+    : T[P] extends object
+    ? DeepPartial<T[P]>
+    : T[P];
 };
+```
 
-// Agora o endereço aninhado também se torna opcional em todos os níveis!
+#### Exemplo prático de uso:
+```typescript
+interface Endereco {
+  rua: string;
+  numero: number;
+}
+
+interface Cliente {
+  nome: string;
+  endereco: Endereco;
+  criadoEm: Date; // Objeto nativo
+}
+
+// O endereço aninhado se torna opcional em todos os níveis, mas criadoEm continua sendo um Date íntegro!
 const clienteDeepParcial: DeepPartial<Cliente> = {
   nome: "Rodrigo",
   endereco: {
     rua: "Av. Paulista" // Válido! 'numero' não é mais obrigatório aqui.
-  }
+  },
+  criadoEm: new Date() // Mantém o tipo Date intacto
 };
 ```
