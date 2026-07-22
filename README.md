@@ -247,6 +247,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [2 - API Client - Insomnia](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/2%20-%20API%20Client%20-%20Insomnia.md)
 - [3 - Utilizando o Insomnia](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/3%20-%20Utilizando%20o%20Insomnia.md)
 - [4 - Métodos HTTP](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/4%20-%20Metodos%20HTTP.md)
+- [5 - Identificando o método HTTP](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/5%20-%20Identificando%20o%20metodo%20HTTP.md)
+- [6 - Utilizando Status Code](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/6%20-%20Utilizando%20Status%20Code.md)
 
 ### 4.1 - Node.js Avançado
 

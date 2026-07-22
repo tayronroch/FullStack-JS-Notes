@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" width="1000" height="580">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1016"/>
+      <stop offset="100%" stop-color="#1A1B26"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .font-sans { font-family: system-ui, -apple-system, sans-serif; }
+    .title { font-size: 32px; font-weight: 800; fill: #00F5D4; text-anchor: middle; }
+    .subtitle { font-size: 15px; fill: #A9B1D6; text-anchor: middle; font-weight: 500; }
+    .box-code { font-size: 24px; font-weight: 800; text-anchor: middle; }
+    .box-text { font-size: 18px; font-weight: 700; text-anchor: middle; }
+
+    /* 1xx - Respostas Informativas (Blue) */
+    .box-1xx { fill: #0F1D36; stroke: #3A86FF; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-1xx { fill: #3A86FF; }
+
+    /* 2xx - Sucesso (Green) */
+    .box-2xx { fill: #0F2C24; stroke: #06D6A0; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-2xx { fill: #06D6A0; }
+
+    /* 3xx - Redirecionamento (Yellow) */
+    .box-3xx { fill: #2C2518; stroke: #FFD166; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-3xx { fill: #FFD166; }
+
+    /* 4xx - Erro do Cliente (Orange) */
+    .box-4xx { fill: #321C16; stroke: #FF8A5B; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-4xx { fill: #FF8A5B; }
+
+    /* 5xx - Erro no Servidor (Red) */
+    .box-5xx { fill: #2E151B; stroke: #EF476F; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-5xx { fill: #EF476F; }
+  </style>
+
+  <!-- Background Card -->
+  <rect width="1000" height="580" fill="url(#bgGrad)" rx="16"/>
+
+  <!-- Header -->
+  <text x="500" y="55" class="font-sans title">HTTP Response Status Codes</text>
+  <text x="500" y="85" class="font-sans subtitle">Os códigos de status indicam o resultado e o status da solicitação realizada.</text>
+
+  <!-- Row 1: 1xx -->
+  <g>
+    <rect x="150" y="130" width="120" height="60" rx="10" class="box-1xx"/>
+    <text x="210" y="167" class="font-sans box-code text-1xx">1xx</text>
+
+    <rect x="285" y="130" width="565" height="60" rx="10" class="box-1xx"/>
+    <text x="567" y="166" class="font-sans box-text text-1xx">Respostas Informativas</text>
+  </g>
+
+  <!-- Row 2: 2xx -->
+  <g>
+    <rect x="150" y="212" width="120" height="60" rx="10" class="box-2xx"/>
+    <text x="210" y="249" class="font-sans box-code text-2xx">2xx</text>
+
+    <rect x="285" y="212" width="565" height="60" rx="10" class="box-2xx"/>
+    <text x="567" y="248" class="font-sans box-text text-2xx">Sucesso</text>
+  </g>
+
+  <!-- Row 3: 3xx -->
+  <g>
+    <rect x="150" y="294" width="120" height="60" rx="10" class="box-3xx"/>
+    <text x="210" y="331" class="font-sans box-code text-3xx">3xx</text>
+
+    <rect x="285" y="294" width="565" height="60" rx="10" class="box-3xx"/>
+    <text x="567" y="330" class="font-sans box-text text-3xx">Redirecionamento</text>
+  </g>
+
+  <!-- Row 4: 4xx -->
+  <g>
+    <rect x="150" y="376" width="120" height="60" rx="10" class="box-4xx"/>
+    <text x="210" y="413" class="font-sans box-code text-4xx">4xx</text>
+
+    <rect x="285" y="376" width="565" height="60" rx="10" class="box-4xx"/>
+    <text x="567" y="412" class="font-sans box-text text-4xx">Erro do cliente</text>
+  </g>
+
+  <!-- Row 5: 5xx -->
+  <g>
+    <rect x="150" y="458" width="120" height="60" rx="10" class="box-5xx"/>
+    <text x="210" y="495" class="font-sans box-code text-5xx">5xx</text>
+
+    <rect x="285" y="458" width="565" height="60" rx="10" class="box-5xx"/>
+    <text x="567" y="494" class="font-sans box-text text-5xx">Erro no servidor</text>
+  </g>
+
+</svg>

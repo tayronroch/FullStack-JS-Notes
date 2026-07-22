@@ -17,6 +17,10 @@ Em APIs estruturadas sob a arquitetura REST, cada operação do **CRUD** (Create
 * **Corpo (Body):** **Não** deve enviar dados no corpo (as informações de busca e filtros devem ir apenas na URL ou Query Params).
 * **Exemplo:** `GET /produtos` (lista todos os produtos) ou `GET /produtos/15` (detalhes do produto 15).
 
+> [!NOTE]
+> **GET com Corpo (Body) é permitido?**
+> Embora o protocolo HTTP não proíba explicitamente o envio de um corpo em requisições `GET`, a especificação (RFC 7231 / RFC 9110) deixa claro que a presença de um corpo em um `GET` não tem semântica definida. Na prática, muitos servidores, proxies, CDN's ou bibliotecas de cliente ignoram, barram ou removem o corpo de requisições `GET`. Por isso, **não é recomendado** usar corpo com `GET`. Para consultas muito grandes que ultrapassam o limite de caracteres da URL (cerca de 2.048 a 8.192 caracteres dependendo do cliente/servidor), historicamente utiliza-se o método `POST`, ou o novo método `QUERY` (descrito abaixo).
+
 ---
 
 ### 🟡 `POST` (Create - Criar)
@@ -63,13 +67,20 @@ Além dos quatro verbos principais, existem outros métodos indispensáveis no d
 
 ---
 
+### 🟣 `QUERY` (RFC 9435)
+* **Objetivo:** Realizar consultas (queries) seguras e idempotentes de forma que os parâmetros e filtros de busca possam ser enviados no **corpo (body)** da requisição. Foi criado especificamente para resolver o problema de consultas extremamente longas ou complexas que excedem os limites práticos de tamanho da URL.
+* **Corpo (Body):** **Sim**, envia os parâmetros da busca, filtros ou formato da resposta desejada no corpo da requisição.
+* **Status:** Definido na RFC 9435 (publicada em 2024). Embora seja o padrão ideal para buscas complexas, verifique a compatibilidade do seu framework web/servidor, pois a adoção em ferramentas mais antigas ainda está em andamento.
+
+---
+
 ## 3. Conceitos Cruciais: Seguro vs. Idempotente
 
 Compreender estes dois conceitos teóricos de arquitetura HTTP separa desenvolvedores iniciantes de profissionais experientes:
 
 ### A. Métodos Seguros (Safe Methods)
 Um método HTTP é considerado **seguro** se ele for puramente de **leitura** (read-only) e sua execução não alterar o estado dos dados no servidor (não cria, altera ou exclui registros).
-* **Métodos seguros:** `GET`, `HEAD`, `OPTIONS`.
+* **Métodos seguros:** `GET`, `QUERY`, `HEAD`, `OPTIONS`.
 * **Por que importa?** Ferramentas automatizadas, como indexadores de busca (Googlebot) ou web crawlers, podem acessar links desses métodos livremente sem o risco de realizar alterações indesejadas, como comprar um produto ou deletar uma conta.
 
 ---
@@ -77,7 +88,7 @@ Um método HTTP é considerado **seguro** se ele for puramente de **leitura** (r
 ### B. Métodos Idempotentes (Idempotent Methods)
 Um método é **idempotente** se o resultado de realizar a mesma requisição múltiplas vezes de forma idêntica for **exatamente o mesmo** que realizá-la uma única vez. O estado do servidor não muda após a primeira execução bem-sucedida.
 
-* **Idempotentes:** `GET`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`.
+* **Idempotentes:** `GET`, `QUERY`, `PUT`, `DELETE`, `HEAD`, `OPTIONS`.
   * *Por que o PUT é idempotente?* Se você atualizar o preço do produto 10 para `150.00` dez vezes seguidas, no final das dez execuções o preço continuará sendo `150.00`.
   * *Por que o DELETE é idempotente?* Deletar o produto 10 a primeira vez o remove do banco. Tentar deletar as próximas nove vezes não alterará mais nada (ele continuará deletado, embora o servidor possa responder com status de erro 404 nas requisições seguintes).
 * **NÃO Idempotentes:** `POST`, `PATCH`.
@@ -90,6 +101,7 @@ Um método é **idempotente** se o resultado de realizar a mesma requisição m�
 | Método | Ação CRUD | Envia Body? | É Seguro? | É Idempotente? |
 | :--- | :--- | :--- | :--- | :--- |
 | **`GET`** | Ler (Read) | ❌ Não | ✅ Sim | ✅ Sim |
+| **`QUERY`** | Ler/Consultar (Read) | ✅ Sim | ✅ Sim | ✅ Sim |
 | **`POST`** | Criar (Create) | ✅ Sim | ❌ Não | ❌ Não |
 | **`PUT`** | Atualizar total (Update) | ✅ Sim | ❌ Não | ✅ Sim |
 | **`PATCH`** | Atualizar parcial (Update)| ✅ Sim | ❌ Não | ❌ Não |
@@ -152,4 +164,76 @@ const server = http.createServer((req, res) => {
 // Limita o tempo de processamento de cada requisição para 30 segundos (30000ms)
 server.requestTimeout = 30000; 
 ```
+
+---
+
+## 6. HTTP Response Status Codes (Códigos de Resposta)
+
+Os **Códigos de Status de Resposta HTTP** (HTTP Response Status Codes) indicam o resultado de uma solicitação enviada ao servidor. Eles servem para que o cliente (navegador, aplicativo ou API client) saiba exatamente o que aconteceu com seu pedido (se foi concluído com sucesso, se houve algum erro de digitação/autorização ou se o servidor falhou).
+
+![Diagrama dos Status Codes HTTP](./assets/http-status-codes-diagram.svg)
+
+---
+
+### A. As 5 Famílias de Códigos HTTP
+
+Os códigos de status são compostos por 3 dígitos e divididos em 5 categorias principais (representadas pelo primeiro dígito, de 1 a 5):
+
+| Classe | Tipo | Descrição | Exemplo Comum |
+| :--- | :--- | :--- | :--- |
+| **`1xx`** | **Respostas Informativas** | O pedido foi recebido e o processo está continuando. | `101 Switching Protocols` |
+| **`2xx`** | **Sucesso (Success)** | A ação foi recebida, compreendida e aceita com sucesso. | `200 OK`, `201 Created` |
+| **`3xx`** | **Redirecionamento (Redirection)** | Mais ações precisam ser tomadas para concluir a requisição. | `301 Moved Permanently` |
+| **`4xx`** | **Erro do Cliente (Client Error)** | A requisição contém sintaxe incorreta ou não pode ser processada por culpa do cliente. | `400 Bad Request`, `404 Not Found` |
+| **`5xx`** | **Erro do Servidor (Server Error)** | O servidor falhou ao tentar processar uma requisição aparentemente válida. | `500 Internal Server Error` |
+
+---
+
+### B. Principais Códigos por Família
+
+#### 🟢 2xx - Sucesso (Success)
+Significa que tudo correu bem com a requisição do cliente.
+
+* **`200 OK`**: A requisição foi bem-sucedida. O significado da resposta depende do método utilizado (no `GET` retorna o recurso; no `PUT`/`PATCH` confirma a alteração).
+* **`201 Created`**: A requisição foi bem-sucedida e um **novo recurso foi criado** no servidor (muito comum em respostas de `POST`).
+* **`204 No Content`**: A requisição foi bem-sucedida, mas **não há conteúdo** no corpo da resposta. É muito usado em requisições de `DELETE` (pois o recurso foi apagado e não há nada para retornar) ou em atualizações (`PUT`/`PATCH`) em que não se deseja devolver dados.
+
+---
+
+#### 🟡 3xx - Redirecionamento (Redirection)
+Informa ao cliente que o recurso solicitado mudou de endereço ou que mais ações são necessárias para obtê-lo.
+
+* **`301 Moved Permanently`**: O recurso solicitado mudou permanentemente para uma nova URL. O navegador redireciona automaticamente para o novo link.
+* **`302 Found` (Redirecionamento temporário)**: O recurso mudou temporariamente de endereço.
+* **`304 Not Modified`**: Usado para fins de **cache**. Indica que o recurso não mudou desde a última vez que foi solicitado. O cliente pode usar a cópia que já tem salva localmente, economizando internet e processamento.
+
+---
+
+#### 🟠 4xx - Erros do Cliente (Client Errors)
+Esses códigos são retornados quando a API detecta que o problema está na requisição enviada pelo cliente.
+
+* **`400 Bad Request`**: A requisição está mal formatada ou faltam dados obrigatórios (ex: enviar um JSON com sintaxe quebrada ou sem os campos requeridos).
+* **`401 Unauthorized`**: O cliente precisa se **autenticar** (fazer login) para obter a resposta solicitada.
+* **`403 Forbidden`**: O cliente está autenticado, mas **não possui permissão** para acessar aquele recurso específico (ex: um usuário comum tentando acessar uma rota administrativa `/admin`).
+* **`404 Not Found`**: O recurso solicitado (URL ou ID do recurso) **não pôde ser encontrado** no servidor.
+* **`408 Request Timeout`**: O servidor encerrou a conexão por tempo limite de espera (o cliente demorou muito para enviar os dados).
+* **`409 Conflict`**: A requisição conflita com o estado atual do servidor (ex: tentar cadastrar um usuário com um e-mail que já existe no banco de dados).
+
+---
+
+#### 🔴 5xx - Erros do Servidor (Server Errors)
+Significa que a requisição do cliente estava correta, mas o servidor da API encontrou uma falha interna ou está indisponível para processá-la.
+
+* **`500 Internal Server Error`**: O erro "coringa" do servidor. Acontece quando ocorre um crash/erro não tratado no código do backend (ex: uma variável nula que estourou um erro ou uma falha de conexão interna).
+* **`502 Bad Gateway`**: O servidor, ao agir como proxy ou gateway, recebeu uma resposta inválida do servidor de backend (upstream).
+* **`503 Service Unavailable`**: O servidor está temporariamente indisponível (geralmente por sobrecarga ou manutenção programada).
+* **`504 Gateway Timeout`**: O servidor intermediário (proxy/load balancer) não recebeu uma resposta a tempo do servidor principal onde roda a aplicação.
+
+---
+
+> [!TIP]
+> **Boas Práticas na Escolha dos Status Codes:**
+> No desenvolvimento de APIs REST, é fundamental retornar os códigos corretos. 
+> * Nunca retorne `200 OK` contendo uma mensagem de erro no corpo do JSON (ex: `{ "error": "Usuário não encontrado" }`). Em vez disso, use `404 Not Found`.
+> * Retornar códigos corretos facilita o tratamento de erros no Frontend e em integrações automatizadas.
 
