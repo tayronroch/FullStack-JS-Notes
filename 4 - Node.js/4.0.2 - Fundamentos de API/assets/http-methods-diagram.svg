@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1016"/>
+      <stop offset="100%" stop-color="#1A1B26"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .font-sans { font-family: system-ui, -apple-system, sans-serif; }
+    .box-title { font-size: 24px; font-weight: 800; text-anchor: middle; }
+    .box-subtitle { font-size: 13px; text-anchor: middle; font-weight: 600; }
+    
+    /* Box Styles */
+    .box-get { fill: #10202E; stroke: #00F5D4; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-get { fill: #00F5D4; }
+    .subtext-get { fill: #82C9BC; }
+    
+    .box-post { fill: #102620; stroke: #06D6A0; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-post { fill: #06D6A0; }
+    .subtext-post { fill: #8CEFD6; }
+    
+    .box-put { fill: #1C152E; stroke: #9D4EDD; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-put { fill: #9D4EDD; }
+    .subtext-put { fill: #D8B4F8; }
+    
+    .box-delete { fill: #2E151B; stroke: #EF476F; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-delete { fill: #EF476F; }
+    .subtext-delete { fill: #FBB1C3; }
+    
+    .box-patch { fill: #2C2618; stroke: #FFD166; stroke-width: 2; stroke-dasharray: 6,6; }
+    .text-patch { fill: #FFD166; }
+    .subtext-patch { fill: #FFE6A9; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1000" height="320" fill="url(#bgGrad)" rx="8"/>
+
+  <!-- 1. GET Box -->
+  <g>
+    <rect x="60" y="70" width="160" height="180" rx="12" class="box-get"/>
+    <text x="140" y="150" class="font-sans box-title text-get">GET</text>
+    <text x="140" y="180" class="font-sans box-subtitle subtext-get">Leitura</text>
+  </g>
+
+  <!-- 2. POST Box -->
+  <g>
+    <rect x="240" y="70" width="160" height="180" rx="12" class="box-post"/>
+    <text x="320" y="150" class="font-sans box-title text-post">POST</text>
+    <text x="320" y="180" class="font-sans box-subtitle subtext-post">Criação</text>
+  </g>
+
+  <!-- 3. PUT Box -->
+  <g>
+    <rect x="420" y="70" width="160" height="180" rx="12" class="box-put"/>
+    <text x="500" y="150" class="font-sans box-title text-put">PUT</text>
+    <text x="500" y="180" class="font-sans box-subtitle subtext-put">Atualizar</text>
+  </g>
+
+  <!-- 4. DELETE Box -->
+  <g>
+    <rect x="600" y="70" width="160" height="180" rx="12" class="box-delete"/>
+    <text x="680" y="150" class="font-sans box-title text-delete">DELETE</text>
+    <text x="680" y="180" class="font-sans box-subtitle subtext-delete">Deletar</text>
+  </g>
+
+  <!-- 5. PATCH Box -->
+  <g>
+    <rect x="780" y="70" width="160" height="180" rx="12" class="box-patch"/>
+    <text x="860" y="150" class="font-sans box-title text-patch">PATCH</text>
+    <text x="860" y="180" class="font-sans box-subtitle subtext-patch">Atualização Parcial</text>
+  </g>
+
+</svg>
