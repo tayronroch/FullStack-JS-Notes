@@ -1,9 +1,9 @@
 import http from "node:http";
 
-const server = http.createServer((request, response) => {
+const server = http.createServer(async (request, response) => {
   const { method, url } = request;
 
-  if (method === "GET" && url === "/home") {
+  if (method === "GET" && url === "/products") {
     response.writeHead(200, { "Content-Type": "application/json" });
     return response.end(
       JSON.stringify({
@@ -11,29 +11,27 @@ const server = http.createServer((request, response) => {
       }),
     );
   }
-  if (method === "POST" && url === "/home") {
-    response.writeHead(201, { "Content-Type": "application/json" });
-    return response.end(
-      JSON.stringify({
-        message: "Você esta na home da aplicação. Usando metodo: " + method,
-      }),
-    );
-  }
 
-  if (method === "GET" && url === "/users") {
+  if (method === "POST" && url === "/products") {
+    const buffers = [];
+
+    for await (const chunk of request) {
+      buffers.push(chunk);
+    }
+
+    const fullBody = Buffer.concat(buffers).toString();
+
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+
+    console.log(fullBody);
+
     response.writeHead(200, { "Content-Type": "application/json" });
     return response.end(
       JSON.stringify({
-        message: "Listagem de usuários. Usando metodo: " + method,
-      }),
-    );
-  }
-
-  if (method === "POST" && url === "/users") {
-    response.writeHead(201, { "Content-Type": "application/json" });
-    return response.end(
-      JSON.stringify({
-        message: "Criação de usuário. Usando metodo: " + method,
+        message: "Você esta na home da aplicação. Usando metodo: " + method,
       }),
     );
   }

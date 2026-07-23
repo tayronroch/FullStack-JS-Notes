@@ -251,6 +251,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [6 - Utilizando Status Code](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/6%20-%20Utilizando%20Status%20Code.md)
 - [7 - URL da requisição](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/7%20-%20URL%20da%20requisicao.md)
 - [8 - Como o Node.js lida com requisições HTTP](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/8%20-%20Como%20o%20Node.js%20lida%20com%20requisicoes%20HTTP.md)
+- [9 - Recuperando dados no body](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/9%20-%20Recuperando%20dados%20no%20body.md)
 
 ### 4.1 - Node.js Avançado
 

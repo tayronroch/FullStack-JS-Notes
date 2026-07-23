@@ -15,172 +15,33 @@ Isso permite que o Node.js lide com milhares de conexões simultâneas com pouqu
 
 ---
 
-## 2. O que é o Corpo (Body) da Requisição e como enviá-lo
+## 2. Requisições como Streams e Chunks
 
-Quando um cliente (como um navegador ou um API client) envia uma requisição HTTP para o servidor, ele pode incluir dados estruturados em um **corpo (body)**. 
+Quando uma requisição chega ao servidor, o corpo da requisição não está imediatamente disponível como uma propriedade simples (como `request.body`). Isso ocorre porque o corpo pode ser grande (como uploads de imagens ou grandes volumes de texto) e chega ao servidor como um fluxo (**stream**) de dados, dividido em pedaços (**chunks**).
 
-Essa técnica é usada principalmente para enviar dados complexos que serão criados ou atualizados no servidor (usando os métodos `POST`, `PUT` ou `PATCH`).
-
-![Enviando dados no corpo](./assets/enviando-dados-body.png)
-
-### 2.1. Como enviar dados usando o Body (Lado do Cliente)
-
-Para enviar dados no corpo, o cliente precisa configurar três coisas fundamentais:
-1. O **Método HTTP** (ex: `POST`).
-2. O cabeçalho **`Content-Type`** (informa ao servidor o formato do dado enviado, ex: `application/json`).
-3. O **Corpo (Body)** serializado.
-
-#### A. Usando a API Fetch no Navegador (JavaScript)
-```javascript
-const novoProduto = { name: "Teclado", price: 120.50 };
-
-fetch('http://localhost:3333/produtos', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json; charset=utf-8'
-  },
-  body: JSON.stringify(novoProduto) // Serializa o objeto JS para string JSON
-});
-```
-
-#### B. Usando o Insomnia / Postman
-1. Defina a URL e altere o método para `POST`.
-2. Logo abaixo, selecione a aba **Body** e escolha a opção **JSON**.
-3. Escreva o seu objeto JSON:
-   ```json
-   {
-     "name": "Teclado",
-     "price": 120.50
-   }
-   ```
-4. Ao enviar, o client insere automaticamente o cabeçalho `Content-Type: application/json` na requisição.
-
----
-
-## 3. Requisições e Respostas como Streams
+![Como o Node.js lida com Requisições HTTP](./assets/como-node-lida-requisicoes-http.png)
 
 No Node.js, os objetos `request` e `response` na verdade são **Streams** (fluxos de dados):
 
-* **`request` (Readable Stream)**: É um fluxo de dados de leitura. Quando um cliente envia uma requisição com corpo (como o JSON acima), os dados não chegam todos de uma vez. Eles chegam em pequenos pacotes chamados **chunks** (pedações de dados em formato de `Buffer`).
-* **`response` (Writable Stream)**: É um fluxo de escrita. Você pode enviar dados aos poucos usando `response.write()` e avisar que terminou de escrever usando `response.end()`.
+* **`request` (Readable Stream)**: É um fluxo de dados de leitura. O corpo da requisição é transmitido da rede em pequenos pedaços (chunks em formato de `Buffer`) à medida que chegam.
+* **`response` (Writable Stream)**: É um fluxo de escrita. Enviamos dados de resposta para a rede aos poucos usando `response.write()` e finalizamos a resposta chamando `response.end()`.
 
 ---
 
-## 4. Lendo o corpo da requisição (Request Body) de forma manual
+## 3. O Fluxo de Transmissão de Dados
 
-Como o `request` é uma Readable Stream, para capturarmos o corpo da requisição, precisamos escutar os eventos emitidos pela stream:
+Abaixo, podemos visualizar o ciclo de vida do envio e recebimento de dados estruturados em uma API Node.js nativa:
 
-1. **`data`**: Disparado sempre que um novo chunk (pacote de dados) chega ao servidor.
-2. **`end`**: Disparado quando a transmissão do corpo da requisição termina completamente.
+```mermaid
+sequenceDiagram
+    participant Cliente as Cliente (Fetch/Insomnia)
+    participant Servidor as Servidor (Node.js)
 
-### Exemplo Prático de Consumo de Body:
-
-```javascript
-import http from 'node:http';
-
-const server = http.createServer((request, response) => {
-  const { method, url } = request;
-
-  if (method === 'POST' && url === '/users') {
-    const chunks = [];
-
-    // 1. Escuta a chegada dos pacotes de dados (chunks)
-    request.on('data', (chunk) => {
-      chunks.push(chunk);
-    });
-
-    // 2. Escuta o encerramento do envio do corpo
-    request.on('end', () => {
-      // Junta todos os buffers e os converte em string (texto)
-      const bodyCompleto = Buffer.concat(chunks).toString();
-      
-      // Converte o texto JSON em um objeto JavaScript
-      const usuario = JSON.parse(bodyCompleto);
-
-      console.log('Dados do usuário recebidos:', usuario);
-
-      response.writeHead(201, { 'Content-Type': 'application/json' });
-      return response.end(JSON.stringify({ 
-        mensagem: 'Usuário recebido com sucesso!', 
-        dados: usuario 
-      }));
-    });
-  }
-});
-
-server.listen(3333);
-```
-
-> [!IMPORTANT]
-> O método `JSON.parse()` pode lançar erros se a string não for um JSON válido. Na prática, é essencial envelopar essa conversão em um bloco `try/catch` para evitar que a aplicação quebre (sofra um *crash*).
-
----
-
-## 5. Criando um Helper / Middleware de Body Parser
-
-Ficar escrevendo os eventos `data` e `end` para cada rota `POST` ou `PUT` gera muita duplicação de código. Em APIs nativas, costumamos isolar essa lógica em uma função auxiliar (helper):
-
-```javascript
-// helper/json-body-parser.js
-export async function jsonBodyParser(request) {
-  const chunks = [];
-
-  for await (const chunk of request) {
-    chunks.push(chunk);
-  }
-
-  const content = Buffer.concat(chunks).toString();
-
-  try {
-    return JSON.parse(content);
-  } catch {
-    return null; // Retorna null se não houver corpo ou se for inválido
-  }
-}
-```
-
-Usando a função no servidor:
-
-```javascript
-import http from 'node:http';
-import { jsonBodyParser } from './helper/json-body-parser.js';
-
-const server = http.createServer(async (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'application/json' });
-
-  // Resolve o body antes de analisar as rotas
-  const body = await jsonBodyParser(request);
-  request.body = body; // Anexa o body no próprio objeto request
-
-  if (request.method === 'POST' && request.url === '/users') {
-    const { name, email } = request.body || {};
-    
-    return response.end(JSON.stringify({ 
-      mensagem: `Usuário ${name} cadastrado!` 
-    }));
-  }
-});
-```
-
----
-
-## 6. Como os Frameworks resolvem isso (Express.js)
-
-Em frameworks modernos, o gerenciamento de streams é ocultado por rotinas prontas chamadas middlewares. No Express.js, por exemplo, basta habilitar o interpretador nativo de JSON:
-
-```javascript
-import express from 'express';
-
-const app = express();
-
-// Habilita o parsing de JSON globalmente
-app.use(express.json());
-
-app.post('/users', (req, res) => {
-  // O corpo já vem parseado e disponível no req.body!
-  const { name, email } = req.body;
-  res.status(201).json({ mensagem: `Usuário ${name} cadastrado!` });
-});
-
-app.listen(3333);
+    Note over Cliente: Cria objeto JavaScript<br/>{ name: "Teclado" }
+    Cliente->>Cliente: Serializa para JSON String usando JSON.stringify()
+    Cliente->>Servidor: POST /produtos com Content-Type: application/json
+    Note over Servidor: Recebe pacotes de dados (chunks)
+    Note over Servidor: Une os chunks (Buffer.concat) e transforma em string
+    Servidor->>Servidor: Executa JSON.parse(body) para virar objeto novamente
+    Servidor-->>Cliente: Retorna resposta (ex: 201 Created)
 ```
