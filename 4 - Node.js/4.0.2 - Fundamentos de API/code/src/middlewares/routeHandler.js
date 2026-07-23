@@ -6,9 +6,9 @@ export async function routeHandler(request, response) {
     (route) => route.method === method && route.path === url,
   );
 
-  if (!route) {
-    return response.writeHead(404).end("Rota não encontrada");
+  if (route) {
+    return route.controller(request, response);
   }
 
-  return route.handler(request, response);
+  return response.writeHead(404).end("Rota não encontrada");
 }

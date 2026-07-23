@@ -2,11 +2,12 @@ export const routes = [
   {
     method: "GET",
     path: "/products",
-    handler: (request, response) => {
+    controller: (request, response) => {
       response.writeHead(200, { "Content-Type": "application/json" });
       return response.end(
         JSON.stringify({
-          message: "Você esta na home da aplicação. Usando metodo: " + request.method,
+          message:
+            "Você esta na home da aplicação. Usando metodo: " + request.method,
         }),
       );
     },
@@ -14,12 +15,13 @@ export const routes = [
   {
     method: "POST",
     path: "/products",
-    handler: (request, response) => {
-      response.writeHead(200, { "Content-Type": "application/json" });
+    controller: (request, response) => {
+      response.writeHead(201, { "Content-Type": "application/json" });
       console.log(request.body);
       return response.end(
         JSON.stringify({
-          message: "Você esta enviando o objeto usando metodo: " + request.method,
+          message:
+            "Você esta enviando o objeto usando metodo: " + request.method,
         }),
       );
     },
@@ -27,27 +29,19 @@ export const routes = [
   {
     method: "PUT",
     path: "/products",
-    handler: (request, response) => {
-      response.writeHead(200, { "Content-Type": "application/json" });
+    controller: (request, response) => {
       console.log(request.body);
-      return response.end(
-        JSON.stringify({
-          message: "Você esta enviando o objeto usando metodo: " + request.method,
-        }),
-      );
+      response.writeHead(204);
+      return response.end();
     },
   },
   {
     method: "DELETE",
     path: "/products",
-    handler: (request, response) => {
-      response.writeHead(200, { "Content-Type": "application/json" });
+    controller: (request, response) => {
       console.log(request.body);
-      return response.end(
-        JSON.stringify({
-          message: "Você esta enviando o objeto usando metodo: " + request.method,
-        }),
-      );
+      response.writeHead(204);
+      return response.end();
     },
   },
 ];
