@@ -261,6 +261,11 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [16 - Obtendo Parametros nomeados](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/16%20-%20Obtendo%20Parametros%20nomeados.md)
 - [17 - Separando parametros](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/17%20-%20Separando%20parametros.md)
 
+#### 4.0.3 - Manipulando Dados
+
+- [1 - Armazenando dados na nova pasta criada](./4%20-%20Node.js/4.0.3%20-%20Manipulando%20Dados/1%20-%20Armazenando%20dados%20na%20nova%20pasta%20criada.md)
+
+
 ### 4.1 - Node.js Avançado
 
 #### 4.1.1 - Migrations
