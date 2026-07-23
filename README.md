@@ -258,6 +258,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [13 - Route Params](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/13%20-%20Route%20Params.md)
 - [14 - Obtendo o parâmetro](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/14%20-%20Obtendo%20o%20parametro.md)
 - [15 - Parametros nomeados](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/15%20-%20Parametros%20nomeados.md)
+- [16 - Obtendo Parametros nomeados](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/16%20-%20Obtendo%20Parametros%20nomeados.md)
 
 ### 4.1 - Node.js Avançado
 
