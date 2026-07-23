@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#319795" />
+      <stop offset="100%" stop-color="#4fd1c5" />
+    </linearGradient>
+    <linearGradient id="mwGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dd6b20" />
+      <stop offset="100%" stop-color="#f6ad55" />
+    </linearGradient>
+    <linearGradient id="handlerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38a169" />
+      <stop offset="100%" stop-color="#68d391" />
+    </linearGradient>
+    <linearGradient id="blockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e53e3e" />
+      <stop offset="100%" stop-color="#fc8181" />
+    </linearGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <style>
+    .title { font-family: 'Inter', system-ui, sans-serif; font-weight: bold; font-size: 14px; fill: #ffffff; }
+    .subtitle { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #a0aec0; }
+    .label { font-family: 'Inter', system-ui, sans-serif; font-weight: 500; font-size: 12px; fill: #e2e8f0; }
+    .arrow-text { font-family: 'Inter', system-ui, sans-serif; font-size: 11px; fill: #718096; font-weight: bold; }
+    .arrow { stroke: #4a5568; stroke-width: 2; fill: none; stroke-dasharray: 4 4; }
+    .arrow-solid { stroke: #cbd5e0; stroke-width: 2; fill: none; }
+    .arrow-blocked { stroke: #fc8181; stroke-width: 2; fill: none; stroke-dasharray: 3 3; }
+  </style>
+
+  <!-- Background container (sleek dark) -->
+  <rect width="100%" height="100%" rx="12" fill="#171923" />
+
+  <!-- 1. CLIENT NODE -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="110" width="100" height="90" rx="8" fill="url(#clientGrad)" />
+    <text x="90" y="150" text-anchor="middle" class="title">Client</text>
+    <text x="90" y="170" text-anchor="middle" class="subtitle">Navegador / App</text>
+  </g>
+
+  <!-- Arrow 1: Request -->
+  <path d="M 140 145 L 210 145" class="arrow-solid" />
+  <polygon points="210,141 218,145 210,149" fill="#cbd5e0" />
+  <text x="175" y="135" text-anchor="middle" class="arrow-text">REQUEST</text>
+
+  <!-- 2. MIDDLEWARE 1 (Log) -->
+  <g filter="url(#shadow)">
+    <rect x="220" y="110" width="130" height="90" rx="8" fill="url(#mwGrad)" />
+    <text x="285" y="145" text-anchor="middle" class="title">Middleware 1</text>
+    <text x="285" y="165" text-anchor="middle" class="subtitle">Logger (Registros)</text>
+    <text x="285" y="185" text-anchor="middle" class="label" fill="#feebc8">next()</text>
+  </g>
+
+  <!-- Arrow 2: next() -->
+  <path d="M 350 145 L 420 145" class="arrow-solid" />
+  <polygon points="420,141 428,145 420,149" fill="#cbd5e0" />
+  <text x="385" y="135" text-anchor="middle" class="arrow-text">next()</text>
+
+  <!-- 3. MIDDLEWARE 2 (Auth) -->
+  <g filter="url(#shadow)">
+    <rect x="430" y="110" width="130" height="90" rx="8" fill="url(#mwGrad)" />
+    <text x="495" y="145" text-anchor="middle" class="title">Middleware 2</text>
+    <text x="495" y="165" text-anchor="middle" class="subtitle">Autenticação</text>
+    <text x="495" y="185" text-anchor="middle" class="label" fill="#feebc8">next() ou res.send()</text>
+  </g>
+
+  <!-- Arrow 3: next() to Route Handler -->
+  <path d="M 560 145 L 630 145" class="arrow-solid" />
+  <polygon points="630,141 638,145 630,149" fill="#cbd5e0" />
+  <text x="595" y="135" text-anchor="middle" class="arrow-text">next()</text>
+
+  <!-- Arrow 4: Blocked / Denied path -->
+  <path d="M 495 200 L 495 270 L 140 270" class="arrow-blocked" />
+  <polygon points="140,266 132,270 140,274" fill="#fc8181" />
+  <text x="320" y="260" text-anchor="middle" class="arrow-text" fill="#fc8181">BARRADO: Retorna 401 Unauthorized</text>
+
+  <!-- 4. ROUTE HANDLER / CONTROLLER -->
+  <g filter="url(#shadow)">
+    <rect x="640" y="110" width="120" height="90" rx="8" fill="url(#handlerGrad)" />
+    <text x="700" y="150" text-anchor="middle" class="title">Controller</text>
+    <text x="700" y="170" text-anchor="middle" class="subtitle">Lógica da Rota</text>
+  </g>
+
+  <!-- Arrow 5: Success Response -->
+  <path d="M 700 110 L 700 50 L 90 50 L 90 100" class="arrow" stroke="#68d391" />
+  <polygon points="94,100 90,108 86,100" fill="#68d391" />
+  <text x="395" y="42" text-anchor="middle" class="arrow-text" fill="#68d391">RESPOSTA DE SUCESSO (200 OK / 201 Created)</text>
+</svg>
