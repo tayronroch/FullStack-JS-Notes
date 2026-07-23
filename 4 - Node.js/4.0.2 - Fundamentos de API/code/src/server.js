@@ -1,37 +1,26 @@
 import http from "node:http";
+import { jsonBodyHandler } from "./middlewares/jsonBodyHandler.js";
 
 const server = http.createServer(async (request, response) => {
   const { method, url } = request;
+
+  await jsonBodyHandler(request, response);
 
   if (method === "GET" && url === "/products") {
     response.writeHead(200, { "Content-Type": "application/json" });
     return response.end(
       JSON.stringify({
-        message: "Você esta na home da aplicação. Usando metodo: " + method,
+        message: "Você tentando pegar algo usando o metodo: " + method,
       }),
     );
   }
 
   if (method === "POST" && url === "/products") {
-    const buffers = [];
-
-    for await (const chunk of request) {
-      buffers.push(chunk);
-    }
-
-    const fullBody = Buffer.concat(buffers).toString();
-
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-
-    console.log(fullBody);
-
     response.writeHead(200, { "Content-Type": "application/json" });
+    console.log(request.body);
     return response.end(
       JSON.stringify({
-        message: "Você esta na home da aplicação. Usando metodo: " + method,
+        message: "Você esta enviando o objeto usando metodo: " + method,
       }),
     );
   }
