@@ -6,12 +6,7 @@ export const routes = [
     path: "/products",
     controller: (request, response) => {
       response.writeHead(200, { "Content-Type": "application/json" });
-      return response.end(
-        JSON.stringify({
-          message:
-            "Você esta na home da aplicação. Usando metodo: " + request.method,
-        }),
-      );
+      return response.end(JSON.stringify(request.query));
     },
   },
   {
