@@ -256,6 +256,7 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [11 - Utilizando middleware](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/11%20-%20Utilizando%20middleware.md)
 - [12 - Separando as rotas](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/12%20-%20Separando%20as%20rotas.md)
 - [13 - Route Params](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/13%20-%20Route%20Params.md)
+- [14 - Obtendo o parâmetro](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/14%20-%20Obtendo%20o%20parametro.md)
 
 ### 4.1 - Node.js Avançado
 

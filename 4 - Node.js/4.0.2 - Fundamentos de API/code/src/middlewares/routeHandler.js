@@ -1,12 +1,14 @@
 import { routes } from "../routes.js";
 
 export async function routeHandler(request, response) {
-  const { method, url } = request;
-  const route = routes.find(
-    (route) => route.method === method && route.path === url,
-  );
+  const route = routes.find((route) => {
+    return route.method === request.method && route.path.test(request.url);
+  });
 
   if (route) {
+    const routeParams = request.url.match(route.path);
+    const { ...params } = routeParams.groups;
+    request.params = params;
     return route.controller(request, response);
   }
 

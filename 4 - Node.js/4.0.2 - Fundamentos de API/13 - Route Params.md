@@ -32,7 +32,7 @@ Se definirmos uma rota no nosso arquivo de rotas como `/products/:id` e tentarmo
 {
   method: 'DELETE',
   path: '/products/:id', // Rota esperada
-  handler: ...
+  controller: ...
 }
 ```
 E o cliente fizer uma requisição para `DELETE /products/42`, a verificação simples `url === path` falhará (pois `/products/42` é diferente de `/products/:id`).
@@ -76,8 +76,8 @@ export async function routeHandler(request, response) {
         request.params[name] = match[index + 1]; // match[0] é a url completa, match[1] é o primeiro grupo
       });
 
-      // 5. Executa o handler correspondente
-      return route.handler(request, response);
+      // 5. Executa o controller correspondente
+      return route.controller(request, response);
     }
   }
 
@@ -96,7 +96,7 @@ export const routes = [
   {
     method: "GET",
     path: "/products/:id",
-    handler: (request, response) => {
+    controller: (request, response) => {
       // Acessando o parâmetro mapeado pelo roteador
       const { id } = request.params;
 
@@ -109,13 +109,12 @@ export const routes = [
   {
     method: "DELETE",
     path: "/products/:id",
-    handler: (request, response) => {
+    controller: (request, response) => {
       const { id } = request.params;
 
-      response.writeHead(200, { "Content-Type": "application/json" });
-      return response.end(JSON.stringify({ 
-        message: `Produto com ID: ${id} removido com sucesso.` 
-      }));
+      // Usando o status 204 No Content para remoções bem-sucedidas
+      response.writeHead(204);
+      return response.end();
     },
   }
 ];
