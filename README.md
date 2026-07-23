@@ -254,6 +254,8 @@ Aqui estão as anotações detalhadas sobre cada tecnologia, criadas durante o a
 - [9 - Recuperando dados no body](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/9%20-%20Recuperando%20dados%20no%20body.md)
 - [10 - Conceito de middleware](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/10%20-%20Conceito%20de%20middleware.md)
 - [11 - Utilizando middleware](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/11%20-%20Utilizando%20middleware.md)
+- [12 - Separando as rotas](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/12%20-%20Separando%20as%20rotas.md)
+- [13 - Route Params](./4%20-%20Node.js/4.0.2%20-%20Fundamentos%20de%20API/13%20-%20Route%20Params.md)
 
 ### 4.1 - Node.js Avançado
 
